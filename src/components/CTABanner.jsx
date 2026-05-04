@@ -1,7 +1,6 @@
-import { Link } from 'react-router-dom'
 import { FiPhone } from 'react-icons/fi'
 
-export default function CTABanner() {
+export default function CTABanner({ onContact }) {
   return (
     <section className="bg-navy-dark overflow-hidden">
       <div className="grid lg:grid-cols-2">
@@ -28,7 +27,7 @@ export default function CTABanner() {
             Our team is available to answer your questions, schedule showings,
             and guide you through every step of your Atlanta Metro real estate journey.
           </p>
-          <Link to="/contact" className="btn-gold self-start mb-8">Contact Us</Link>
+          <button onClick={onContact} className="btn-gold self-start mb-8">Contact Us</button>
           <div>
             <p className="font-body text-xs text-white/40 uppercase tracking-widest mb-2">Direct Call Us By</p>
             <a

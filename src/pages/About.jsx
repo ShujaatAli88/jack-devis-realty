@@ -5,7 +5,6 @@ import Navbar from '../components/Navbar'
 import PageHero from '../components/PageHero'
 import Testimonials from '../components/Testimonials'
 import FAQ from '../components/FAQ'
-import AgentCard from '../components/AgentCard'
 import Footer from '../components/Footer'
 
 const specializations = [
@@ -37,53 +36,77 @@ export default function About() {
         </p>
       </div>
 
-      {/* Bio */}
+      {/* Tomond Jack Bio */}
       <section className="bg-ivory py-24 px-4">
-        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-start">
-          <div>
-            <p className="section-label mb-3">Managing Broker &amp; Founder</p>
-            <h2 className="section-heading mb-1">Tomond Jack</h2>
-            <p className="font-body text-gold font-medium mb-6">Jack Davis Realty</p>
-            <p className="font-body text-gray-600 leading-relaxed mb-4">
-              I&apos;m a Texas native who moved to metro Atlanta over 25 years ago. After graduating
-              from Georgia State University, I began my real estate career as an investor in 2002
-              and have been a licensed real estate professional since 2007.
-            </p>
-            <p className="font-body text-gray-600 leading-relaxed mb-4">
-              With over 6,000 real estate deals under my belt, whether as an agent or investor,
-              I prioritize understanding your needs and using my expertise to find the best solution.
-              Buying or selling a home is a major financial transaction, and my goal is to make the
-              process seamless for you.
-            </p>
-            <p className="font-body text-gray-600 leading-relaxed mb-10">
-              As an affiliate with Homes for Heroes, I have the privilege of honoring military
-              service members and other heroes with special savings and benefits.
-            </p>
-            <h3 className="font-heading text-xl font-semibold text-navy mb-4">Specializations</h3>
-            <div className="grid grid-cols-2 gap-3 mb-10">
-              {specializations.map((s) => (
-                <div key={s} className="flex items-center gap-2 font-body text-sm text-gray-600">
-                  <span className="w-2 h-2 bg-gold rounded-full shrink-0" />{s}
-                </div>
-              ))}
+        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
+          {/* Left – text */}
+          <div className="flex flex-col justify-between h-full">
+            <div>
+              <p className="section-label mb-3">Managing Broker — 20+ Years Experience</p>
+              <h2 className="font-heading text-5xl font-semibold text-[#AC1E32] leading-tight mb-2">
+                Tomond Jack
+              </h2>
+              <p className="font-body text-gold font-medium mb-6">Jack Davis Realty</p>
+
+              <p className="font-body text-gray-600 leading-relaxed mb-5">
+                With over 6,000 real estate deals and 20+ years of experience, I prioritize
+                understanding your needs and using my expertise to find the best solution.
+                Buying or selling a home is a major financial transaction — my goal is to make
+                the process seamless, stress-free, and rewarding for you.
+              </p>
+              <p className="font-body text-gray-600 leading-relaxed mb-5">
+                As the Managing Broker &amp; Founder of Jack Davis Realty, I've built an
+                unmatched reputation across the Atlanta Metro for integrity, deep market
+                knowledge, and results that consistently exceed expectations. Whether you're
+                a first-time buyer stepping into homeownership or a seasoned investor
+                expanding your portfolio, you'll always work directly with someone who
+                genuinely cares about your outcome — not just the commission.
+              </p>
+              <p className="font-body text-gray-600 leading-relaxed mb-5">
+                Real estate is not just a transaction — it's one of the most significant
+                decisions of your life. I believe every client deserves white-glove service,
+                crystal-clear communication, and a trusted advisor who fights relentlessly
+                in their corner from the first showing to the closing table. That commitment
+                has earned the trust of thousands of Atlanta families and investors, and it
+                remains the cornerstone of everything we do at Jack Davis Realty.
+              </p>
+              <p className="font-body text-gray-600 leading-relaxed mb-8">
+                Licensed since 2007 and a proud Homes for Heroes affiliate, I'm dedicated
+                to giving back to the military service members, first responders, healthcare
+                workers, and educators who make our community extraordinary — offering real,
+                meaningful savings on every real estate transaction they entrust to us.
+              </p>
             </div>
-            <Link to="/contact" className="btn-gold">Let&apos;s Connect</Link>
+
+            <div>
+              <Link to="/about#team" className="btn-gold inline-block">
+                Meet The Team
+              </Link>
+            </div>
           </div>
+
+          {/* Right – photo card */}
           <div className="relative">
-            <div className="absolute -inset-4 border-2 border-gold/20 rounded-3xl transform translate-x-4 translate-y-4" />
-            <img
-              src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=600&auto=format&fit=crop&q=80"
-              alt="Tomond Jack – Managing Broker, Jack Davis Realty"
-              loading="lazy"
-              className="relative w-full rounded-3xl object-cover shadow-2xl"
-              style={{ aspectRatio: '3/4' }}
-            />
+            <div className="rounded-3xl overflow-hidden shadow-xl border border-gray-100">
+              <img
+                src="https://u.realgeeks.media/jackdavisrealty/jack_tomand.jpg"
+                alt="Tomond Jack – Managing Broker"
+                loading="lazy"
+                className="w-full object-cover"
+                style={{ aspectRatio: '4/5' }}
+              />
+            </div>
+            {/* Licensed since badge */}
+            <div className="absolute bottom-6 left-6 bg-[#AC1E32] text-white rounded-2xl px-5 py-4 shadow-lg">
+              <p className="font-body text-xs uppercase tracking-widest text-white/70 mb-1">Licensed Since</p>
+              <p className="font-heading text-3xl font-semibold">2007</p>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Team */}
-      <section className="bg-white py-24 px-4">
+      <section id="team" className="bg-white py-24 px-4">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-14">
             <p className="section-label mb-3">Our Team</p>
@@ -143,10 +166,6 @@ export default function About() {
           </div>
           <FAQ />
         </div>
-      </section>
-
-      <section className="bg-white py-24 px-4">
-        <div className="max-w-4xl mx-auto"><AgentCard /></div>
       </section>
 
       <Footer />

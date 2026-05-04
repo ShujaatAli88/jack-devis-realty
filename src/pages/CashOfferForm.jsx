@@ -2,7 +2,6 @@ import { Helmet } from 'react-helmet-async'
 import { motion } from 'framer-motion'
 import { useState } from 'react'
 import Navbar from '../components/Navbar'
-import Logo from '../components/Logo'
 import Footer from '../components/Footer'
 
 const PROPERTY_TYPES = [
@@ -126,13 +125,8 @@ export default function CashOfferForm() {
 
       <Navbar />
 
-      <section className="bg-ivory min-h-screen py-16 px-4">
+      <section className="bg-ivory min-h-screen pt-28 pb-16 px-4">
         <div className="max-w-2xl mx-auto">
-
-          {/* Logo */}
-          <div className="flex justify-center mb-8">
-            <Logo height={60} />
-          </div>
 
           {submitted ? (
             <motion.div

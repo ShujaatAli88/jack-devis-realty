@@ -1,6 +1,4 @@
-import { Link } from 'react-router-dom'
-
-export default function ConnectCTA() {
+export default function ConnectCTA({ onContact }) {
   return (
     <section className="bg-ivory py-24 px-4 text-center">
       <div className="max-w-2xl mx-auto">
@@ -12,9 +10,9 @@ export default function ConnectCTA() {
           Whether you&apos;re buying, selling, or exploring your options in the Atlanta Metro —
           a conversation with Tomond Jack costs nothing and could change everything.
         </p>
-        <Link to="/contact" className="btn-gold">
+        <button onClick={onContact} className="btn-gold">
           Schedule a Consultation
-        </Link>
+        </button>
       </div>
     </section>
   )

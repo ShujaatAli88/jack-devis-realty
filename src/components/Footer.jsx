@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom'
-import Logo from './Logo'
 
 const metroAreas = [
   'Atlanta GA',
@@ -25,8 +24,12 @@ export default function Footer() {
 
         {/* Left column – logo + contact */}
         <div className="md:w-72 shrink-0 flex flex-col items-center text-center border-r border-gray-200 pr-10 pb-8 md:pb-0">
-          <Link to="/" className="block mb-6 bg-[#AC1E32] rounded-xl px-5 py-4">
-            <Logo height={80} />
+          <Link to="/" className="block mb-6">
+            <img
+              src="/logo_red.png"
+              alt="Jack Davis Real Estate"
+              style={{ height: '90px', width: 'auto', objectFit: 'contain' }}
+            />
           </Link>
 
           <p className="font-body text-sm text-gray-600 leading-7">
@@ -35,9 +38,15 @@ export default function Footer() {
           <p className="font-body text-sm text-gray-600 leading-7">
             Atlanta, GA 30318
           </p>
-          <p className="font-body text-sm text-gray-600 leading-7 mb-5">
+          <p className="font-body text-sm text-gray-600 leading-7 mb-4">
             678-922-2532
           </p>
+
+          <img
+            src="https://u.realgeeks.media/jackdavisrealty/R-EH.png"
+            alt="Realtor Equal Housing"
+            className="h-12 object-contain mb-4"
+          />
 
           {/* Equal Housing + Realtor badge */}
           <div className="flex items-center justify-center gap-1 mb-5">

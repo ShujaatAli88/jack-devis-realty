@@ -2,8 +2,122 @@ import { useState, useEffect } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import { FiMenu, FiX } from 'react-icons/fi'
 import { MdEmail, MdPhone, MdPerson } from 'react-icons/md'
+import { FaFacebook } from 'react-icons/fa'
 import { motion, AnimatePresence } from 'framer-motion'
 import Logo from './Logo'
+import ContactModal from './ContactModal'
+
+function LoginModal({ onClose }) {
+  const [email, setEmail] = useState('')
+  const [phone, setPhone] = useState('')
+
+  function handleSubmit(e) {
+    e.preventDefault()
+    // MLS_READY: wire to auth provider
+  }
+
+  return (
+    <AnimatePresence>
+      <div
+        className="fixed inset-0 z-[200] flex items-center justify-center px-4"
+        onClick={onClose}
+      >
+        {/* Backdrop */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="absolute inset-0 bg-black/50"
+        />
+
+        {/* Card */}
+        <motion.div
+          initial={{ opacity: 0, y: -16, scale: 0.97 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          exit={{ opacity: 0, y: -16, scale: 0.97 }}
+          transition={{ duration: 0.2 }}
+          onClick={(e) => e.stopPropagation()}
+          className="relative bg-gray-100 rounded-lg shadow-2xl w-full max-w-sm p-6 z-10"
+        >
+          {/* Close */}
+          <button
+            onClick={onClose}
+            className="absolute top-3 right-3 text-gray-400 hover:text-gray-600 transition-colors"
+            aria-label="Close"
+          >
+            <FiX className="w-5 h-5" />
+          </button>
+
+          <h2 className="font-body text-base text-gray-600 mb-5">Sign in to your account</h2>
+
+          <form onSubmit={handleSubmit} className="space-y-4">
+            {/* Email */}
+            <div>
+              <label className="font-body text-sm font-medium text-gray-700 block mb-1">Email</label>
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="w-full bg-white border border-gray-300 rounded px-3 py-2.5 font-body text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-navy/30 transition-all"
+              />
+            </div>
+
+            {/* Phone */}
+            <div>
+              <label className="font-body text-sm font-medium text-gray-700 block mb-1">Phone Number</label>
+              <input
+                type="tel"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                className="w-full bg-white border border-gray-300 rounded px-3 py-2.5 font-body text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-navy/30 transition-all"
+              />
+              <button
+                type="button"
+                className="font-body text-xs text-navy hover:opacity-75 transition-opacity mt-1"
+              >
+                Need to reset your phone number?
+              </button>
+            </div>
+
+            {/* Log In */}
+            <button
+              type="submit"
+              className="w-full bg-navy hover:bg-navy-dark text-white font-body font-semibold text-sm py-3 rounded transition-colors"
+            >
+              Log In
+            </button>
+          </form>
+
+          {/* Divider */}
+          <div className="flex items-center gap-3 my-4">
+            <div className="flex-1 h-px bg-gray-300" />
+            <div className="flex-1 h-px bg-gray-300" />
+          </div>
+
+          {/* Facebook */}
+          <button
+            type="button"
+            className="w-full flex items-center justify-center gap-3 bg-[#1877F2] hover:bg-[#1664d8] text-white font-body font-semibold text-sm py-3 rounded transition-colors"
+          >
+            <FaFacebook className="w-5 h-5" />
+            Continue with Facebook
+          </button>
+
+          {/* Sign up */}
+          <p className="font-body text-xs text-gray-500 text-center mt-5">
+            Don't have an account with us?{' '}
+            <button
+              type="button"
+              className="text-navy hover:opacity-75 transition-opacity font-medium"
+            >
+              Click here to sign up.
+            </button>
+          </p>
+        </motion.div>
+      </div>
+    </AnimatePresence>
+  )
+}
 
 const navLinks = [
   { label: 'Home', path: '/' },
@@ -18,6 +132,8 @@ const navLinks = [
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
+  const [loginOpen, setLoginOpen] = useState(false)
+  const [contactOpen, setContactOpen] = useState(false)
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60)
@@ -63,13 +179,13 @@ export default function Navbar() {
 
           {/* Icon actions + mobile trigger */}
           <div className="flex items-center gap-3">
-            <a
-              href="mailto:tomond@jackdavisrealty.com"
+            <button
+              onClick={() => setContactOpen(true)}
               className="hidden md:flex items-center justify-center w-9 h-9 rounded-full bg-white/10 text-white hover:bg-gold hover:text-navy transition-all duration-200"
-              aria-label="Email us"
+              aria-label="Contact us"
             >
               <MdEmail className="w-4 h-4" />
-            </a>
+            </button>
             <a
               href="tel:6789222532"
               className="hidden md:flex items-center justify-center w-9 h-9 rounded-full bg-white/10 text-white hover:bg-gold hover:text-navy transition-all duration-200"
@@ -77,13 +193,13 @@ export default function Navbar() {
             >
               <MdPhone className="w-4 h-4" />
             </a>
-            <Link
-              to="/contact"
+            <button
+              onClick={() => setLoginOpen(true)}
               className="hidden md:flex items-center justify-center w-9 h-9 rounded-full bg-white/10 text-white hover:bg-gold hover:text-navy transition-all duration-200"
-              aria-label="Contact"
+              aria-label="Sign in"
             >
               <MdPerson className="w-4 h-4" />
-            </Link>
+            </button>
             <button
               onClick={() => setMobileOpen(true)}
               className="lg:hidden text-white p-2 rounded-lg hover:bg-white/10 transition-colors"
@@ -94,6 +210,10 @@ export default function Navbar() {
           </div>
         </div>
       </nav>
+
+      {/* Modals */}
+      {loginOpen && <LoginModal onClose={() => setLoginOpen(false)} />}
+      {contactOpen && <ContactModal onClose={() => setContactOpen(false)} />}
 
       {/* Mobile full-screen overlay */}
       <AnimatePresence>
@@ -148,14 +268,13 @@ export default function Navbar() {
                 >
                   <MdPhone className="w-5 h-5" />
                 </a>
-                <Link
-                  to="/contact"
-                  onClick={() => setMobileOpen(false)}
+                <button
+                  onClick={() => { setMobileOpen(false); setLoginOpen(true) }}
                   className="flex items-center justify-center w-10 h-10 rounded-full bg-white/10 text-white hover:bg-gold hover:text-navy transition-all"
-                  aria-label="Contact"
+                  aria-label="Sign in"
                 >
                   <MdPerson className="w-5 h-5" />
-                </Link>
+                </button>
               </div>
             </div>
           </motion.div>

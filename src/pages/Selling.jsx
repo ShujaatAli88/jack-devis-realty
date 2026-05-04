@@ -1,10 +1,12 @@
 import { Helmet } from 'react-helmet-async'
 import { motion } from 'framer-motion'
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { FiTrendingUp, FiDollarSign, FiCheckCircle, FiClock } from 'react-icons/fi'
+import { FiTrendingUp, FiDollarSign, FiCheckCircle, FiClock, FiArrowRight, FiSearch } from 'react-icons/fi'
 import Navbar from '../components/Navbar'
 import PageHero from '../components/PageHero'
 import Footer from '../components/Footer'
+import CashOfferModal from '../components/CashOfferModal'
 
 const sellingPoints = [
   {
@@ -34,6 +36,8 @@ const sellingPoints = [
 ]
 
 export default function Selling() {
+  const [contactOpen, setContactOpen] = useState(false)
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -70,9 +74,9 @@ export default function Selling() {
             It's our goal to not only sell your home for the highest price possible, but to do so
             as quickly as possible with as little stress and interruption in your life as possible.
           </p>
-          <Link to="/contact" className="btn-gold">
+          <button onClick={() => setContactOpen(true)} className="btn-gold">
             Get a Free Home Valuation
-          </Link>
+          </button>
         </div>
       </section>
 
@@ -102,42 +106,99 @@ export default function Selling() {
       </section>
 
       {/* Fast Cash Offer */}
-      <section className="bg-white py-24 px-4">
-        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
-          <div>
-            <div className="border border-gray-200 rounded-xl p-6 mb-8 max-w-md">
-              <h3 className="font-heading text-lg font-semibold text-navy mb-3">Address Search</h3>
-              <input
-                type="text"
-                placeholder="Enter an Address, City, Zip or MLS Number"
-                className="w-full border border-gray-300 rounded-lg px-4 py-3 font-body text-sm text-gray-600 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gold/50 focus:border-gold transition-all"
-              />
+      <section className="relative bg-navy overflow-hidden py-0">
+        {/* Diagonal split */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute right-0 top-0 w-1/2 h-full bg-[#1F0A0E]" />
+        </div>
+
+        <div className="relative z-10 max-w-7xl mx-auto grid lg:grid-cols-2 min-h-[520px]">
+
+          {/* Left — content */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="flex flex-col justify-center px-8 md:px-12 py-16"
+          >
+            <span className="inline-flex items-center gap-2 bg-gold/15 border border-gold/30 text-gold font-body text-xs font-semibold uppercase tracking-widest px-4 py-1.5 rounded-full mb-6 self-start">
+              <span className="w-2 h-2 bg-gold rounded-full animate-pulse" />
+              Cash Buyers Ready Now
+            </span>
+
+            <h2 className="font-heading text-4xl md:text-5xl font-bold text-white leading-tight mb-5">
+              Fast Cash Offer<br />
+              <span className="text-gold">No Repairs. No Hassle.</span>
+            </h2>
+
+            <p className="font-body text-white/60 text-base leading-relaxed mb-8 max-w-sm">
+              Sell your home in as little as 14 days. We work with cash buyers who are ready to purchase your home today — any condition, any situation.
+            </p>
+
+            {/* Stats row */}
+            <div className="flex gap-6 mb-8">
+              {[['14 Days', 'To Close'], ['$0', 'Closing Costs'], ['24hr', 'Response']].map(([val, label]) => (
+                <div key={label} className="text-center">
+                  <p className="font-heading text-2xl font-bold text-gold">{val}</p>
+                  <p className="font-body text-white/40 text-xs uppercase tracking-wider">{label}</p>
+                </div>
+              ))}
             </div>
 
-            <h2 className="font-heading text-3xl font-semibold text-navy mb-4">
-              Fast Cash Offer
-            </h2>
-            <p className="font-body text-gray-500 leading-relaxed mb-8">
-              Receive a fast Cash Offer and sell your home in as little as 14 days. We work with
-              cash buyers who are ready to purchase your home today.
-            </p>
-            <Link to="/cash-offer-form" className="btn-gold">
-              Get Started
-            </Link>
-          </div>
-          <div>
-            <img
-              src="https://u.realgeeks.media/jackdavisrealty/177709534M.jpg"
-              alt="Home Sold"
-              loading="lazy"
-              className="w-full rounded-3xl object-cover shadow-2xl"
-              style={{ aspectRatio: '4/3' }}
-            />
-          </div>
+            {/* Address search */}
+            <div className="bg-white/8 border border-white/15 rounded-2xl p-4 mb-6 max-w-sm backdrop-blur-sm">
+              <p className="font-body text-xs text-gold font-semibold uppercase tracking-widest mb-2">Address Search</p>
+              <div className="flex items-center gap-2 bg-white rounded-xl px-4 py-3">
+                <FiSearch className="w-4 h-4 text-gray-400 shrink-0" />
+                <input
+                  type="text"
+                  placeholder="Enter an Address, City, Zip or MLS Number"
+                  className="flex-1 font-body text-sm text-gray-700 placeholder-gray-400 focus:outline-none bg-transparent"
+                />
+              </div>
+            </div>
+
+            <motion.button
+              onClick={() => setContactOpen(true)}
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
+              className="self-start inline-flex items-center gap-2 bg-gold hover:bg-gold-dark text-navy font-body font-bold text-sm px-7 py-3.5 rounded-full shadow-lg transition-colors"
+            >
+              Get Started <FiArrowRight className="w-4 h-4" />
+            </motion.button>
+          </motion.div>
+
+          {/* Right — image */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.15 }}
+            className="relative flex items-center justify-center px-8 md:px-12 py-16"
+          >
+            {/* Glow ring */}
+            <div className="absolute inset-8 rounded-3xl bg-gold/5 blur-2xl" />
+            <div className="relative w-full">
+              {/* Corner accent */}
+              <div className="absolute -top-3 -left-3 w-16 h-16 border-t-2 border-l-2 border-gold/50 rounded-tl-2xl" />
+              <div className="absolute -bottom-3 -right-3 w-16 h-16 border-b-2 border-r-2 border-gold/50 rounded-br-2xl" />
+              <img
+                src="https://u.realgeeks.media/jackdavisrealty/177709534M.jpg"
+                alt="Home Sold"
+                loading="lazy"
+                className="w-full rounded-3xl object-cover shadow-2xl ring-1 ring-white/10"
+                style={{ aspectRatio: '4/3' }}
+              />
+            </div>
+          </motion.div>
+
         </div>
       </section>
 
       <Footer />
+
+      {contactOpen && <CashOfferModal onClose={() => setContactOpen(false)} />}
     </motion.div>
   )
 }

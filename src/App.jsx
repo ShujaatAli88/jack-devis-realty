@@ -4,7 +4,6 @@ import { AnimatePresence } from 'framer-motion'
 import Home from './pages/Home'
 import About from './pages/About'
 import BlogPage from './pages/BlogPage'
-import Contact from './pages/Contact'
 import SearchListings from './pages/SearchListings'
 import Communities from './pages/Communities'
 import Buying from './pages/Buying'
@@ -25,7 +24,6 @@ export default function App() {
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/blog" element={<BlogPage />} />
-            <Route path="/contact" element={<Contact />} />
             <Route path="/search" element={<SearchListings />} />
             <Route path="/communities" element={<Communities />} />
             <Route path="/buying" element={<Buying />} />
