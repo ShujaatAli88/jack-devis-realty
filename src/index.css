@@ -1,0 +1,82 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background-color: #FAF7F2;
+    color: #1A1A1A;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Cormorant Garamond', serif;
+  }
+
+  #root {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    text-align: left;
+    border: none;
+    min-height: 100vh;
+    display: block;
+  }
+}
+
+@layer components {
+  .btn-gold {
+    @apply bg-gold text-navy font-body font-semibold px-8 py-3 rounded-full transition-all duration-300 hover:bg-gold-dark hover:shadow-lg hover:-translate-y-0.5 inline-block;
+  }
+
+  .btn-outline-white {
+    @apply border-2 border-white text-white font-body font-semibold px-8 py-3 rounded-full transition-all duration-300 hover:bg-white hover:text-navy inline-block;
+  }
+
+  .btn-outline-navy {
+    @apply border-2 border-navy text-navy font-body font-semibold px-8 py-3 rounded-full transition-all duration-300 hover:bg-navy hover:text-white inline-block;
+  }
+
+  .section-label {
+    @apply text-gold font-body font-semibold text-xs tracking-[0.2em] uppercase;
+  }
+
+  .section-heading {
+    @apply font-heading text-4xl md:text-5xl font-semibold text-navy leading-tight;
+  }
+
+  .card-hover {
+    @apply transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl;
+  }
+}
+
+/* Swiper overrides */
+.swiper-button-next,
+.swiper-button-prev {
+  color: #C8A96E !important;
+}
+
+.swiper-pagination-bullet-active {
+  background: #C8A96E !important;
+}
+
+/* Smooth scroll offset for sticky nav */
+section[id] {
+  scroll-margin-top: 80px;
+}
+
+/* Hero Ken Burns zoom */
+@keyframes kenBurns {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.08); }
+}
+.animate-ken-burns {
+  animation: kenBurns 6s ease-out forwards;
+}

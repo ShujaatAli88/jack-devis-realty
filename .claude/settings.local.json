@@ -1,0 +1,27 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm create *)",
+      "Bash(Remove-Item -Recurse -Force \"c:\\\\neway_Nexus_workspace\\\\jack_devis_website\\\\cneway_Nexus_workspacejack_devis_website\")",
+      "Bash(npx --yes create-vite@latest temp_setup --template react)",
+      "PowerShell($src = \"c:\\\\neway_Nexus_workspace\\\\jack_devis_website\\\\temp_setup\"; $dst = \"c:\\\\neway_Nexus_workspace\\\\jack_devis_website\"; Get-ChildItem $src -Force | ForEach-Object { Move-Item $_.FullName $dst -Force }; Remove-Item $src -Force)",
+      "Bash(npx tailwindcss *)",
+      "PowerShell(New-Item -ItemType Directory -Force -Path \"c:\\\\neway_Nexus_workspace\\\\jack_devis_website\\\\src\\\\data\")",
+      "PowerShell(New-Item -ItemType Directory -Force -Path \"c:\\\\neway_Nexus_workspace\\\\jack_devis_website\\\\src\\\\hooks\")",
+      "PowerShell(New-Item -ItemType Directory -Force -Path \"c:\\\\neway_Nexus_workspace\\\\jack_devis_website\\\\src\\\\utils\")",
+      "PowerShell(New-Item -ItemType Directory -Force -Path \"c:\\\\neway_Nexus_workspace\\\\jack_devis_website\\\\src\\\\components\")",
+      "PowerShell(New-Item -ItemType Directory -Force -Path \"c:\\\\neway_Nexus_workspace\\\\jack_devis_website\\\\src\\\\pages\")",
+      "Bash(netstat -ano)",
+      "Bash(findstr \"5174\\\\|5175\\\\|5173\")",
+      "Bash(node -e \"const p=require\\('./node_modules/framer-motion/package.json'\\); console.log\\(p.version\\)\")",
+      "PowerShell(Get-Process -Name \"node\" -ErrorAction SilentlyContinue)",
+      "PowerShell(Stop-Process -Force)",
+      "Bash(node -e \"import\\('./src/components/StatsBar.jsx'\\).catch\\(e => console.error\\(e.message\\)\\)\")",
+      "Bash(npx vite *)",
+      "Bash(git remote *)",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(git push *)"
+    ]
+  }
+}
