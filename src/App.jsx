@@ -12,6 +12,7 @@ import CashOffer from './pages/CashOffer'
 import CashOfferForm from './pages/CashOfferForm'
 import Valuation from './pages/Valuation'
 import FeaturedProperties from './pages/FeaturedProperties'
+import AgentProfile from './pages/AgentProfile'
 import ScrollToTop from './components/ScrollToTop'
 
 export default function App() {
@@ -32,6 +33,7 @@ export default function App() {
             <Route path="/cash-offer-form" element={<CashOfferForm />} />
             <Route path="/valuation" element={<Valuation />} />
             <Route path="/featured" element={<FeaturedProperties />} />
+            <Route path="/agents/:slug" element={<AgentProfile />} />
           </Routes>
         </AnimatePresence>
       </BrowserRouter>
