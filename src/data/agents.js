@@ -76,7 +76,7 @@ export const agents = [
     title: 'Real Estate Agent',
     subtitle: 'Buyer & Seller Specialist',
     image: '/Ericka Smith-Sowell.jpg',
-    phone: '(770) 000-0000',
+    phone: '(445) 238-9494',
     email: 'ericka@jackdavisrealty.com',
     licensedSince: null,
     dealsCount: null,
