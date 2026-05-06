@@ -150,8 +150,9 @@ export default function Navbar() {
     <>
       <nav
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          scrolled ? 'bg-navy shadow-2xl py-3' : 'bg-red-950/40 backdrop-blur-sm py-5'
+          scrolled ? 'shadow-2xl py-3' : 'backdrop-blur-sm py-5'
         }`}
+        style={{ background: scrolled ? '#AC1E32' : 'rgba(172,30,50,0.55)' }}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
           {/* Logo */}

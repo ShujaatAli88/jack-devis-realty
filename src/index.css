@@ -33,7 +33,7 @@
 
 @layer components {
   .btn-gold {
-    @apply bg-gold text-navy font-body font-semibold px-8 py-3 rounded-full transition-all duration-300 hover:bg-gold-dark hover:shadow-lg hover:-translate-y-0.5 inline-block;
+    @apply bg-navy text-white font-body font-semibold px-8 py-3 rounded-full transition-all duration-300 hover:bg-navy-dark hover:shadow-lg hover:-translate-y-0.5 inline-block;
   }
 
   .btn-outline-white {

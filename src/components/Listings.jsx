@@ -32,7 +32,7 @@ function ListingRow({ listing }) {
       <div className="flex-1 min-w-0">
         {/* Address + Price */}
         <div className="flex items-start justify-between gap-2 mb-1">
-          <p className="font-body font-semibold text-[#AC1E32] leading-snug">
+          <p className="font-body font-semibold text-navy leading-snug">
             {listing.address}, {listing.city}
             {listing.neighborhood && (
               <span className="text-gray-400 font-normal"> — {listing.neighborhood}</span>
@@ -97,7 +97,7 @@ export default function Listings() {
             firms other than the owner of this website. The listing brokerage is identified in any
             listing details. Information is deemed reliable but is not guaranteed. If you believe any
             FMLS listing contains material that infringes your copyrighted work, please{' '}
-            <a href="#" className="text-[#AC1E32] hover:underline font-medium">click here</a> to
+            <a href="#" className="text-navy hover:underline font-medium">click here</a> to
             review our DMCA policy and learn how to submit a takedown request. © 2026 FMLS. Last
             updated 2026-05-04 at 11:32 pm
           </p>
