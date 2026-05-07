@@ -82,7 +82,7 @@ export default function Footer() {
 
             {/* Instagram */}
             <a
-              href="https://www.instagram.com/phgdenver/"
+              href="https://www.instagram.com/jackdavisrealty/"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2.5"
