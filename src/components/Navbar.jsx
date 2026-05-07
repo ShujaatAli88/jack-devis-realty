@@ -2,35 +2,23 @@ import { useState, useEffect } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import { FiMenu, FiX } from 'react-icons/fi'
 import { MdEmail, MdPhone, MdPerson } from 'react-icons/md'
-import { FaFacebook } from 'react-icons/fa'
 import { motion, AnimatePresence } from 'framer-motion'
 import Logo from './Logo'
 import ContactModal from './ContactModal'
 
+// --- Login Modal Component ---
 function LoginModal({ onClose }) {
   const [email, setEmail] = useState('')
   const [phone, setPhone] = useState('')
 
   function handleSubmit(e) {
     e.preventDefault()
-    // MLS_READY: wire to auth provider
   }
 
   return (
     <AnimatePresence>
-      <div
-        className="fixed inset-0 z-[200] flex items-center justify-center px-4"
-        onClick={onClose}
-      >
-        {/* Backdrop */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          className="absolute inset-0 bg-black/50"
-        />
-
-        {/* Card */}
+      <div className="fixed inset-0 z-[200] flex items-center justify-center px-4" onClick={onClose}>
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="absolute inset-0 bg-black/50" />
         <motion.div
           initial={{ opacity: 0, y: -16, scale: 0.97 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -39,80 +27,21 @@ function LoginModal({ onClose }) {
           onClick={(e) => e.stopPropagation()}
           className="relative bg-gray-100 rounded-lg shadow-2xl w-full max-w-sm p-6 z-10"
         >
-          {/* Close */}
-          <button
-            onClick={onClose}
-            className="absolute top-3 right-3 text-gray-400 hover:text-gray-600 transition-colors"
-            aria-label="Close"
-          >
+          <button onClick={onClose} className="absolute top-3 right-3 text-gray-400 hover:text-gray-600 transition-colors">
             <FiX className="w-5 h-5" />
           </button>
-
           <h2 className="font-body text-base text-gray-600 mb-5">Sign in to your account</h2>
-
           <form onSubmit={handleSubmit} className="space-y-4">
-            {/* Email */}
             <div>
               <label className="font-body text-sm font-medium text-gray-700 block mb-1">Email</label>
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="w-full bg-white border border-gray-300 rounded px-3 py-2.5 font-body text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-navy/30 transition-all"
-              />
+              <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} className="w-full bg-white border border-gray-300 rounded px-3 py-2.5 font-body text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-navy/30 transition-all" />
             </div>
-
-            {/* Phone */}
             <div>
               <label className="font-body text-sm font-medium text-gray-700 block mb-1">Phone Number</label>
-              <input
-                type="tel"
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-                className="w-full bg-white border border-gray-300 rounded px-3 py-2.5 font-body text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-navy/30 transition-all"
-              />
-              <button
-                type="button"
-                className="font-body text-xs text-navy hover:opacity-75 transition-opacity mt-1"
-              >
-                Need to reset your phone number?
-              </button>
+              <input type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} className="w-full bg-white border border-gray-300 rounded px-3 py-2.5 font-body text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-navy/30 transition-all" />
             </div>
-
-            {/* Log In */}
-            <button
-              type="submit"
-              className="w-full bg-navy hover:bg-navy-dark text-white font-body font-semibold text-sm py-3 rounded transition-colors"
-            >
-              Log In
-            </button>
+            <button type="submit" className="w-full bg-navy hover:bg-navy-dark text-white font-body font-semibold text-sm py-3 rounded transition-colors">Log In</button>
           </form>
-
-          {/* Divider */}
-          <div className="flex items-center gap-3 my-4">
-            <div className="flex-1 h-px bg-gray-300" />
-            <div className="flex-1 h-px bg-gray-300" />
-          </div>
-
-          {/* Facebook */}
-          <button
-            type="button"
-            className="w-full flex items-center justify-center gap-3 bg-[#1877F2] hover:bg-[#1664d8] text-white font-body font-semibold text-sm py-3 rounded transition-colors"
-          >
-            <FaFacebook className="w-5 h-5" />
-            Continue with Facebook
-          </button>
-
-          {/* Sign up */}
-          <p className="font-body text-xs text-gray-500 text-center mt-5">
-            Don't have an account with us?{' '}
-            <button
-              type="button"
-              className="text-navy hover:opacity-75 transition-opacity font-medium"
-            >
-              Click here to sign up.
-            </button>
-          </p>
         </motion.div>
       </div>
     </AnimatePresence>
@@ -141,100 +70,81 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  useEffect(() => {
-    document.body.style.overflow = mobileOpen ? 'hidden' : ''
-    return () => { document.body.style.overflow = '' }
-  }, [mobileOpen])
-
   return (
     <>
       <nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          scrolled ? 'shadow-2xl py-3' : 'backdrop-blur-sm py-5'
+        className={`fixed top-0 left-0 right-0 z-50 bg-white transition-all duration-300 border-b border-gray-100 ${
+          scrolled ? 'py-3 shadow-md' : 'py-4'
         }`}
-        style={{ background: scrolled ? '#AC1E32' : 'rgba(172,30,50,0.55)' }}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+
           {/* Logo */}
           <Link to="/" className="shrink-0">
-            <Logo height={38} />
+            <Logo height={46} />
           </Link>
 
           {/* Desktop nav */}
-          <div className="hidden lg:flex items-center gap-6">
+          <div className="hidden lg:flex items-center gap-7">
             {navLinks.map((link) => (
               <NavLink
                 key={link.path}
                 to={link.path}
                 end={link.path === '/'}
                 className={({ isActive }) =>
-                  `font-body text-sm font-medium tracking-wide transition-colors duration-200 ${
-                    isActive ? 'text-gold' : 'text-white/90 hover:text-gold'
+                  `font-body text-sm font-medium tracking-wide transition-colors duration-200 relative group ${
+                    isActive ? 'text-[#AC1E32]' : 'text-gray-600 hover:text-[#AC1E32]'
                   }`
                 }
               >
                 {link.label}
+                <span className={`absolute -bottom-1.5 left-0 w-full h-0.5 rounded-full transition-transform duration-300 ${window.location.pathname === link.path ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'}`} style={{ background: '#AC1E32' }} />
               </NavLink>
             ))}
           </div>
 
-          {/* Icon actions + mobile trigger */}
-          <div className="flex items-center gap-3">
+          {/* Icon actions */}
+          <div className="flex items-center gap-2">
             <button
               onClick={() => setContactOpen(true)}
-              className="hidden md:flex items-center justify-center w-9 h-9 rounded-full bg-white/10 text-white hover:bg-gold hover:text-navy transition-all duration-200"
-              aria-label="Contact us"
+              className="hidden md:flex items-center justify-center w-9 h-9 rounded-full text-gray-500 hover:text-[#AC1E32] hover:bg-red-50 transition-all duration-200"
             >
               <MdEmail className="w-4 h-4" />
             </button>
             <a
               href="tel:6789222532"
-              className="hidden md:flex items-center justify-center w-9 h-9 rounded-full bg-white/10 text-white hover:bg-gold hover:text-navy transition-all duration-200"
-              aria-label="Call us"
+              className="hidden md:flex items-center justify-center w-9 h-9 rounded-full text-gray-500 hover:text-[#AC1E32] hover:bg-red-50 transition-all duration-200"
             >
               <MdPhone className="w-4 h-4" />
             </a>
             <button
               onClick={() => setLoginOpen(true)}
-              className="hidden md:flex items-center justify-center w-9 h-9 rounded-full bg-white/10 text-white hover:bg-gold hover:text-navy transition-all duration-200"
-              aria-label="Sign in"
+              className="hidden md:flex items-center justify-center w-9 h-9 rounded-full text-gray-500 hover:text-[#AC1E32] hover:bg-red-50 transition-all duration-200"
             >
               <MdPerson className="w-4 h-4" />
             </button>
-            <button
-              onClick={() => setMobileOpen(true)}
-              className="lg:hidden text-white p-2 rounded-lg hover:bg-white/10 transition-colors"
-              aria-label="Open menu"
-            >
+            <button onClick={() => setMobileOpen(true)} className="lg:hidden text-gray-600 p-2 rounded-lg hover:bg-gray-100 transition-colors">
               <FiMenu className="w-6 h-6" />
             </button>
           </div>
+
         </div>
       </nav>
 
-      {/* Modals */}
       {loginOpen && <LoginModal onClose={() => setLoginOpen(false)} />}
       {contactOpen && <ContactModal onClose={() => setContactOpen(false)} />}
 
-      {/* Mobile full-screen overlay */}
+      {/* Mobile Overlay */}
       <AnimatePresence>
         {mobileOpen && (
-          <motion.div
-            initial={{ x: '100%' }}
-            animate={{ x: 0 }}
-            exit={{ x: '100%' }}
-            transition={{ type: 'tween', duration: 0.3 }}
-            className="fixed inset-0 z-[60] bg-navy flex flex-col"
-          >
+          <motion.div initial={{ x: '100%' }} animate={{ x: 0 }} exit={{ x: '100%' }} transition={{ type: 'tween', duration: 0.3 }} className="fixed inset-0 z-[60] bg-navy flex flex-col">
             <div className="flex items-center justify-between px-6 py-5 border-b border-white/10">
               <Link to="/" onClick={() => setMobileOpen(false)}>
-                <Logo height={34} />
+                <div className="bg-white rounded-lg px-3 py-1.5">
+                  <Logo height={40} />
+                </div>
               </Link>
-              <button
-                onClick={() => setMobileOpen(false)}
-                className="text-white p-2 rounded-lg hover:bg-white/10 transition-colors"
-                aria-label="Close menu"
-              >
+              <button onClick={() => setMobileOpen(false)} className="text-white p-2 rounded-lg hover:bg-white/10 transition-colors">
                 <FiX className="w-7 h-7" />
               </button>
             </div>
@@ -246,37 +156,14 @@ export default function Navbar() {
                   end={link.path === '/'}
                   onClick={() => setMobileOpen(false)}
                   className={({ isActive }) =>
-                    `font-body text-xl font-medium py-2 border-b border-white/10 transition-colors ${
-                      isActive ? 'text-gold' : 'text-white hover:text-gold'
+                    `font-body text-xl font-medium py-2 border-b border-white/10 transition-all ${
+                      isActive ? 'text-gold' : 'text-white hover:text-white hover:font-bold hover:underline underline-offset-4'
                     }`
                   }
                 >
                   {link.label}
                 </NavLink>
               ))}
-              <div className="flex items-center gap-4 mt-4">
-                <a
-                  href="mailto:tomond@jackdavisrealty.com"
-                  className="flex items-center justify-center w-10 h-10 rounded-full bg-white/10 text-white hover:bg-gold hover:text-navy transition-all"
-                  aria-label="Email us"
-                >
-                  <MdEmail className="w-5 h-5" />
-                </a>
-                <a
-                  href="tel:6789222532"
-                  className="flex items-center justify-center w-10 h-10 rounded-full bg-white/10 text-white hover:bg-gold hover:text-navy transition-all"
-                  aria-label="Call us"
-                >
-                  <MdPhone className="w-5 h-5" />
-                </a>
-                <button
-                  onClick={() => { setMobileOpen(false); setLoginOpen(true) }}
-                  className="flex items-center justify-center w-10 h-10 rounded-full bg-white/10 text-white hover:bg-gold hover:text-navy transition-all"
-                  aria-label="Sign in"
-                >
-                  <MdPerson className="w-5 h-5" />
-                </button>
-              </div>
             </div>
           </motion.div>
         )}

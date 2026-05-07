@@ -170,7 +170,7 @@ export default function Contact() {
 
       {/* Hero banner */}
       <div
-        className="relative pt-16"
+        className="relative pt-28"
         style={{
           backgroundImage:
             'url(https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1600&auto=format&fit=crop&q=80)',

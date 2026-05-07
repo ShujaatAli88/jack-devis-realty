@@ -55,11 +55,11 @@ function FormBody({ onClose }) {
           {/* Contact info */}
           <div className="border-t border-gray-200 pt-5">
             <p className="font-heading text-base font-semibold text-navy text-center mb-5">Seller Contact Information</p>
-            <div className="grid grid-cols-2 gap-4 mb-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
               <input type="text" value={form.firstName} onChange={field('firstName')} required placeholder="First Name" className={inp} />
               <input type="text" value={form.lastName} onChange={field('lastName')} required placeholder="Last Name" className={inp} />
             </div>
-            <div className="grid grid-cols-2 gap-4 mb-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
               <input type="email" value={form.email} onChange={field('email')} required placeholder="Email Address" className={inp} />
               <input type="tel" value={form.phone} onChange={field('phone')} required placeholder="(000) 000-0000" className={inp} />
             </div>

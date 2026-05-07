@@ -53,7 +53,7 @@ export default function Valuation() {
 
       {/* Hero with address search */}
       <section
-        className="relative min-h-[420px] flex flex-col justify-center px-4 py-24"
+        className="relative min-h-[420px] flex flex-col justify-center px-4 pt-28 pb-24"
         style={{
           backgroundImage:
             'url(https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=1600&auto=format&fit=crop&q=80)',

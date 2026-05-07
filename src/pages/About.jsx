@@ -19,7 +19,7 @@ export default function About() {
       <PageHero title="Meet The Team" breadcrumb="About" />
 
       <div className="bg-navy py-5 px-4 text-center">
-        <p className="font-body text-sm text-gold/80 tracking-widest uppercase">
+        <p className="font-body text-sm text-white/90 tracking-widest uppercase">
           Jack Davis Realty — Your Atlanta Residential &amp; Investment Specialist
         </p>
       </div>
@@ -28,7 +28,7 @@ export default function About() {
       <section id="team" className="bg-navy pt-10 pb-24 px-4">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-14">
-            <p className="font-body text-xs uppercase tracking-[0.25em] text-gold/70 mb-3">Our Team</p>
+            <p className="font-body text-xs uppercase tracking-[0.25em] text-white/80 mb-3">Our Team</p>
             <h2 className="font-heading text-4xl md:text-5xl font-semibold text-white leading-tight">
               The People Behind Every Deal
             </h2>

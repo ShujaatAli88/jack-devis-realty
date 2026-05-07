@@ -35,9 +35,9 @@ const services = [
 ]
 
 const WHY_ITEMS = [
-  { icon: '🏆', title: 'Market-Leading Results', body: 'Our listings sell faster and for more money than the Atlanta Metro average — backed by data.' },
-  { icon: '🤝', title: 'End-to-End Support', body: 'From first search to closing day, our team is by your side at every step of the journey.' },
-  { icon: '📊', title: 'Investment Expertise', body: "Whether it's your first home or your fifth investment property, we know Atlanta's best opportunities." },
+  { icon: FiAward,        title: 'Market-Leading Results', body: 'Our listings sell faster and for more money than the Atlanta Metro average — backed by data.' },
+  { icon: FiCheckCircle,  title: 'End-to-End Support',     body: 'From first search to closing day, our team is by your side at every step of the journey.' },
+  { icon: FiStar,         title: 'Investment Expertise',   body: "Whether it's your first home or your fifth investment property, we know Atlanta's best opportunities." },
 ]
 
 const PROCESS_STEPS = [
@@ -80,7 +80,6 @@ function ReviewsCarousel() {
 
   return (
     <section className="relative overflow-hidden py-20 px-4">
-      {/* Blurred background */}
       <div className="absolute inset-0">
         <img
           src="/pexels-ibidsy-5524164.jpg"
@@ -93,11 +92,8 @@ function ReviewsCarousel() {
       </div>
 
       <div className="relative max-w-2xl mx-auto text-center">
+        <p className="font-body text-[11px] uppercase tracking-[0.4em] text-white/70 mb-10">What Our Clients Say</p>
 
-        {/* Label */}
-        <p className="font-body text-[11px] uppercase tracking-[0.4em] text-gold/70 mb-10">What Our Clients Say</p>
-
-        {/* Animated content */}
         <AnimatePresence mode="wait">
           <motion.div
             key={active}
@@ -106,14 +102,12 @@ function ReviewsCarousel() {
             exit={{ opacity: 0, y: -12 }}
             transition={{ duration: 0.55, ease: 'easeInOut' }}
           >
-            {/* Stars */}
             <div className="flex justify-center gap-1.5 mb-6">
               {[...Array(5)].map((_, i) => (
-                <FiStar key={i} className="w-4 h-4" style={{ fill: '#C8A96E', color: '#C8A96E' }} />
+                <FiStar key={i} className="w-4 h-4" style={{ fill: 'white', color: 'white' }} />
               ))}
             </div>
 
-            {/* Decorative open-quote */}
             <div
               className="font-heading leading-none mb-1 select-none"
               style={{ fontSize: '5rem', color: '#AC1E32', opacity: 0.5, lineHeight: 1 }}
@@ -121,24 +115,21 @@ function ReviewsCarousel() {
               &ldquo;
             </div>
 
-            {/* Quote */}
             <p className="font-heading text-lg md:text-xl text-white/90 leading-relaxed italic mb-8">
               {r.quote}
             </p>
 
-            {/* Author */}
             <div className="flex items-center justify-center gap-3">
-              <div className="h-px w-10 bg-gold/40 shrink-0" />
+              <div className="h-px w-10 bg-white/40 shrink-0" />
               <div className="text-center">
-                <p className="font-body text-sm font-semibold text-gold tracking-wide">{r.name}</p>
+                <p className="font-body text-sm font-semibold text-white tracking-wide">{r.name}</p>
                 <p className="font-body text-xs text-white/40 mt-0.5">{r.role}</p>
               </div>
-              <div className="h-px w-10 bg-gold/40 shrink-0" />
+              <div className="h-px w-10 bg-white/40 shrink-0" />
             </div>
           </motion.div>
         </AnimatePresence>
 
-        {/* Dot indicators */}
         <div className="flex justify-center gap-2 mt-10">
           {REVIEWS.map((_, i) => (
             <button
@@ -148,12 +139,11 @@ function ReviewsCarousel() {
               style={{
                 width: i === active ? '22px' : '6px',
                 height: '6px',
-                background: i === active ? '#C8A96E' : 'rgba(255,255,255,0.2)',
+                background: i === active ? 'white' : 'rgba(255,255,255,0.2)',
               }}
             />
           ))}
         </div>
-
       </div>
     </section>
   )
@@ -183,13 +173,13 @@ export default function Home() {
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 md:gap-6">
           <div className="text-center md:text-left">
             <p className="font-heading text-xl md:text-3xl font-semibold text-white leading-tight">Jack Davis Realty</p>
-            <p className="font-body text-xs md:text-sm text-gold/80 tracking-widest uppercase mt-1">Your Atlanta Residential &amp; Investment Specialist</p>
+            <p className="font-body text-xs md:text-sm text-white/80 tracking-widest uppercase mt-1">Your Atlanta Residential &amp; Investment Specialist</p>
           </div>
           <div className="flex gap-6 md:gap-10">
             {[['6,000+', 'Deals Closed'], ['20+', 'Years Exp.'], ['5★', 'Rated']].map(([num, lbl]) => (
               <div key={lbl} className="text-center">
-                <p className="font-heading text-xl md:text-2xl font-bold text-gold">{num}</p>
-                <p className="font-body text-[10px] text-white/50 uppercase tracking-widest mt-1">{lbl}</p>
+                <p className="font-heading text-xl md:text-2xl font-bold text-white">{num}</p>
+                <p className="font-body text-[10px] text-white uppercase tracking-widest mt-1">{lbl}</p>
               </div>
             ))}
           </div>
@@ -203,15 +193,17 @@ export default function Home() {
         </div>
         <div className="relative max-w-6xl mx-auto grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
           <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
-            <p className="section-label mb-4">Why Jack Davis Realty</p>
+            <p className="section-label mb-4 text-[#AC1E32]">Why Jack Davis Realty</p>
             <h2 className="section-heading mb-6">Atlanta's Most Trusted<br />Real Estate Partner</h2>
             <p className="font-body text-gray-500 text-base leading-relaxed mb-10 max-w-md">
               With over two decades in the Atlanta Metro market and 6,000+ successful closings, Jack Davis Realty delivers results that speak for themselves.
             </p>
             <div className="space-y-5 mb-10">
               {WHY_ITEMS.map((item, i) => (
-                <motion.div key={item.title} initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: i * 0.1 }} className="flex gap-4 items-start">
-                  <span className="text-2xl mt-0.5 flex-shrink-0">{item.icon}</span>
+                <motion.div key={item.title} initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: i * 0.1 }} className="flex gap-4 items-center">
+                  <div className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0 shadow-md" style={{ background: '#AC1E32' }}>
+                    <item.icon className="w-5 h-5 text-white" />
+                  </div>
                   <div>
                     <p className="font-heading text-lg font-semibold text-navy mb-1">{item.title}</p>
                     <p className="font-body text-sm text-gray-500 leading-relaxed">{item.body}</p>
@@ -219,7 +211,7 @@ export default function Home() {
                 </motion.div>
               ))}
             </div>
-            <Link to="/about" className="btn-gold">Meet the Team</Link>
+            <Link to="/about" className="bg-white text-navy font-bold px-10 py-4 rounded-full shadow-lg hover:bg-gray-100 transition-all">Meet the Team</Link>
           </motion.div>
           <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.65, delay: 0.15 }} className="relative">
             <div className="relative rounded-3xl overflow-hidden shadow-2xl aspect-[4/5]">
@@ -228,7 +220,7 @@ export default function Home() {
               <div className="absolute bottom-6 left-6 right-6 bg-white/95 backdrop-blur-sm rounded-2xl p-5 shadow-xl">
                 <p className="font-body text-[10px] uppercase tracking-widest text-gray-400 mb-1">Latest Achievement</p>
                 <p className="font-heading text-xl font-semibold text-navy leading-tight">
-                  #1 Real Estate Team<br /><span className="text-gold">Atlanta Metro 2024</span>
+                  #1 Real Estate Team<br /><span className="text-navy">Atlanta Metro 2024</span>
                 </p>
               </div>
             </div>
@@ -242,7 +234,7 @@ export default function Home() {
       <section className="bg-white py-14 md:py-20 px-4">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-10 md:mb-14">
-            <p className="section-label mb-3">Simple Process</p>
+            <p className="section-label mb-3 text-[#AC1E32]">Simple Process</p>
             <h2 className="section-heading">How It Works</h2>
             <p className="font-body text-gray-500 mt-4 max-w-lg mx-auto">From your first call to closing day — we make buying or selling straightforward and stress-free.</p>
           </div>
@@ -254,7 +246,7 @@ export default function Home() {
                 )}
                 <div className="relative w-20 h-20 rounded-2xl bg-navy flex items-center justify-center text-white mb-5 shadow-lg group-hover:scale-105 transition-transform duration-200">
                   {step.icon}
-                  <span className="absolute -top-2 -right-2 w-6 h-6 rounded-full bg-gold text-navy font-body text-[10px] font-bold flex items-center justify-center">{step.num}</span>
+                  <span className="absolute -top-2 -right-2 w-6 h-6 rounded-full bg-white text-navy font-body text-[10px] font-bold flex items-center justify-center">{step.num}</span>
                 </div>
                 <h3 className="font-heading text-xl font-semibold text-navy mb-3">{step.title}</h3>
                 <p className="font-body text-gray-500 text-sm leading-relaxed">{step.body}</p>
@@ -262,7 +254,7 @@ export default function Home() {
             ))}
           </div>
           <div className="text-center mt-12">
-            <button onClick={() => setContactOpen(true)} className="btn-gold px-10 py-4 text-base">Get Started Today</button>
+            <button onClick={() => setContactOpen(true)} className="bg-navy text-white px-10 py-4 text-base rounded-full font-bold hover:bg-navy-dark transition-all">Get Started Today</button>
           </div>
         </div>
       </section>
@@ -271,7 +263,7 @@ export default function Home() {
       <section className="bg-ivory py-14 md:py-20 px-4">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-10 md:mb-14">
-            <p className="section-label mb-3">Our Services</p>
+            <p className="section-label mb-3 text-navy">Our Services</p>
             <h2 className="section-heading">What We Can Do For You</h2>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 md:gap-8">
@@ -284,7 +276,7 @@ export default function Home() {
                 <div className="p-5 md:p-7 flex flex-col flex-1">
                   <h3 className="font-heading text-xl md:text-2xl font-semibold text-navy mb-2 md:mb-3">{svc.title}</h3>
                   <p className="font-body text-gray-500 leading-relaxed text-sm flex-1 mb-5 md:mb-6">{svc.description}</p>
-                  <Link to={svc.href} className="btn-outline-navy w-full text-center block">Learn More</Link>
+                  <Link to={svc.href} className="border-2 border-navy text-navy hover:bg-navy hover:text-white w-full text-center block py-3 rounded-full font-bold transition-all">Learn More</Link>
                 </div>
               </motion.div>
             ))}
@@ -292,10 +284,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── What Clients Are Saying — Carousel ── */}
       <ReviewsCarousel />
 
-      {/* ── Listings ── */}
       <Listings />
 
       {/* ── CTA Banner ── */}
@@ -311,16 +301,16 @@ export default function Home() {
           transition={{ duration: 0.55 }}
           className="relative max-w-3xl mx-auto text-center"
         >
-          <p className="section-label mb-3 md:mb-4">Ready to Move?</p>
+          <p className="section-label mb-3 md:mb-4 text-white">Ready to Move?</p>
           <h2 className="font-heading text-3xl md:text-5xl font-semibold text-white mb-4 md:mb-6 leading-tight">
             Let's Find Your Perfect<br />
-            <span className="text-gold italic">Atlanta Home Today</span>
+            <span className="text-white italic">Atlanta Home Today</span>
           </h2>
           <p className="font-body text-white/65 text-sm md:text-base mb-8 md:mb-10 max-w-md mx-auto">
             Whether you're buying, selling, or investing — Jack Davis Realty has the experience and connections to make it happen.
           </p>
           <div className="flex gap-3 md:gap-4 justify-center flex-wrap">
-            <button onClick={() => setContactOpen(true)} className="btn-gold text-sm md:text-base px-7 md:px-10 py-3.5 md:py-4">
+            <button onClick={() => setContactOpen(true)} className="bg-white text-navy px-7 md:px-10 py-3.5 md:py-4 rounded-full font-bold text-sm md:text-base hover:bg-gray-100 transition-all duration-200">
               Contact Us
             </button>
             <Link to="/search" className="border-2 border-white/50 text-white font-body font-semibold text-sm md:text-base px-7 md:px-10 py-3.5 md:py-4 rounded-full hover:border-white hover:bg-white/10 transition-all duration-200">

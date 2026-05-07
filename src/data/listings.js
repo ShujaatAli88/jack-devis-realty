@@ -34,7 +34,7 @@ export const listings = [
     status: 'Active',
     propertyType: 'Single Family',
     description:
-      "Tucked along one of Oakhurst's most storied streets — platted in the early 1900s as one of Decatur's first planned communities — 221 3rd Avenue carries the neighborhood's...",
+      "Tucked along one of Oakhurst's most storied streets  platted in the early 1900s as one of Decatur's first planned communities  221 3rd Avenue carries the neighborhood's...",
     images: ['https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&auto=format&fit=crop&q=80'],
     listedDate: '2026-04-18',
   },
@@ -53,7 +53,7 @@ export const listings = [
     status: 'Active',
     propertyType: 'Single Family',
     description:
-      "Welcome to 1186 & 1187 Thomas Road — a rare opportunity to own a beautifully renovated estate property on approximately 1.5 acres in one of Metro Atlanta's most sought-af...",
+      "Welcome to 1186 & 1187 Thomas Road  a rare opportunity to own a beautifully renovated estate property on approximately 1.5 acres in one of Metro Atlanta's most sought-af...",
     images: ['https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&auto=format&fit=crop&q=80'],
     listedDate: '2026-04-19',
   },

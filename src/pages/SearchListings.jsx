@@ -258,7 +258,7 @@ export default function SearchListings() {
       <Navbar />
 
       {/* Hero */}
-      <div className="relative bg-navy overflow-hidden pt-24 pb-12 px-4 text-center">
+      <div className="relative bg-navy overflow-hidden pt-28 pb-12 px-4 text-center">
         <div className="absolute inset-0 opacity-10 pointer-events-none"
           style={{ backgroundImage: 'radial-gradient(ellipse at 15% 60%, #C8A96E 0%, transparent 55%), radial-gradient(ellipse at 85% 40%, #AC1E32 0%, transparent 55%)' }} />
         <motion.p initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}

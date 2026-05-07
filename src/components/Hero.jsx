@@ -50,6 +50,7 @@ export default function Hero() {
   const [minPrice, setMinPrice] = useState('No Min')
   const [maxPrice, setMaxPrice] = useState('No Max')
   const [beds, setBeds] = useState('Any')
+  const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
 
   const next = useCallback(() => setSlide(s => (s + 1) % SLIDES.length), [])
   const prev = useCallback(() => setSlide(s => (s - 1 + SLIDES.length) % SLIDES.length), [])
@@ -139,21 +140,21 @@ export default function Hero() {
 
       {/* ── Content ── */}
       <div className="relative z-20 flex flex-col" style={{ minHeight: '100dvh' }}>
-        <div className="flex-1 flex items-center py-20 px-4 sm:px-8 lg:px-16">
+        <div className="flex-1 flex items-center pt-28 pb-16 px-4 sm:px-8 lg:px-16">
           <div className="w-full max-w-7xl mx-auto grid lg:grid-cols-[1fr_460px] gap-8 xl:gap-20 items-center">
 
             {/* ── LEFT: Headline ── */}
             <div className="space-y-4 lg:space-y-6 text-center lg:text-left">
 
               <motion.p
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.45 }}
-                style={{ color: GOLD }}
-                className="text-[11px] font-semibold tracking-[0.35em] uppercase font-body"
-              >
-                Atlanta Metro Real Estate
-              </motion.p>
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.45 }}
+                  style={{ color: 'white' }}
+                  className="text-[11px] font-semibold tracking-[0.35em] uppercase font-body"
+                >
+                  Atlanta Metro Real Estate
+                </motion.p>
 
               <AnimatePresence mode="wait">
                 <motion.div
@@ -166,7 +167,8 @@ export default function Hero() {
                   <h1 className="font-heading font-semibold text-[2.4rem] sm:text-5xl lg:text-7xl text-white leading-[1.06]">
                     {SLIDES[slide].title}
                     <br />
-                    <span style={{ color: GOLD }} className="italic">{SLIDES[slide].accent}</span>
+                    {/* Removed the style={{ color: GOLD }} prop below */}
+                    <span className="italic">{SLIDES[slide].accent}</span>
                   </h1>
                   <p className="font-body text-white/65 text-sm sm:text-base mt-3 lg:mt-4 mx-auto lg:mx-0 max-w-[340px] sm:max-w-sm leading-relaxed">
                     {SLIDES[slide].sub}
@@ -176,19 +178,20 @@ export default function Hero() {
 
               {/* Stats */}
               <motion.div
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.38 }}
-                className="flex justify-center lg:justify-start gap-6 lg:gap-8 pt-1"
-              >
-                {[['6,000+', 'Deals Closed'], ['20+', 'Years Exp.'], ['#1', 'ATL Specialist']].map(([num, lbl]) => (
-                  <div key={lbl}>
-                    <p className="font-heading text-2xl lg:text-3xl font-bold leading-none" style={{ color: GOLD }}>{num}</p>
-                    <p className="font-body text-[10px] text-white/50 uppercase tracking-wider mt-1.5">{lbl}</p>
-                  </div>
-                ))}
-              </motion.div>
-
+                  initial={{ opacity: 0, y: 16 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.38 }}
+                  className="flex justify-center lg:justify-start gap-6 lg:gap-8 pt-1"
+                >
+                  {[['6,000+', 'Deals Closed'], ['20+', 'Years Exp.'], ['#1', 'ATL Specialist']].map(([num, lbl]) => (
+                    <div key={lbl}>
+                      {/* Changed text color to white by adding 'text-white' class and removing the style prop */}
+                      <p className="font-heading text-2xl lg:text-3xl font-bold leading-none text-white">{num}</p>
+                      {/* Changed 'text-white/50' to 'text-white' to remove the transparency */}
+                      <p className="font-body text-[10px] text-white uppercase tracking-wider mt-1.5">{lbl}</p>
+                    </div>
+                  ))}
+                </motion.div>
               {/* CTAs */}
               <motion.div
                 initial={{ opacity: 0, y: 16 }}
@@ -207,32 +210,144 @@ export default function Hero() {
                 </Link>
               </motion.div>
 
-              {/* Mobile quick-search bar — lg+ uses full panel on right */}
+              {/* Mobile search panel — lg+ uses full panel on right */}
               <motion.div
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.6 }}
-                className="lg:hidden mx-auto w-full max-w-sm"
+                className="lg:hidden w-full max-w-sm mx-auto"
               >
                 <div
-                  className="flex items-center gap-2 rounded-2xl px-4 py-3"
-                  style={{ background: 'rgba(255,255,255,0.12)', border: '1px solid rgba(255,255,255,0.22)', backdropFilter: 'blur(8px)' }}
+                  className="rounded-2xl overflow-hidden"
+                  style={{
+                    background: 'rgba(10,14,26,0.55)',
+                    border: '1px solid rgba(255,255,255,0.14)',
+                    backdropFilter: 'blur(14px)',
+                    WebkitBackdropFilter: 'blur(14px)',
+                  }}
                 >
-                  <MdSearch size={18} style={{ color: GOLD, flexShrink: 0 }} />
-                  <input
-                    type="text"
-                    value={city}
-                    onChange={e => setCity(e.target.value)}
-                    onKeyDown={e => e.key === 'Enter' && handleSearch()}
-                    placeholder="City, ZIP, or neighborhood…"
-                    className="flex-1 bg-transparent font-body text-sm text-white outline-none placeholder:text-white/40 min-w-0"
-                  />
+                  {/* Buy / Rent / Sold tabs */}
+                  <div className="flex">
+                    {['Buy', 'Rent', 'Sold'].map(t => (
+                      <button
+                        key={t}
+                        onClick={() => setActiveTab(t)}
+                        className="flex-1 py-2.5 font-body text-[11px] font-bold uppercase tracking-widest transition-all duration-200 relative"
+                        style={{ color: activeTab === t ? GOLD : 'rgba(255,255,255,0.4)' }}
+                      >
+                        {t}
+                        {activeTab === t && (
+                          <span className="absolute bottom-0 left-1/4 right-1/4 h-[2px] rounded-full" style={{ background: GOLD }} />
+                        )}
+                      </button>
+                    ))}
+                  </div>
+
+                  {/* Location row */}
+                  <div
+                    className="flex items-center gap-2.5 mx-3 mb-3 rounded-xl px-3 py-2.5"
+                    style={{ background: 'rgba(255,255,255,0.10)', border: '1px solid rgba(255,255,255,0.12)' }}
+                  >
+                    <MdLocationOn size={15} style={{ color: GOLD, flexShrink: 0 }} />
+                    <input
+                      type="text"
+                      value={city}
+                      onChange={e => setCity(e.target.value)}
+                      onKeyDown={e => e.key === 'Enter' && handleSearch()}
+                      placeholder="City, ZIP, or neighborhood…"
+                      className="flex-1 bg-transparent font-body text-sm text-white outline-none placeholder:text-white/35 min-w-0"
+                    />
+                    {city && (
+                      <button onClick={() => setCity('')} className="text-white/30 hover:text-white/60 transition-colors">
+                        <MdClose size={13} />
+                      </button>
+                    )}
+                  </div>
+
+                  {/* Filters toggle */}
+                  <div
+                    className="mx-3 mb-3 rounded-xl overflow-hidden"
+                    style={{ border: '1px solid rgba(255,255,255,0.10)' }}
+                  >
+                    <button
+                      onClick={() => setMobileFiltersOpen(v => !v)}
+                      className="w-full flex items-center justify-between px-3 py-2 transition-colors"
+                      style={{ background: 'rgba(255,255,255,0.06)' }}
+                    >
+                      <span className="flex items-center gap-1.5 font-body text-[11px] font-semibold uppercase tracking-wider" style={{ color: 'rgba(255,255,255,0.55)' }}>
+                        <MdTune size={13} />
+                        Filters
+                        {(propertyType !== 'All' || beds !== 'Any') && (
+                          <span className="w-1.5 h-1.5 rounded-full ml-0.5" style={{ background: GOLD }} />
+                        )}
+                      </span>
+                      <span
+                        className="font-body text-xs transition-transform duration-200"
+                        style={{ color: 'rgba(255,255,255,0.35)', transform: mobileFiltersOpen ? 'rotate(180deg)' : 'none', display: 'inline-block' }}
+                      >▾</span>
+                    </button>
+
+                    <AnimatePresence>
+                      {mobileFiltersOpen && (
+                        <motion.div
+                          key="mobile-filters"
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: 'auto', opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.22, ease: 'easeInOut' }}
+                          className="overflow-hidden"
+                        >
+                          <div className="px-3 pt-2 pb-3 space-y-3" style={{ borderTop: '1px solid rgba(255,255,255,0.08)' }}>
+                            {/* Property type */}
+                            <div>
+                              <p className="font-body text-[9px] uppercase tracking-[0.2em] mb-1.5" style={{ color: 'rgba(255,255,255,0.35)' }}>Property Type</p>
+                              <div className="flex flex-wrap gap-1.5">
+                                {PROPERTY_TYPES.map(t => (
+                                  <button
+                                    key={t}
+                                    onClick={() => setPropertyType(t)}
+                                    className="px-2.5 py-1 rounded-lg font-body text-[11px] font-semibold transition-all duration-150"
+                                    style={propertyType === t
+                                      ? { background: GOLD, color: RED }
+                                      : { background: 'rgba(255,255,255,0.08)', color: 'rgba(255,255,255,0.6)', border: '1px solid rgba(255,255,255,0.1)' }
+                                    }
+                                  >{t}</button>
+                                ))}
+                              </div>
+                            </div>
+                            {/* Bedrooms */}
+                            <div>
+                              <p className="font-body text-[9px] uppercase tracking-[0.2em] mb-1.5" style={{ color: 'rgba(255,255,255,0.35)' }}>Bedrooms</p>
+                              <div className="flex gap-1.5">
+                                {BEDS_OPTS.map(b => (
+                                  <button
+                                    key={b}
+                                    onClick={() => setBeds(b)}
+                                    className="flex-1 py-1.5 rounded-lg font-body text-[11px] font-bold transition-all duration-150"
+                                    style={beds === b
+                                      ? { background: GOLD, color: RED }
+                                      : { background: 'rgba(255,255,255,0.08)', color: 'rgba(255,255,255,0.6)', border: '1px solid rgba(255,255,255,0.1)' }
+                                    }
+                                  >{b}</button>
+                                ))}
+                              </div>
+                            </div>
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+
+                  {/* Search button */}
                   <button
                     onClick={handleSearch}
-                    className="shrink-0 font-body font-bold text-xs px-3 py-1.5 rounded-xl transition-opacity hover:opacity-85"
-                    style={{ background: GOLD, color: RED }}
+                    className="mx-3 mb-3 w-[calc(100%-1.5rem)] flex items-center justify-center gap-2 py-3 rounded-xl font-body font-bold text-sm transition-opacity active:scale-[0.98]"
+                    style={{ background: `linear-gradient(135deg, ${RED} 0%, ${RED_DARK} 100%)`, color: 'white' }}
+                    onMouseEnter={e => e.currentTarget.style.opacity = '0.9'}
+                    onMouseLeave={e => e.currentTarget.style.opacity = '1'}
                   >
-                    Search
+                    <MdSearch size={16} />
+                    Search Properties
                   </button>
                 </div>
               </motion.div>
@@ -267,40 +382,37 @@ export default function Hero() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.65, delay: 0.2 }}
             >
-              <div className="bg-white rounded-3xl overflow-hidden" style={{ boxShadow: '0 32px 80px rgba(0,0,0,0.45)' }}>
+              <div className="bg-white rounded-3xl overflow-hidden flex flex-col" style={{ maxHeight: 'calc(100dvh - 200px)', boxShadow: '0 32px 80px rgba(0,0,0,0.45)' }}>
 
                 {/* Card header */}
-                <div className="px-7 pt-6 pb-5" style={{ background: RED }}>
-                  <p className="font-body text-[10px] uppercase tracking-[0.28em] font-semibold mb-4" style={{ color: `${GOLD}CC` }}>
+                <div className="px-7 pt-6 pb-5 flex-shrink-0" style={{ background: RED }}>
+                  <p className="font-body text-[10px] uppercase tracking-[0.28em] font-semibold mb-4" style={{ color: `white` }}>
                     Property Search
                   </p>
                   <div className="flex gap-1 rounded-2xl p-1" style={{ background: 'rgba(0,0,0,0.25)' }}>
                     {['Buy', 'Rent', 'Sold'].map(tab => (
                       <button
-                        key={tab}
-                        onClick={() => setActiveTab(tab)}
-                        className="flex-1 py-2.5 rounded-xl text-sm font-bold uppercase tracking-widest transition-all duration-200"
-                        style={activeTab === tab
-                          ? { background: GOLD, color: RED }
-                          : { color: 'rgba(255,255,255,0.65)' }
-                        }
-                      >
-                        {tab}
-                      </button>
+                          key={tab}
+                          onClick={() => setActiveTab(tab)}
+                          className="flex-1 py-2.5 rounded-xl text-sm font-bold uppercase tracking-widest transition-all duration-200"
+                          style={activeTab === tab
+                            ? { background: 'white', color: 'red' }
+                            : { color: 'rgb(255, 255, 255)' }
+                          }
+                        >
+                          {tab}
+                        </button>
                     ))}
                   </div>
                 </div>
 
                 {/* Card body */}
-                <div className="px-7 py-6 space-y-5">
+                <div className="px-7 py-6 space-y-5 overflow-y-auto flex-1 min-h-0" style={{ scrollbarWidth: 'thin', scrollbarColor: '#C8A96E transparent' }}>
 
                   {/* Location */}
-                  <div>
-                    <label className="font-body text-[10px] uppercase tracking-[0.22em] text-gray-400 font-semibold mb-2 block">
-                      Location
-                    </label>
-                    <div className="flex items-center gap-3 border-2 border-gray-100 focus-within:border-[#C8A96E] rounded-2xl px-4 py-3.5 bg-gray-50/60 transition-colors duration-200">
-                      <MdLocationOn className="text-xl flex-shrink-0" style={{ color: GOLD }} />
+                  <div className="flex items-center gap-3 border-2 border-gray-100 focus-within:border-[#C8A96E] rounded-2xl px-4 py-3.5 bg-gray-50/60 transition-colors duration-200">
+                      {/* Updated to black */}
+                      <MdLocationOn className="text-xl flex-shrink-0" style={{ color: 'black' }} />
                       <input
                         type="text"
                         value={city}
@@ -315,7 +427,6 @@ export default function Hero() {
                         </button>
                       )}
                     </div>
-                  </div>
 
                   {/* Property Type */}
                   <div>
@@ -386,14 +497,15 @@ export default function Hero() {
                   </div>
 
                   {/* Search button */}
-                  <button
+                 <button
                     onClick={handleSearch}
                     className="w-full flex items-center justify-center gap-2.5 py-4 rounded-2xl text-white font-body font-bold text-base transition-all duration-200 shadow-lg active:scale-[0.99] mt-1"
                     style={{ background: `linear-gradient(135deg, ${RED} 0%, ${RED_DARK} 100%)` }}
                     onMouseEnter={e => e.currentTarget.style.opacity = '0.92'}
                     onMouseLeave={e => e.currentTarget.style.opacity = '1'}
                   >
-                    <MdSearch size={20} style={{ color: GOLD }} />
+                    {/* Changed color from GOLD to 'white' */}
+                    <MdSearch size={20} style={{ color: 'white' }} />
                     Search Properties
                   </button>
 

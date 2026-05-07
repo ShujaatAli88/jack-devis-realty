@@ -242,7 +242,7 @@ export default function ContactModal({ onClose }) {
                 </p>
 
                 <form onSubmit={handleSubmit} noValidate className="space-y-4">
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <FloatingInput
                       id="cm-name"
                       label="Full Name *"

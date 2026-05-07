@@ -129,7 +129,7 @@ export default function Selling() {
 
             <h2 className="font-heading text-4xl md:text-5xl font-bold text-white leading-tight mb-5">
               Fast Cash Offer<br />
-              <span className="text-gold">No Repairs. No Hassle.</span>
+              <span className="text-white">No Repairs. No Hassle.</span>
             </h2>
 
             <p className="font-body text-white/60 text-base leading-relaxed mb-8 max-w-sm">
@@ -140,7 +140,7 @@ export default function Selling() {
             <div className="flex gap-6 mb-8">
               {[['14 Days', 'To Close'], ['$0', 'Closing Costs'], ['24hr', 'Response']].map(([val, label]) => (
                 <div key={label} className="text-center">
-                  <p className="font-heading text-2xl font-bold text-gold">{val}</p>
+                  <p className="font-heading text-2xl font-bold text-white/70">{val}</p>
                   <p className="font-body text-white/40 text-xs uppercase tracking-wider">{label}</p>
                 </div>
               ))}
@@ -148,7 +148,7 @@ export default function Selling() {
 
             {/* Address search */}
             <div className="bg-white/8 border border-white/15 rounded-2xl p-4 mb-6 max-w-sm backdrop-blur-sm">
-              <p className="font-body text-xs text-gold font-semibold uppercase tracking-widest mb-2">Address Search</p>
+              <p className="font-body text-xs text-white/40 font-semibold uppercase tracking-widest mb-2">Address Search</p>
               <div className="flex items-center gap-2 bg-white rounded-xl px-4 py-3">
                 <FiSearch className="w-4 h-4 text-gray-400 shrink-0" />
                 <input
