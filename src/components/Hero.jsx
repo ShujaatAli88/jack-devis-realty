@@ -363,7 +363,7 @@ export default function Hero() {
                     onClick={() => setSlide(i)}
                     className="rounded-full transition-all duration-300"
                     style={{
-                      background: i === slide ? GOLD : 'rgba(255,255,255,0.3)',
+                      background: i === slide ? '#ffffff' : 'rgba(255,255,255,0.3)',
                       width: i === slide ? '28px' : '8px',
                       height: '8px',
                     }}
@@ -410,7 +410,7 @@ export default function Hero() {
                 <div className="px-7 py-6 space-y-5 overflow-y-auto flex-1 min-h-0" style={{ scrollbarWidth: 'thin', scrollbarColor: '#C8A96E transparent' }}>
 
                   {/* Location */}
-                  <div className="flex items-center gap-3 border-2 border-gray-100 focus-within:border-[#C8A96E] rounded-2xl px-4 py-3.5 bg-gray-50/60 transition-colors duration-200">
+                  <div className="flex items-center gap-3 border-2 border-gray-100 rounded-2xl px-4 py-3.5 bg-gray-50/60 transition-colors duration-200">
                       {/* Updated to black */}
                       <MdLocationOn className="text-xl flex-shrink-0" style={{ color: 'black' }} />
                       <input
