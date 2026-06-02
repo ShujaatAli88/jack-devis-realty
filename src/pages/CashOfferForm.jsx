@@ -219,7 +219,7 @@ export default function CashOfferForm() {
                           <TextInput value={form.street2} onChange={field('street2')} />
                           <p className="font-body text-xs text-gold mt-1">Street Address Line 2</p>
                         </div>
-                        <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                           <div>
                             <TextInput value={form.city} onChange={field('city')} required />
                             <p className="font-body text-xs text-gold mt-1">City</p>

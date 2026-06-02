@@ -330,7 +330,7 @@ export default function SearchListings() {
                   <div className="grid md:grid-cols-2 gap-5">
                     <div className="bg-[#FAF7F2] rounded-2xl p-5 border border-gray-100">
                       <SectionTitle icon={MdHome}>Property Type</SectionTitle>
-                      <div className="grid grid-cols-4 gap-2">
+                      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
                         {PROP_TYPES.map(pt => (
                           <PropCard key={pt.key} icon={pt.icon} label={pt.label}
                             active={propTypes[pt.key]} onClick={() => toggleType(pt.key)} />

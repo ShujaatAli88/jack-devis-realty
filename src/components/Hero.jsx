@@ -1,529 +1,356 @@
-import { useState, useEffect, useRef, useCallback } from 'react'
-import { useNavigate, Link } from 'react-router-dom'
+import { useState, useEffect, useRef } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
-import { MdSearch, MdLocationOn, MdTune, MdClose } from 'react-icons/md'
-import { FiChevronLeft, FiChevronRight } from 'react-icons/fi'
+import { FiCheckCircle, FiSearch, FiX, FiChevronDown } from 'react-icons/fi'
+import { MdLocationOn } from 'react-icons/md'
 
-const RED = '#AC1E32'
-const RED_DARK = '#8B1828'
-const GOLD = '#C8A96E'
+/* ── Search config ─────────────────────────────── */
+const TABS          = ['Buy', 'Rent', 'Sold']
+const PROPERTY_TYPES = ['All', 'House', 'Condo', 'Townhouse', 'Land', 'Multi-Family']
+const BEDS_OPTS     = ['Any', '1+', '2+', '3+', '4+', '5+']
+const MIN_PRICES    = ['No Min', '$100K', '$200K', '$300K', '$400K', '$500K', '$750K', '$1M']
+const MAX_PRICES    = ['No Max', '$300K', '$400K', '$500K', '$750K', '$1M', '$1.5M', '$2M+']
+const PLACEHOLDERS  = ['Atlanta, GA…', 'Decatur, GA…', 'Marietta, GA…', 'Smyrna, GA…', 'Buckhead, GA…']
 
-const SLIDES = [
-  {
-    title: 'Find Your',
-    accent: 'Dream Home.',
-    sub: 'Luxury homes, condos & investment properties across Atlanta Metro.',
-    url: '/pexels-curtis-adams-1694007-7027849.jpg',
-  },
-  {
-    title: 'Sell Smarter,',
-    accent: 'Close Faster.',
-    sub: "Top-dollar results with Atlanta's most experienced listing specialist.",
-    url: '/pexels-ibidsy-5524164.jpg',
-  },
-  {
-    title: "Atlanta's Premier",
-    accent: 'Real Estate Partner.',
-    sub: '6,000+ deals closed. 20+ years of trusted expertise in the Metro area.',
-    url: '/pexels-cara-denison-886614634-37419422.jpg',
-  },
+const TRUST_BADGES = [
+  'Licensed Georgia Brokerage',
+  'Local Investor Expertise',
+  'No Repairs Required',
+  'Close in as Little as 14 Days',
 ]
 
-const PLACEHOLDERS = ['Atlanta, GA…', 'Decatur, GA…', 'Buckhead, GA…', 'Marietta, GA…', 'Smyrna, GA…']
-const PROPERTY_TYPES = ['All', 'House', 'Condo', 'Townhouse', 'Land', 'Multi-Family']
-const MIN_PRICES = ['No Min', '$100K', '$200K', '$300K', '$400K', '$500K', '$750K', '$1M']
-const MAX_PRICES = ['No Max', '$300K', '$400K', '$500K', '$750K', '$1M', '$1.5M', '$2M+']
-const BEDS_OPTS = ['Any', '1+', '2+', '3+', '4+', '5+']
+/* ── Expandable Search ─────────────────────────── */
+function ExpandableSearch() {
+  const navigate  = useNavigate()
+  const wrapRef   = useRef(null)
 
-export default function Hero() {
-  const navigate = useNavigate()
-  const [slide, setSlide] = useState(0)
-  const touchStartX = useRef(null)
+  const [expanded,  setExpanded]  = useState(false)
+  const [tab,       setTab]       = useState('Buy')
+  const [city,      setCity]      = useState('')
+  const [propType,  setPropType]  = useState('All')
+  const [beds,      setBeds]      = useState('Any')
+  const [minPrice,  setMinPrice]  = useState('No Min')
+  const [maxPrice,  setMaxPrice]  = useState('No Max')
+  const [phIdx,     setPhIdx]     = useState(0)
+  const [phText,    setPhText]    = useState('')
+  const [phTyping,  setPhTyping]  = useState(true)
 
-  const [phIdx, setPhIdx] = useState(0)
-  const [phText, setPhText] = useState('')
-  const [phTyping, setPhTyping] = useState(true)
-
-  const [activeTab, setActiveTab] = useState('Buy')
-  const [city, setCity] = useState('')
-  const [propertyType, setPropertyType] = useState('All')
-  const [minPrice, setMinPrice] = useState('No Min')
-  const [maxPrice, setMaxPrice] = useState('No Max')
-  const [beds, setBeds] = useState('Any')
-  const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
-
-  const next = useCallback(() => setSlide(s => (s + 1) % SLIDES.length), [])
-  const prev = useCallback(() => setSlide(s => (s - 1 + SLIDES.length) % SLIDES.length), [])
-
+  /* Typewriter placeholder */
   useEffect(() => {
-    const t = setTimeout(next, 3000)
-    return () => clearTimeout(t)
-  }, [slide, next])
-
-  useEffect(() => {
+    if (expanded) return
     const target = PLACEHOLDERS[phIdx]
     if (phTyping) {
       if (phText.length < target.length) {
         const t = setTimeout(() => setPhText(target.slice(0, phText.length + 1)), 65)
         return () => clearTimeout(t)
-      } else {
-        const t = setTimeout(() => setPhTyping(false), 1600)
-        return () => clearTimeout(t)
       }
+      const t = setTimeout(() => setPhTyping(false), 1400)
+      return () => clearTimeout(t)
     } else {
       if (phText.length > 0) {
-        const t = setTimeout(() => setPhText(phText.slice(0, -1)), 40)
+        const t = setTimeout(() => setPhText(phText.slice(0, -1)), 38)
         return () => clearTimeout(t)
-      } else {
-        setPhIdx(i => (i + 1) % PLACEHOLDERS.length)
-        setPhTyping(true)
       }
+      setPhIdx(i => (i + 1) % PLACEHOLDERS.length)
+      setPhTyping(true)
     }
-  }, [phText, phTyping, phIdx])
+  }, [phText, phTyping, phIdx, expanded])
 
-  const handleTouchStart = e => { touchStartX.current = e.touches[0].clientX }
-  const handleTouchEnd = e => {
-    if (touchStartX.current === null) return
-    const diff = touchStartX.current - e.changedTouches[0].clientX
-    if (Math.abs(diff) > 50) diff > 0 ? next() : prev()
-    touchStartX.current = null
-  }
+  /* Close on outside click */
+  useEffect(() => {
+    if (!expanded) return
+    const handler = (e) => {
+      if (wrapRef.current && !wrapRef.current.contains(e.target)) setExpanded(false)
+    }
+    document.addEventListener('mousedown', handler)
+    return () => document.removeEventListener('mousedown', handler)
+  }, [expanded])
+
+  /* Close on Escape */
+  useEffect(() => {
+    const handler = (e) => { if (e.key === 'Escape') setExpanded(false) }
+    window.addEventListener('keydown', handler)
+    return () => window.removeEventListener('keydown', handler)
+  }, [])
 
   const handleSearch = () => {
-    const params = new URLSearchParams()
-    if (city) params.set('q', city)
-    if (propertyType !== 'All') params.set('type', propertyType)
-    if (minPrice !== 'No Min') params.set('minPrice', minPrice)
-    if (maxPrice !== 'No Max') params.set('maxPrice', maxPrice)
-    if (beds !== 'Any') params.set('beds', beds)
-    params.set('tab', activeTab)
-    navigate(`/search?${params.toString()}`)
+    const p = new URLSearchParams()
+    if (city) p.set('q', city)
+    if (propType !== 'All') p.set('type', propType)
+    if (minPrice !== 'No Min') p.set('minPrice', minPrice)
+    if (maxPrice !== 'No Max') p.set('maxPrice', maxPrice)
+    if (beds !== 'Any') p.set('beds', beds)
+    p.set('tab', tab)
+    navigate(`/search?${p.toString()}`)
+    setExpanded(false)
   }
 
+  const activeFilters = [propType !== 'All', beds !== 'Any', minPrice !== 'No Min', maxPrice !== 'No Max'].filter(Boolean).length
+
   return (
-    <section
-      className="relative overflow-hidden"
-      style={{ minHeight: '100dvh' }}
-      onTouchStart={handleTouchStart}
-      onTouchEnd={handleTouchEnd}
-    >
-      {/* ── Background slides ── */}
-      {SLIDES.map((s, i) => (
+    <div ref={wrapRef} className="relative z-30 -mt-6">
+
+      <motion.div
+        layout
+        transition={{ duration: 0.38, ease: [0.22, 1, 0.36, 1] }}
+        className="overflow-hidden rounded-2xl shadow-2xl"
+        style={{ background: 'rgba(255,255,255,0.97)', backdropFilter: 'blur(16px)' }}
+      >
+        {/* ── Collapsed: single pill row ── */}
         <div
-          key={i}
-          className={`absolute inset-0 transition-opacity duration-1000 ${i === slide ? 'opacity-100' : 'opacity-0'}`}
+          className="flex items-center gap-3 px-4 py-3 cursor-pointer"
+          onClick={() => setExpanded(true)}
         >
-          <img
-            src={s.url}
-            alt={s.accent}
-            loading={i === 0 ? 'eager' : 'lazy'}
-            className="w-full h-full object-cover"
-          />
-        </div>
-      ))}
-
-      {/* Mobile overlay — uniform dark for centered text readability */}
-      <div
-        className="absolute inset-0 z-10 lg:hidden"
-        style={{ background: 'rgba(8,14,26,0.78)' }}
-      />
-      {/* Desktop overlay — left-heavy for split layout */}
-      <div
-        className="absolute inset-0 z-10 hidden lg:block"
-        style={{ background: 'linear-gradient(to right, rgba(10,18,32,0.90) 0%, rgba(10,18,32,0.65) 52%, rgba(10,18,32,0.20) 100%)' }}
-      />
-      {/* Top/bottom vignette for both */}
-      <div
-        className="absolute inset-0 z-10"
-        style={{ background: 'linear-gradient(to bottom, rgba(0,0,0,0.20) 0%, transparent 40%, rgba(0,0,0,0.40) 100%)' }}
-      />
-
-      {/* ── Content ── */}
-      <div className="relative z-20 flex flex-col" style={{ minHeight: '100dvh' }}>
-        <div className="flex-1 flex items-center pt-28 pb-16 px-4 sm:px-8 lg:px-16">
-          <div className="w-full max-w-7xl mx-auto grid lg:grid-cols-[1fr_460px] gap-8 xl:gap-20 items-center">
-
-            {/* ── LEFT: Headline ── */}
-            <div className="space-y-4 lg:space-y-6 text-center lg:text-left">
-
-              <motion.p
-                  initial={{ opacity: 0, y: 12 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.45 }}
-                  style={{ color: 'white' }}
-                  className="text-[11px] font-semibold tracking-[0.35em] uppercase font-body"
-                >
-                  Atlanta Metro Real Estate
-                </motion.p>
-
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={slide}
-                  initial={{ opacity: 0, y: 28 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -18 }}
-                  transition={{ duration: 0.55 }}
-                >
-                  <h1 className="font-heading font-semibold text-[2.4rem] sm:text-5xl lg:text-7xl text-white leading-[1.06]">
-                    {SLIDES[slide].title}
-                    <br />
-                    {/* Removed the style={{ color: GOLD }} prop below */}
-                    <span className="italic">{SLIDES[slide].accent}</span>
-                  </h1>
-                  <p className="font-body text-white/65 text-sm sm:text-base mt-3 lg:mt-4 mx-auto lg:mx-0 max-w-[340px] sm:max-w-sm leading-relaxed">
-                    {SLIDES[slide].sub}
-                  </p>
-                </motion.div>
-              </AnimatePresence>
-
-              {/* Stats */}
-              <motion.div
-                  initial={{ opacity: 0, y: 16 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.38 }}
-                  className="flex justify-center lg:justify-start gap-6 lg:gap-8 pt-1"
-                >
-                  {[['6,000+', 'Deals Closed'], ['20+', 'Years Exp.'], ['#1', 'ATL Specialist']].map(([num, lbl]) => (
-                    <div key={lbl}>
-                      {/* Changed text color to white by adding 'text-white' class and removing the style prop */}
-                      <p className="font-heading text-2xl lg:text-3xl font-bold leading-none text-white">{num}</p>
-                      {/* Changed 'text-white/50' to 'text-white' to remove the transparency */}
-                      <p className="font-body text-[10px] text-white uppercase tracking-wider mt-1.5">{lbl}</p>
-                    </div>
-                  ))}
-                </motion.div>
-              {/* CTAs */}
-              <motion.div
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5 }}
-                className="flex justify-center lg:justify-start gap-3 flex-wrap pt-1"
+          {/* Tab pills — hidden on small mobile (shown in expanded panel instead) */}
+          <div className="hidden sm:flex gap-1 shrink-0">
+            {TABS.map(t => (
+              <button
+                key={t}
+                onClick={e => { e.stopPropagation(); setTab(t); setExpanded(true) }}
+                className="px-3.5 py-1.5 rounded-full font-body text-xs font-bold transition-all duration-200"
+                style={tab === t
+                  ? { background: '#AC1E32', color: 'white' }
+                  : { background: '#f3f4f6', color: '#6b7280' }
+                }
               >
-                <Link to="/search" className="btn-gold text-sm sm:text-base px-6 sm:px-8 py-3 sm:py-3.5">
-                  Browse All Homes
-                </Link>
-                <Link
-                  to="/valuation"
-                  className="border-2 border-white/40 text-white font-body font-semibold text-sm sm:text-base px-6 sm:px-8 py-3 sm:py-3.5 rounded-full hover:border-white hover:bg-white/10 transition-all duration-200"
-                >
-                  Free Valuation
-                </Link>
+                {t}
+              </button>
+            ))}
+          </div>
+
+          {/* Divider */}
+          <div className="hidden sm:block h-6 w-px bg-gray-200 shrink-0" />
+
+          {/* Search input hint */}
+          <div className="flex items-center gap-2 flex-1 min-w-0">
+            <MdLocationOn className="w-4 h-4 text-[#AC1E32] shrink-0" />
+            {expanded ? (
+              <input
+                autoFocus
+                type="text"
+                value={city}
+                onChange={e => setCity(e.target.value)}
+                onKeyDown={e => e.key === 'Enter' && handleSearch()}
+                placeholder="City, ZIP, or neighborhood…"
+                className="flex-1 bg-transparent outline-none font-body text-sm text-gray-800 placeholder:text-gray-400 min-w-0"
+                onClick={e => e.stopPropagation()}
+              />
+            ) : (
+              <span className="font-body text-sm text-gray-400 truncate">
+                {phText || 'Search properties…'}
+                <span className="animate-pulse">|</span>
+              </span>
+            )}
+          </div>
+
+          {/* Right side */}
+          <div className="flex items-center gap-2 shrink-0">
+            {activeFilters > 0 && (
+              <span className="w-5 h-5 rounded-full text-white font-body text-[10px] font-bold flex items-center justify-center" style={{ background: '#AC1E32' }}>
+                {activeFilters}
+              </span>
+            )}
+            {expanded ? (
+              <button onClick={e => { e.stopPropagation(); setExpanded(false) }} className="p-1 text-gray-400 hover:text-gray-700 transition-colors">
+                <FiX className="w-4 h-4" />
+              </button>
+            ) : (
+              <motion.div animate={{ rotate: expanded ? 180 : 0 }} transition={{ duration: 0.2 }}>
+                <FiChevronDown className="w-4 h-4 text-gray-400" />
               </motion.div>
-
-              {/* Mobile search panel — lg+ uses full panel on right */}
-              <motion.div
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.6 }}
-                className="lg:hidden w-full max-w-sm mx-auto"
-              >
-                <div
-                  className="rounded-2xl overflow-hidden"
-                  style={{
-                    background: 'rgba(10,14,26,0.55)',
-                    border: '1px solid rgba(255,255,255,0.14)',
-                    backdropFilter: 'blur(14px)',
-                    WebkitBackdropFilter: 'blur(14px)',
-                  }}
-                >
-                  {/* Buy / Rent / Sold tabs */}
-                  <div className="flex">
-                    {['Buy', 'Rent', 'Sold'].map(t => (
-                      <button
-                        key={t}
-                        onClick={() => setActiveTab(t)}
-                        className="flex-1 py-2.5 font-body text-[11px] font-bold uppercase tracking-widest transition-all duration-200 relative"
-                        style={{ color: activeTab === t ? GOLD : 'rgba(255,255,255,0.4)' }}
-                      >
-                        {t}
-                        {activeTab === t && (
-                          <span className="absolute bottom-0 left-1/4 right-1/4 h-[2px] rounded-full" style={{ background: GOLD }} />
-                        )}
-                      </button>
-                    ))}
-                  </div>
-
-                  {/* Location row */}
-                  <div
-                    className="flex items-center gap-2.5 mx-3 mb-3 rounded-xl px-3 py-2.5"
-                    style={{ background: 'rgba(255,255,255,0.10)', border: '1px solid rgba(255,255,255,0.12)' }}
-                  >
-                    <MdLocationOn size={15} style={{ color: GOLD, flexShrink: 0 }} />
-                    <input
-                      type="text"
-                      value={city}
-                      onChange={e => setCity(e.target.value)}
-                      onKeyDown={e => e.key === 'Enter' && handleSearch()}
-                      placeholder="City, ZIP, or neighborhood…"
-                      className="flex-1 bg-transparent font-body text-sm text-white outline-none placeholder:text-white/35 min-w-0"
-                    />
-                    {city && (
-                      <button onClick={() => setCity('')} className="text-white/30 hover:text-white/60 transition-colors">
-                        <MdClose size={13} />
-                      </button>
-                    )}
-                  </div>
-
-                  {/* Filters toggle */}
-                  <div
-                    className="mx-3 mb-3 rounded-xl overflow-hidden"
-                    style={{ border: '1px solid rgba(255,255,255,0.10)' }}
-                  >
-                    <button
-                      onClick={() => setMobileFiltersOpen(v => !v)}
-                      className="w-full flex items-center justify-between px-3 py-2 transition-colors"
-                      style={{ background: 'rgba(255,255,255,0.06)' }}
-                    >
-                      <span className="flex items-center gap-1.5 font-body text-[11px] font-semibold uppercase tracking-wider" style={{ color: 'rgba(255,255,255,0.55)' }}>
-                        <MdTune size={13} />
-                        Filters
-                        {(propertyType !== 'All' || beds !== 'Any') && (
-                          <span className="w-1.5 h-1.5 rounded-full ml-0.5" style={{ background: GOLD }} />
-                        )}
-                      </span>
-                      <span
-                        className="font-body text-xs transition-transform duration-200"
-                        style={{ color: 'rgba(255,255,255,0.35)', transform: mobileFiltersOpen ? 'rotate(180deg)' : 'none', display: 'inline-block' }}
-                      >▾</span>
-                    </button>
-
-                    <AnimatePresence>
-                      {mobileFiltersOpen && (
-                        <motion.div
-                          key="mobile-filters"
-                          initial={{ height: 0, opacity: 0 }}
-                          animate={{ height: 'auto', opacity: 1 }}
-                          exit={{ height: 0, opacity: 0 }}
-                          transition={{ duration: 0.22, ease: 'easeInOut' }}
-                          className="overflow-hidden"
-                        >
-                          <div className="px-3 pt-2 pb-3 space-y-3" style={{ borderTop: '1px solid rgba(255,255,255,0.08)' }}>
-                            {/* Property type */}
-                            <div>
-                              <p className="font-body text-[9px] uppercase tracking-[0.2em] mb-1.5" style={{ color: 'rgba(255,255,255,0.35)' }}>Property Type</p>
-                              <div className="flex flex-wrap gap-1.5">
-                                {PROPERTY_TYPES.map(t => (
-                                  <button
-                                    key={t}
-                                    onClick={() => setPropertyType(t)}
-                                    className="px-2.5 py-1 rounded-lg font-body text-[11px] font-semibold transition-all duration-150"
-                                    style={propertyType === t
-                                      ? { background: GOLD, color: RED }
-                                      : { background: 'rgba(255,255,255,0.08)', color: 'rgba(255,255,255,0.6)', border: '1px solid rgba(255,255,255,0.1)' }
-                                    }
-                                  >{t}</button>
-                                ))}
-                              </div>
-                            </div>
-                            {/* Bedrooms */}
-                            <div>
-                              <p className="font-body text-[9px] uppercase tracking-[0.2em] mb-1.5" style={{ color: 'rgba(255,255,255,0.35)' }}>Bedrooms</p>
-                              <div className="flex gap-1.5">
-                                {BEDS_OPTS.map(b => (
-                                  <button
-                                    key={b}
-                                    onClick={() => setBeds(b)}
-                                    className="flex-1 py-1.5 rounded-lg font-body text-[11px] font-bold transition-all duration-150"
-                                    style={beds === b
-                                      ? { background: GOLD, color: RED }
-                                      : { background: 'rgba(255,255,255,0.08)', color: 'rgba(255,255,255,0.6)', border: '1px solid rgba(255,255,255,0.1)' }
-                                    }
-                                  >{b}</button>
-                                ))}
-                              </div>
-                            </div>
-                          </div>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </div>
-
-                  {/* Search button */}
-                  <button
-                    onClick={handleSearch}
-                    className="mx-3 mb-3 w-[calc(100%-1.5rem)] flex items-center justify-center gap-2 py-3 rounded-xl font-body font-bold text-sm transition-opacity active:scale-[0.98]"
-                    style={{ background: `linear-gradient(135deg, ${RED} 0%, ${RED_DARK} 100%)`, color: 'white' }}
-                    onMouseEnter={e => e.currentTarget.style.opacity = '0.9'}
-                    onMouseLeave={e => e.currentTarget.style.opacity = '1'}
-                  >
-                    <MdSearch size={16} />
-                    Search Properties
-                  </button>
-                </div>
-              </motion.div>
-
-              {/* Slide dots */}
-              <div className="flex items-center justify-center lg:justify-start gap-3 pt-1">
-                <button onClick={prev} className="text-white/40 hover:text-white transition-colors">
-                  <FiChevronLeft size={18} />
-                </button>
-                {SLIDES.map((_, i) => (
-                  <button
-                    key={i}
-                    onClick={() => setSlide(i)}
-                    className="rounded-full transition-all duration-300"
-                    style={{
-                      background: i === slide ? '#ffffff' : 'rgba(255,255,255,0.3)',
-                      width: i === slide ? '28px' : '8px',
-                      height: '8px',
-                    }}
-                  />
-                ))}
-                <button onClick={next} className="text-white/40 hover:text-white transition-colors">
-                  <FiChevronRight size={18} />
-                </button>
-              </div>
-            </div>
-
-            {/* ── RIGHT: Search panel — desktop only ── */}
-            <motion.div
-              className="hidden lg:block"
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.65, delay: 0.2 }}
+            )}
+            <button
+              onClick={e => { e.stopPropagation(); handleSearch() }}
+              className="flex items-center gap-1.5 font-body font-bold text-xs text-white px-4 py-2 rounded-xl transition-all duration-150 shadow-sm"
+              style={{ background: '#AC1E32' }}
             >
-              <div className="bg-white rounded-3xl overflow-hidden flex flex-col" style={{ maxHeight: 'calc(100dvh - 200px)', boxShadow: '0 32px 80px rgba(0,0,0,0.45)' }}>
+              <FiSearch className="w-3.5 h-3.5" />
+              Search
+            </button>
+          </div>
+        </div>
 
-                {/* Card header */}
-                <div className="px-7 pt-6 pb-5 flex-shrink-0" style={{ background: RED }}>
-                  <p className="font-body text-[10px] uppercase tracking-[0.28em] font-semibold mb-4" style={{ color: `white` }}>
-                    Property Search
-                  </p>
-                  <div className="flex gap-1 rounded-2xl p-1" style={{ background: 'rgba(0,0,0,0.25)' }}>
-                    {['Buy', 'Rent', 'Sold'].map(tab => (
-                      <button
-                          key={tab}
-                          onClick={() => setActiveTab(tab)}
-                          className="flex-1 py-2.5 rounded-xl text-sm font-bold uppercase tracking-widest transition-all duration-200"
-                          style={activeTab === tab
-                            ? { background: 'white', color: 'red' }
-                            : { color: 'rgb(255, 255, 255)' }
-                          }
-                        >
-                          {tab}
-                        </button>
+        {/* ── Expanded: full filter panel ── */}
+        <AnimatePresence>
+          {expanded && (
+            <motion.div
+              key="filters"
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: 'auto', opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
+              className="overflow-hidden"
+            >
+              <div className="px-4 pb-4 pt-1 border-t border-gray-100 space-y-4">
+
+                {/* Tab pills — shown only on mobile (collapsed bar hides them) */}
+                <div className="sm:hidden flex gap-1.5 pt-1">
+                  {TABS.map(t => (
+                    <button
+                      key={t}
+                      onClick={() => setTab(t)}
+                      className="px-3.5 py-1.5 rounded-full font-body text-xs font-bold transition-all duration-200"
+                      style={tab === t
+                        ? { background: '#AC1E32', color: 'white' }
+                        : { background: '#f3f4f6', color: '#6b7280' }
+                      }
+                    >{t}</button>
+                  ))}
+                </div>
+
+                {/* Property Type */}
+                <div>
+                  <p className="font-body text-[10px] uppercase tracking-[0.2em] text-gray-400 font-semibold mb-2">Property Type</p>
+                  <div className="flex flex-wrap gap-1.5">
+                    {PROPERTY_TYPES.map(t => (
+                      <button key={t} onClick={() => setPropType(t)}
+                        className="px-3 py-1.5 rounded-xl font-body text-xs font-semibold border transition-all duration-150"
+                        style={propType === t
+                          ? { background: '#AC1E32', color: 'white', borderColor: '#AC1E32' }
+                          : { background: '#f9fafb', color: '#4b5563', borderColor: '#f3f4f6' }
+                        }
+                      >{t}</button>
                     ))}
                   </div>
                 </div>
 
-                {/* Card body */}
-                <div className="px-7 py-6 space-y-5 overflow-y-auto flex-1 min-h-0" style={{ scrollbarWidth: 'thin', scrollbarColor: '#C8A96E transparent' }}>
-
-                  {/* Location */}
-                  <div className="flex items-center gap-3 border-2 border-gray-100 rounded-2xl px-4 py-3.5 bg-gray-50/60 transition-colors duration-200">
-                      {/* Updated to black */}
-                      <MdLocationOn className="text-xl flex-shrink-0" style={{ color: 'black' }} />
-                      <input
-                        type="text"
-                        value={city}
-                        onChange={e => setCity(e.target.value)}
-                        onKeyDown={e => e.key === 'Enter' && handleSearch()}
-                        placeholder={phText || 'City, ZIP, or neighborhood…'}
-                        className="flex-1 bg-transparent border-none outline-none text-gray-800 font-body text-sm placeholder:text-gray-400"
-                      />
-                      {city && (
-                        <button onClick={() => setCity('')} className="text-gray-300 hover:text-gray-500 transition-colors">
-                          <MdClose size={15} />
-                        </button>
-                      )}
-                    </div>
-
-                  {/* Property Type */}
-                  <div>
-                    <label className="font-body text-[10px] uppercase tracking-[0.22em] text-gray-400 font-semibold mb-2 block">
-                      Property Type
-                    </label>
-                    <div className="flex flex-wrap gap-2">
-                      {PROPERTY_TYPES.map(t => (
-                        <button
-                          key={t}
-                          onClick={() => setPropertyType(t)}
-                          className="px-3.5 py-1.5 rounded-xl text-xs font-semibold border transition-all duration-150"
-                          style={propertyType === t
-                            ? { background: RED, color: '#fff', borderColor: RED }
-                            : { background: '#f9fafb', color: '#4b5563', borderColor: '#f3f4f6' }
-                          }
-                        >
-                          {t}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {/* Bedrooms */}
                   <div>
-                    <label className="font-body text-[10px] uppercase tracking-[0.22em] text-gray-400 font-semibold mb-2 block">
-                      Bedrooms
-                    </label>
-                    <div className="flex gap-1.5">
+                    <p className="font-body text-[10px] uppercase tracking-[0.2em] text-gray-400 font-semibold mb-2">Bedrooms</p>
+                    <div className="flex flex-wrap gap-1.5">
                       {BEDS_OPTS.map(b => (
-                        <button
-                          key={b}
-                          onClick={() => setBeds(b)}
-                          className="flex-1 py-2.5 rounded-xl text-xs font-bold border transition-all duration-150"
+                        <button key={b} onClick={() => setBeds(b)}
+                          className="flex-1 py-2 rounded-xl font-body text-xs font-bold border transition-all duration-150"
                           style={beds === b
-                            ? { background: RED, color: '#fff', borderColor: RED }
+                            ? { background: '#AC1E32', color: 'white', borderColor: '#AC1E32' }
                             : { background: '#f9fafb', color: '#6b7280', borderColor: '#f3f4f6' }
                           }
-                        >
-                          {b}
-                        </button>
+                        >{b}</button>
                       ))}
                     </div>
                   </div>
 
                   {/* Price Range */}
                   <div>
-                    <label className="font-body text-[10px] uppercase tracking-[0.22em] text-gray-400 font-semibold mb-2 block">
-                      Price Range
-                    </label>
+                    <p className="font-body text-[10px] uppercase tracking-[0.2em] text-gray-400 font-semibold mb-2">Price Range</p>
                     <div className="flex items-center gap-2">
-                      <select
-                        value={minPrice}
-                        onChange={e => setMinPrice(e.target.value)}
-                        className="flex-1 bg-gray-50 border border-gray-100 rounded-xl px-3 py-2.5 text-xs text-gray-700 font-body outline-none cursor-pointer"
-                      >
+                      <select value={minPrice} onChange={e => setMinPrice(e.target.value)}
+                        className="flex-1 bg-gray-50 border border-gray-100 rounded-xl px-2.5 py-2 text-xs text-gray-700 font-body outline-none cursor-pointer">
                         {MIN_PRICES.map(p => <option key={p}>{p}</option>)}
                       </select>
-                      <span className="text-gray-300 text-sm font-body">—</span>
-                      <select
-                        value={maxPrice}
-                        onChange={e => setMaxPrice(e.target.value)}
-                        className="flex-1 bg-gray-50 border border-gray-100 rounded-xl px-3 py-2.5 text-xs text-gray-700 font-body outline-none cursor-pointer"
-                      >
+                      <span className="text-gray-300 text-sm">—</span>
+                      <select value={maxPrice} onChange={e => setMaxPrice(e.target.value)}
+                        className="flex-1 bg-gray-50 border border-gray-100 rounded-xl px-2.5 py-2 text-xs text-gray-700 font-body outline-none cursor-pointer">
                         {MAX_PRICES.map(p => <option key={p}>{p}</option>)}
                       </select>
                     </div>
                   </div>
-
-                  {/* Search button */}
-                 <button
-                    onClick={handleSearch}
-                    className="w-full flex items-center justify-center gap-2.5 py-4 rounded-2xl text-white font-body font-bold text-base transition-all duration-200 shadow-lg active:scale-[0.99] mt-1"
-                    style={{ background: `linear-gradient(135deg, ${RED} 0%, ${RED_DARK} 100%)` }}
-                    onMouseEnter={e => e.currentTarget.style.opacity = '0.92'}
-                    onMouseLeave={e => e.currentTarget.style.opacity = '1'}
-                  >
-                    {/* Changed color from GOLD to 'white' */}
-                    <MdSearch size={20} style={{ color: 'white' }} />
-                    Search Properties
-                  </button>
-
-                  {/* Advanced link */}
-                  <Link
-                    to="/search"
-                    className="flex items-center justify-center gap-1.5 font-body text-xs text-gray-400 hover:text-gray-700 transition-colors pb-1"
-                  >
-                    <MdTune size={13} />
-                    Advanced Search &amp; More Filters
-                  </Link>
-
                 </div>
+
+                {/* Search CTA */}
+                <div className="flex items-center justify-between pt-1 gap-3 flex-wrap">
+                  <button
+                    onClick={() => { setPropType('All'); setBeds('Any'); setMinPrice('No Min'); setMaxPrice('No Max'); setCity('') }}
+                    className="font-body text-xs text-gray-400 hover:text-gray-700 transition-colors underline-offset-2 hover:underline"
+                  >
+                    Clear filters
+                  </button>
+                  <button
+                    onClick={handleSearch}
+                    className="flex items-center gap-2 font-body font-bold text-sm text-white px-8 py-3 rounded-full transition-all duration-200 shadow-md hover:shadow-lg hover:-translate-y-0.5"
+                    style={{ background: 'linear-gradient(135deg, #AC1E32 0%, #8B1828 100%)' }}
+                  >
+                    <FiSearch className="w-4 h-4" />
+                    Advanced Search
+                  </button>
+                </div>
+
               </div>
             </motion.div>
+          )}
+        </AnimatePresence>
+      </motion.div>
+    </div>
+  )
+}
 
+/* ── Hero ──────────────────────────────────────── */
+export default function Hero() {
+  return (
+    <section className="bg-white pt-[72px]">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 pt-6">
+
+        {/* ── Hero Card ── */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.65, ease: 'easeOut' }}
+          className="relative overflow-hidden rounded-3xl"
+          style={{ minHeight: 'clamp(250px, calc(100vh - 300px), 440px)' }}
+        >
+          {/* Background */}
+          <img
+            src="/hero_bg.jpg"
+            alt="Metro Atlanta Home"
+            className="absolute inset-0 w-full h-full object-cover"
+            style={{ objectPosition: 'center 55%' }}
+            loading="eager"
+          />
+
+          {/* Gradient — left for text, subtle overall darkening */}
+          <div className="absolute inset-0" style={{ background: 'linear-gradient(110deg, rgba(6,2,3,0.80) 0%, rgba(6,2,3,0.50) 50%, rgba(6,2,3,0.08) 100%)' }} />
+          <div className="absolute inset-x-0 bottom-0" style={{ height: '120px', background: 'linear-gradient(to top, rgba(0,0,0,0.30) 0%, transparent 100%)' }} />
+
+          {/* Text content */}
+          <div className="relative z-10 px-5 sm:px-10 pt-6 sm:pt-8 md:pt-12 pb-6 sm:pb-8 md:pb-14 max-w-2xl">
+            <motion.p
+              initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
+              className="font-body text-[11px] font-semibold uppercase tracking-[0.32em] text-white/60 mb-4"
+            >
+              Metro Atlanta's Seller Solutions Brokerage
+            </motion.p>
+
+            <motion.h1
+              initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}
+              className="font-heading font-semibold text-white leading-[1.07] mb-5"
+              style={{ fontSize: 'clamp(2rem, 4.5vw, 3.4rem)' }}
+            >
+              Get your strongest<br />
+              <span className="font-bold">cash offer today.</span>
+            </motion.h1>
+
+            <motion.p
+              initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}
+              className="font-body text-white/75 text-sm sm:text-base leading-relaxed max-w-md"
+            >
+              Get a competitive cash offer or explore the best strategy to maximize your home's value.
+            </motion.p>
+            <motion.p
+              initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.48 }}
+              className="font-body text-white font-semibold text-sm sm:text-base mt-1.5"
+            >
+              No obligations, just offers.
+            </motion.p>
           </div>
-        </div>
+        </motion.div>
+
+        {/* ── Expandable Search — floats below card ── */}
+        <ExpandableSearch />
+
+        {/* ── Trust Badges ── */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.7 }}
+          className="flex flex-wrap items-center justify-center gap-x-5 sm:gap-x-8 gap-y-3 py-6 mt-4"
+        >
+          {TRUST_BADGES.map(badge => (
+            <div key={badge} className="flex items-center gap-2">
+              <FiCheckCircle className="w-4 h-4 text-[#AC1E32] shrink-0" />
+              <span className="font-body text-gray-600 text-xs sm:text-sm font-medium">{badge}</span>
+            </div>
+          ))}
+        </motion.div>
+
       </div>
     </section>
   )

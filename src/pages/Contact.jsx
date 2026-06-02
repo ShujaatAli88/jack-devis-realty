@@ -1,8 +1,7 @@
 import { Helmet } from 'react-helmet-async'
 import { motion } from 'framer-motion'
 import { useState } from 'react'
-import { FiSend, FiMail, FiPhone, FiMapPin, FiClock, FiChevronDown } from 'react-icons/fi'
-import { FaFacebook, FaInstagram } from 'react-icons/fa'
+import { FiSend, FiChevronDown } from 'react-icons/fi'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 
@@ -190,82 +189,10 @@ export default function Contact() {
         </div>
       </div>
 
-      {/* Main grid */}
+      {/* Contact Form */}
       <section className="bg-ivory py-20 px-4">
-        <div className="max-w-7xl mx-auto grid lg:grid-cols-5 gap-10 items-start">
-
-          {/* Left panel — info */}
-          <div className="lg:col-span-2 space-y-8">
-
-            {/* Agent card */}
-            <div className="bg-navy rounded-3xl overflow-hidden shadow-xl">
-              <img
-                src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=600&auto=format&fit=crop&q=80"
-                alt="Tomond Jack"
-                className="w-full h-52 object-cover object-top"
-              />
-              <div className="p-7">
-                <p className="font-body text-xs text-gold uppercase tracking-widest mb-1">Your Agent</p>
-                <h3 className="font-heading text-2xl font-semibold text-white mb-0.5">Tomond Jack</h3>
-                <p className="font-body text-white/40 text-xs mb-5">Managing Broker &amp; Founder</p>
-                <div className="space-y-3.5 mb-6">
-                  <a href="mailto:tomond@jackdavisrealty.com" className="flex items-center gap-3 font-body text-sm text-white/75 hover:text-gold transition-colors">
-                    <FiMail className="w-4 h-4 text-gold shrink-0" />
-                    tomond@jackdavisrealty.com
-                  </a>
-                  <a href="tel:6789222532" className="flex items-center gap-3 font-body text-sm text-white/75 hover:text-gold transition-colors">
-                    <FiPhone className="w-4 h-4 text-gold shrink-0" />
-                    678-922-2532
-                  </a>
-                  <div className="flex items-start gap-3 font-body text-sm text-white/75">
-                    <FiMapPin className="w-4 h-4 text-gold shrink-0 mt-0.5" />
-                    2020 Howell Mill Rd NW, Suite D422<br />Atlanta, GA 30318
-                  </div>
-                </div>
-                <div className="flex gap-3">
-                  {[
-                    { icon: <FaFacebook className="w-4 h-4" />, label: 'Facebook' },
-                    { icon: <FaInstagram className="w-4 h-4" />, label: 'Instagram' },
-                  ].map(({ icon, label }) => (
-                    <a
-                      key={label}
-                      href="#"
-                      aria-label={label}
-                      className="w-9 h-9 bg-white/10 rounded-full flex items-center justify-center hover:bg-gold hover:text-navy text-white transition-all"
-                    >
-                      {icon}
-                    </a>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            {/* Office hours */}
-            <div className="bg-white rounded-3xl p-7 shadow-sm border border-gray-100">
-              <div className="flex items-center gap-3 mb-5">
-                <div className="w-10 h-10 bg-gold/10 rounded-xl flex items-center justify-center">
-                  <FiClock className="w-5 h-5 text-gold" />
-                </div>
-                <h4 className="font-heading text-lg font-semibold text-navy">Office Hours</h4>
-              </div>
-              <div className="space-y-2.5 font-body text-sm">
-                {[
-                  ['Mon – Fri', '9:00 AM – 6:00 PM'],
-                  ['Saturday', '10:00 AM – 4:00 PM'],
-                  ['Sunday', 'By Appointment'],
-                ].map(([day, hours]) => (
-                  <div key={day} className="flex justify-between text-gray-600">
-                    <span className="font-medium text-gray-800">{day}</span>
-                    <span>{hours}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-          </div>
-
-          {/* Right panel — form */}
-          <div className="lg:col-span-3 bg-white rounded-3xl p-8 md:p-10 shadow-sm border border-gray-100">
+        <div className="max-w-2xl mx-auto">
+          <div className="bg-white rounded-3xl p-5 sm:p-8 md:p-10 shadow-sm border border-gray-100">
             <div className="mb-8">
               <p className="section-label mb-2">Get in Touch</p>
               <h2 className="font-heading text-4xl font-semibold text-navy mb-2">
@@ -277,7 +204,6 @@ export default function Contact() {
             </div>
             <ContactForm />
           </div>
-
         </div>
       </section>
 
