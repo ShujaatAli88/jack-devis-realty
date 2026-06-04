@@ -13,7 +13,7 @@ function CommunityCard({ community }) {
         <img src={community.image} alt={community.name} loading="lazy" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
         <div className="absolute inset-0 bg-gradient-to-t from-navy/70 to-transparent" />
         <div className="absolute bottom-4 left-4">
-          <span className="font-body text-xs font-semibold text-white bg-gold px-3 py-1 rounded-full">Avg. {community.avgPrice}</span>
+          <span className="font-body text-xs font-semibold text-white bg-[#AC1E32] px-3 py-1 rounded-full">Avg. {community.avgPrice}</span>
         </div>
       </div>
       <div className="p-6">
@@ -21,10 +21,10 @@ function CommunityCard({ community }) {
         <p className="font-body text-gray-500 text-sm leading-relaxed mb-4">{community.description}</p>
         <div className="flex flex-wrap gap-2 mb-4">
           {community.highlights.map((h) => (
-            <span key={h} className="font-body text-xs text-navy bg-ivory border border-gold/20 px-3 py-1 rounded-full">{h}</span>
+            <span key={h} className="font-body text-xs text-navy bg-ivory border border-gray-200 px-3 py-1 rounded-full">{h}</span>
           ))}
         </div>
-        <Link to="/search" className="font-body text-sm font-semibold text-gold hover:text-gold-dark transition-colors">
+        <Link to="/search" className="font-body text-sm font-semibold text-[#AC1E32] hover:text-[#8B1828] transition-colors">
           View Homes in {community.name} →
         </Link>
       </div>
@@ -61,7 +61,7 @@ export default function Communities() {
       </section>
 
       <section className="bg-navy py-20 px-4 text-center">
-        <p className="section-label text-gold mb-4">Ready to Explore?</p>
+        <p className="section-label text-white mb-4">Ready to Explore?</p>
         <h2 className="font-heading text-4xl font-semibold text-white mb-6">Let Tomond Jack Be Your Local Guide</h2>
         <p className="font-body text-white/60 max-w-lg mx-auto mb-10">
           With 20+ years of living and working across Atlanta Metro, Tomond knows every street, school, and opportunity in each of these communities.

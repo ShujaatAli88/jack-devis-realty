@@ -249,7 +249,7 @@ export default function SearchListings() {
 
   return (
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.4 }}
-      className="min-h-screen bg-[#FAF7F2]">
+      className="min-h-screen bg-[#F2F2F2]">
       <Helmet>
         <title>Advanced Property Search | Jack Davis Realty</title>
         <meta name="description" content="Search Atlanta Metro real estate with advanced filters — city, price, beds, property type, subdivision and more." />
@@ -260,9 +260,9 @@ export default function SearchListings() {
       {/* Hero */}
       <div className="relative bg-navy overflow-hidden pt-28 pb-12 px-4 text-center">
         <div className="absolute inset-0 opacity-10 pointer-events-none"
-          style={{ backgroundImage: 'radial-gradient(ellipse at 15% 60%, #C8A96E 0%, transparent 55%), radial-gradient(ellipse at 85% 40%, #AC1E32 0%, transparent 55%)' }} />
+          style={{ backgroundImage: 'radial-gradient(ellipse at 15% 60%, #AC1E32 0%, transparent 55%), radial-gradient(ellipse at 85% 40%, #AC1E32 0%, transparent 55%)' }} />
         <motion.p initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
-          className="font-body text-[11px] text-gold/70 uppercase tracking-[0.3em] mb-2">Jack Davis Realty</motion.p>
+          className="font-body text-[11px] text-white/70 uppercase tracking-[0.3em] mb-2">Jack Davis Realty</motion.p>
         <motion.h1 initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.18 }}
           className="font-heading text-4xl md:text-5xl font-semibold text-white mb-3">Find Your Perfect Property</motion.h1>
         <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.28 }}
@@ -315,7 +315,7 @@ export default function SearchListings() {
                 <div className="p-6 space-y-5">
 
                   {/* Row 1 — Location */}
-                  <div className="bg-[#FAF7F2] rounded-2xl p-5 border border-gray-100">
+                  <div className="bg-[#F2F2F2] rounded-2xl p-5 border border-gray-100">
                     <SectionTitle icon={MdLocationCity}>Location</SectionTitle>
                     <div className="grid grid-cols-2 gap-4">
                       <ScrollBox label="City" value={city} onChange={setCity} options={CITIES} />
@@ -328,7 +328,7 @@ export default function SearchListings() {
 
                   {/* Row 2 — Property type + Price */}
                   <div className="grid md:grid-cols-2 gap-5">
-                    <div className="bg-[#FAF7F2] rounded-2xl p-5 border border-gray-100">
+                    <div className="bg-[#F2F2F2] rounded-2xl p-5 border border-gray-100">
                       <SectionTitle icon={MdHome}>Property Type</SectionTitle>
                       <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
                         {PROP_TYPES.map(pt => (
@@ -338,7 +338,7 @@ export default function SearchListings() {
                       </div>
                     </div>
 
-                    <div className="bg-[#FAF7F2] rounded-2xl p-5 border border-gray-100">
+                    <div className="bg-[#F2F2F2] rounded-2xl p-5 border border-gray-100">
                       <SectionTitle icon={MdAttachMoney}>Price Range</SectionTitle>
                       <div className="flex items-end gap-3">
                         <PriceSelect label="Minimum" value={minPrice} onChange={setMinPrice} />
@@ -349,7 +349,7 @@ export default function SearchListings() {
                   </div>
 
                   {/* Row 3 — Beds + Baths */}
-                  <div className="bg-[#FAF7F2] rounded-2xl p-5 border border-gray-100">
+                  <div className="bg-[#F2F2F2] rounded-2xl p-5 border border-gray-100">
                     <div className="grid sm:grid-cols-2 gap-6">
                       <div>
                         <SectionTitle icon={MdBed}>Bedrooms</SectionTitle>
@@ -367,7 +367,7 @@ export default function SearchListings() {
                   </div>
 
                   {/* Row 4 — More filters */}
-                  <div className="bg-[#FAF7F2] rounded-2xl p-5 border border-gray-100">
+                  <div className="bg-[#F2F2F2] rounded-2xl p-5 border border-gray-100">
                     <SectionTitle icon={MdTune}>Additional Filters</SectionTitle>
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
                       <SmallSelect label="Min Sq. Feet"   value={minSqft}   onChange={setMinSqft}   options={SQFT_OPTS} />

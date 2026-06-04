@@ -9,7 +9,7 @@
 
   body {
     font-family: 'DM Sans', sans-serif;
-    background-color: #FAF7F2;
+    background-color: #F2F2F2;
     color: #1A1A1A;
     margin: 0;
     padding: 0;
@@ -45,7 +45,7 @@
   }
 
   .section-label {
-    @apply text-gold font-body font-semibold text-xs tracking-[0.2em] uppercase;
+    @apply text-[#AC1E32] font-body font-semibold text-xs tracking-[0.2em] uppercase;
   }
 
   .section-heading {
@@ -60,11 +60,11 @@
 /* Swiper overrides */
 .swiper-button-next,
 .swiper-button-prev {
-  color: #C8A96E !important;
+  color: #AC1E32 !important;
 }
 
 .swiper-pagination-bullet-active {
-  background: #C8A96E !important;
+  background: #AC1E32 !important;
 }
 
 /* Smooth scroll offset for sticky nav */

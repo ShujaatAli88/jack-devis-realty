@@ -13,10 +13,10 @@ export default function BlogCard({ post }) {
         />
       </div>
       <div className="p-6">
-        <span className="font-body text-xs font-semibold text-gold uppercase tracking-widest bg-gold/10 px-3 py-1 rounded-full">
+        <span className="font-body text-xs font-semibold text-white uppercase tracking-widest bg-white/10 px-3 py-1 rounded-full">
           {post.category}
         </span>
-        <h3 className="font-heading text-xl font-semibold text-white mt-3 mb-2 leading-snug group-hover:text-gold transition-colors">
+        <h3 className="font-heading text-xl font-semibold text-white mt-3 mb-2 leading-snug group-hover:text-white transition-colors">
           {post.title}
         </h3>
         <p className="font-body text-white/50 text-sm leading-relaxed mb-4 line-clamp-2">
@@ -26,7 +26,7 @@ export default function BlogCard({ post }) {
           <span className="font-body text-xs text-white/30">{post.date}</span>
           <Link
             to={`/blog/${post.slug}`}
-            className="flex items-center gap-2 font-body text-sm font-semibold text-gold hover:text-gold-light transition-colors group/link"
+            className="flex items-center gap-2 font-body text-sm font-semibold text-white hover:text-white/80 transition-colors group/link"
           >
             Read More
             <FiArrowRight className="w-4 h-4 group-hover/link:translate-x-1 transition-transform" />

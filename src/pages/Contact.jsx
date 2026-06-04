@@ -25,8 +25,8 @@ function Field({ label, error, children }) {
 }
 
 const inputClass = (err) =>
-  `w-full bg-white border rounded-xl px-4 py-3.5 font-body text-sm text-gray-800 placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-gold/40 transition-all ${
-    err ? 'border-red-400' : 'border-gray-200 focus:border-gold'
+  `w-full bg-white border rounded-xl px-4 py-3.5 font-body text-sm text-gray-800 placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-300 transition-all ${
+    err ? 'border-red-400' : 'border-gray-200 focus:border-gray-400'
   }`
 
 function ContactForm() {
@@ -69,8 +69,8 @@ function ContactForm() {
         animate={{ opacity: 1, y: 0 }}
         className="text-center py-16"
       >
-        <div className="w-16 h-16 bg-gold/20 rounded-full flex items-center justify-center mx-auto mb-5">
-          <FiSend className="w-7 h-7 text-gold" />
+        <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-5">
+          <FiSend className="w-7 h-7 text-[#AC1E32]" />
         </div>
         <h3 className="font-heading text-3xl font-semibold text-navy mb-2">Message Received!</h3>
         <p className="font-body text-gray-500 text-base">
@@ -118,7 +118,7 @@ function ContactForm() {
           <select
             value={form.timeline}
             onChange={set('timeline')}
-            className="w-full appearance-none bg-white border border-gray-200 rounded-xl px-4 py-3.5 font-body text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-gold/40 focus:border-gold transition-all cursor-pointer"
+            className="w-full appearance-none bg-white border border-gray-200 rounded-xl px-4 py-3.5 font-body text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:border-gray-400 transition-all cursor-pointer"
           >
             {TIMELINES.map((t) => (
               <option key={t} value={t}>{t}</option>
@@ -179,7 +179,7 @@ export default function Contact() {
       >
         <div className="absolute inset-0 bg-navy/80" />
         <div className="relative z-10 text-center py-20 px-4">
-          <p className="section-label text-gold mb-3">We'd Love to Hear From You</p>
+          <p className="section-label mb-3">We'd Love to Hear From You</p>
           <h1 className="font-heading text-5xl md:text-6xl font-semibold text-white mb-4">
             Contact Us
           </h1>

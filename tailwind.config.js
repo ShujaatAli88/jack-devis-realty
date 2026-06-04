@@ -10,13 +10,13 @@ export default {
           dark: '#8B1828',
         },
         gold: {
-          DEFAULT: '#C8A96E',
-          light: '#dfc28f',
-          dark: '#a8843e',
+          DEFAULT: '#374151',
+          light: '#6B7280',
+          dark: '#1F2937',
         },
         ivory: {
-          DEFAULT: '#FAF7F2',
-          dark: '#f0ebe0',
+          DEFAULT: '#F2F2F2',
+          dark: '#E8E8E8',
         },
         'slate-dark': '#1F0A0E',
       },

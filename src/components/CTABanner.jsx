@@ -13,7 +13,7 @@ export default function CTABanner({ onContact }) {
           />
           <div className="absolute inset-0 bg-navy/50" />
           <div className="absolute bottom-8 left-8">
-            <span className="bg-gold text-navy font-body text-xs font-semibold uppercase tracking-widest px-4 py-2 rounded-full">
+            <span className="bg-[#AC1E32] text-white font-body text-xs font-semibold uppercase tracking-widest px-4 py-2 rounded-full">
               Exclusive Service, Best Results
             </span>
           </div>
@@ -32,7 +32,7 @@ export default function CTABanner({ onContact }) {
             <p className="font-body text-xs text-white/40 uppercase tracking-widest mb-2">Direct Call Us By</p>
             <a
               href="tel:6789222532"
-              className="flex items-center gap-3 font-heading text-3xl font-semibold text-gold hover:text-gold-light transition-colors"
+              className="flex items-center gap-3 font-heading text-3xl font-semibold text-white hover:text-white/80 transition-colors"
             >
               <FiPhone className="w-6 h-6" />
               678-922-2532

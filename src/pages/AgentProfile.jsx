@@ -10,7 +10,7 @@ function StarRow({ count = 5 }) {
   return (
     <div className="flex gap-0.5">
       {Array.from({ length: count }).map((_, i) => (
-        <FaStar key={i} className="text-gold text-sm" />
+        <FaStar key={i} className="text-white text-sm" />
       ))}
     </div>
   )
@@ -50,20 +50,20 @@ export default function AgentProfile() {
         <div className="max-w-7xl mx-auto">
           <Link
             to="/about#team"
-            className="inline-flex items-center gap-2 font-body text-sm text-gold/70 hover:text-gold transition-colors mb-8"
+            className="inline-flex items-center gap-2 font-body text-sm text-white/70 hover:text-white transition-colors mb-8"
           >
             <FaArrowLeft className="text-xs" /> Back to Team
           </Link>
 
           <div className="flex flex-wrap items-end gap-3">
             <div>
-              <p className="font-body text-xs uppercase tracking-[0.25em] text-gold/60 mb-2">
+              <p className="font-body text-xs uppercase tracking-[0.25em] text-white/60 mb-2">
                 Jack Davis Realty
               </p>
               <h1 className="font-heading text-5xl md:text-6xl font-semibold text-white leading-tight">
                 {agent.name}
               </h1>
-              <p className="font-body text-gold mt-2 text-lg">{agent.title}</p>
+              <p className="font-body text-white mt-2 text-lg">{agent.title}</p>
               {agent.subtitle && (
                 <p className="font-body text-white/50 text-sm mt-0.5">{agent.subtitle}</p>
               )}
@@ -109,17 +109,17 @@ export default function AgentProfile() {
 
             {/* Contact card */}
             <div className="bg-navy rounded-3xl p-6 space-y-4">
-              <p className="font-body text-xs uppercase tracking-widest text-gold/60 mb-4">
+              <p className="font-body text-xs uppercase tracking-widest text-white/60 mb-4">
                 Get In Touch
               </p>
               <a
                 href={`tel:${agent.phone.replace(/\D/g, '')}`}
                 className="flex items-center gap-4 group"
               >
-                <span className="w-10 h-10 rounded-full bg-gold/15 flex items-center justify-center shrink-0 group-hover:bg-gold/30 transition-colors">
-                  <FaPhone className="text-gold text-sm" />
+                <span className="w-10 h-10 rounded-full bg-white/15 flex items-center justify-center shrink-0 group-hover:bg-white/30 transition-colors">
+                  <FaPhone className="text-white text-sm" />
                 </span>
-                <span className="font-body text-white group-hover:text-gold transition-colors">
+                <span className="font-body text-white group-hover:text-white transition-colors">
                   {agent.phone}
                 </span>
               </a>
@@ -127,10 +127,10 @@ export default function AgentProfile() {
                 href={`mailto:${agent.email}`}
                 className="flex items-center gap-4 group"
               >
-                <span className="w-10 h-10 rounded-full bg-gold/15 flex items-center justify-center shrink-0 group-hover:bg-gold/30 transition-colors">
-                  <FaEnvelope className="text-gold text-sm" />
+                <span className="w-10 h-10 rounded-full bg-white/15 flex items-center justify-center shrink-0 group-hover:bg-white/30 transition-colors">
+                  <FaEnvelope className="text-white text-sm" />
                 </span>
-                <span className="font-body text-white group-hover:text-gold transition-colors break-all text-sm">
+                <span className="font-body text-white group-hover:text-white transition-colors break-all text-sm">
                   {agent.email}
                 </span>
               </a>
@@ -146,7 +146,7 @@ export default function AgentProfile() {
             {/* Bio */}
             {agent.bio.length > 0 && (
               <div className="mb-14">
-                <p className="font-body text-xs uppercase tracking-[0.25em] text-gold mb-3">
+                <p className="font-body text-xs uppercase tracking-[0.25em] text-[#374151] mb-3">
                   About {agent.name.split(' ')[0]}
                 </p>
                 <h2 className="font-heading text-3xl font-semibold text-navy mb-6">
@@ -165,7 +165,7 @@ export default function AgentProfile() {
             {/* Reviews */}
             {agent.reviews.length > 0 && (
               <div>
-                <p className="font-body text-xs uppercase tracking-[0.25em] text-gold mb-3">
+                <p className="font-body text-xs uppercase tracking-[0.25em] text-[#374151] mb-3">
                   Client Reviews
                 </p>
                 <h2 className="font-heading text-3xl font-semibold text-navy mb-8">
@@ -182,7 +182,7 @@ export default function AgentProfile() {
                       transition={{ delay: i * 0.1 }}
                       className="bg-white rounded-3xl p-8 shadow-sm border border-gray-100 relative"
                     >
-                      <FaQuoteLeft className="text-gold/20 text-5xl absolute top-6 right-6" />
+                      <FaQuoteLeft className="text-white/20 text-5xl absolute top-6 right-6" />
                       <StarRow count={review.stars} />
                       <p className="font-body text-gray-600 leading-relaxed mt-4 mb-5 relative z-10">
                         "{review.text}"

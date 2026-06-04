@@ -202,7 +202,7 @@ export default function ContactModal({ onClose }) {
         className="relative bg-ivory rounded-3xl shadow-2xl w-full max-w-lg overflow-hidden z-10"
       >
         {/* Top accent bar */}
-        <div className="h-1.5 w-full bg-gradient-to-r from-navy via-gold to-navy" />
+        <div className="h-1.5 w-full bg-gradient-to-r from-navy via-[#AC1E32] to-navy" />
 
         <div className="p-8">
           {/* Close */}
@@ -221,8 +221,8 @@ export default function ContactModal({ onClose }) {
                 animate={{ opacity: 1, scale: 1 }}
                 className="text-center py-10"
               >
-                <div className="w-16 h-16 bg-gold/20 rounded-full flex items-center justify-center mx-auto mb-5">
-                  <FiSend className="w-7 h-7 text-gold" />
+                <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-5">
+                  <FiSend className="w-7 h-7 text-[#374151]" />
                 </div>
                 <h3 className="font-heading text-2xl font-semibold text-navy mb-2">Message Sent!</h3>
                 <p className="font-body text-gray-500 text-sm">
@@ -231,7 +231,7 @@ export default function ContactModal({ onClose }) {
               </motion.div>
             ) : (
               <motion.div key="form" initial={{ opacity: 1 }} exit={{ opacity: 0 }}>
-                <p className="font-body text-xs font-semibold text-gold uppercase tracking-widest mb-1">
+                <p className="font-body text-xs font-semibold text-[#374151] uppercase tracking-widest mb-1">
                   Get in Touch
                 </p>
                 <h2 className="font-heading text-3xl font-semibold text-navy mb-1">

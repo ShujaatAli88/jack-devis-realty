@@ -9,7 +9,7 @@ export default function Blog() {
     <section className="bg-slate-dark py-24 px-4">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-14">
-          <p className="section-label text-gold mb-3">Stay Informed</p>
+          <p className="section-label text-white mb-3">Stay Informed</p>
           <h2 className="font-heading text-4xl md:text-5xl font-semibold text-white mb-4">
             News &amp; Blog
           </h2>

@@ -98,13 +98,11 @@ export default function Footer() {
 
         {/* Logo */}
         <Link to="/">
-          <div className="bg-white rounded-xl px-6 py-3 inline-block shadow-md">
-            <img
-              src="/logo_navbar.png"
-              alt="Jack Davis Realty"
-              className="h-12 w-auto object-contain"
-            />
-          </div>
+          <img
+            src="/logo_navbar.png"
+            alt="Jack Davis Realty"
+            className="h-44 w-auto object-contain rounded-2xl"
+          />
         </Link>
 
         {/* Phone */}
@@ -114,6 +112,23 @@ export default function Footer() {
         >
           678-922-2532
         </a>
+
+        {/* Primary CTA — required by brand document in footer */}
+        <div className="flex flex-col sm:flex-row items-center gap-3">
+          <Link
+            to="/cash-offer"
+            className="font-body font-bold text-sm text-white px-8 py-3.5 rounded-full transition-all duration-200 hover:opacity-90"
+            style={{ background: '#AC1E32' }}
+          >
+            Get My Fast Cash Offer
+          </Link>
+          <Link
+            to="/selling"
+            className="font-body font-semibold text-sm text-white/70 hover:text-white border border-white/25 px-8 py-3.5 rounded-full transition-all duration-200 hover:border-white/50"
+          >
+            Explore Selling Options
+          </Link>
+        </div>
 
         {/* Address */}
         <p className="font-body text-sm text-white/40 leading-relaxed">
@@ -149,11 +164,13 @@ export default function Footer() {
         </div>
 
         {/* Equal Housing */}
-        <img
-          src="https://u.realgeeks.media/jackdavisrealty/R-EH.png"
-          alt="Equal Housing Opportunity"
-          className="h-8 object-contain opacity-40 mt-1"
-        />
+        <div className="bg-white rounded-lg px-4 py-2 mt-1">
+          <img
+            src="https://u.realgeeks.media/jackdavisrealty/R-EH.png"
+            alt="Equal Housing Opportunity"
+            className="h-10 w-auto object-contain"
+          />
+        </div>
 
       </div>
     </footer>

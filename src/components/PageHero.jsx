@@ -27,10 +27,10 @@ export default function PageHero({ title, breadcrumb, image }) {
           </h1>
           {/* Breadcrumb */}
           <nav className="flex items-center gap-2 font-body text-sm text-white/50">
-            <Link to="/" className="hover:text-gold transition-colors">
+            <Link to="/" className="hover:text-[#AC1E32] transition-colors">
               Home
             </Link>
-            <span className="text-gold/50">›</span>
+            <span className="text-gray-400">›</span>
             <span className="text-white/70">{breadcrumb || title}</span>
           </nav>
         </motion.div>

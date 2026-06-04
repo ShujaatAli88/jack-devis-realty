@@ -56,7 +56,7 @@ export default function FAQ({ dark = false }) {
             >
               {faq.question}
             </span>
-            <span className="shrink-0 w-8 h-8 bg-gold rounded-full flex items-center justify-center">
+            <span className="shrink-0 w-8 h-8 bg-[#AC1E32] rounded-full flex items-center justify-center">
               {open === faq.id ? (
                 <FiMinus className="w-4 h-4 text-navy" />
               ) : (

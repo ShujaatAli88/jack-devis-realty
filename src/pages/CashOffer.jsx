@@ -58,7 +58,7 @@ function FAQItem({ q, a }) {
         className="w-full flex items-center justify-between py-5 text-left gap-4"
       >
         <span className="font-heading text-base font-semibold text-navy">{q}</span>
-        <FiChevronDown className={`w-5 h-5 text-gold shrink-0 transition-transform duration-300 ${open ? 'rotate-180' : ''}`} />
+        <FiChevronDown className={`w-5 h-5 text-[#374151] shrink-0 transition-transform duration-300 ${open ? 'rotate-180' : ''}`} />
       </button>
       <AnimatePresence>
         {open && (
@@ -83,7 +83,7 @@ function CTAButton({ onClick, className = '', children }) {
       onClick={onClick}
       whileHover={{ scale: 1.03 }}
       whileTap={{ scale: 0.97 }}
-      className={`inline-flex items-center gap-2 bg-gold hover:bg-gold-dark text-navy font-body font-bold text-sm px-8 py-4 rounded-full shadow-lg transition-colors ${className}`}
+      className={`inline-flex items-center gap-2 bg-[#AC1E32] hover:bg-[#8B1828] text-white font-body font-bold text-sm px-8 py-4 rounded-full shadow-lg transition-colors ${className}`}
     >
       {children}
       <FiArrowRight className="w-4 h-4" />
@@ -109,7 +109,7 @@ export default function CashOffer() {
         <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/55 to-black/75" />
         <div className="relative z-10 max-w-4xl mx-auto text-center">
           <motion.p initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
-            className="font-body text-xs font-semibold text-gold uppercase tracking-widest mb-4">
+            className="font-body text-xs font-semibold text-white uppercase tracking-widest mb-4">
             Jack Davis Realty
           </motion.p>
           <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
@@ -141,7 +141,7 @@ export default function CashOffer() {
         <div className="max-w-4xl mx-auto grid grid-cols-3 divide-x divide-white/10 text-center">
           {[['14 Days', 'Close Timeline'], ['24–48 hrs', 'Offer Response'], ['$0', 'Closing Costs']].map(([val, label]) => (
             <div key={label} className="px-4 py-2">
-              <p className="font-heading text-2xl md:text-3xl font-bold text-gold">{val}</p>
+              <p className="font-heading text-2xl md:text-3xl font-bold text-white">{val}</p>
               <p className="font-body text-xs text-white/50 uppercase tracking-widest mt-1">{label}</p>
             </div>
           ))}
@@ -178,8 +178,8 @@ export default function CashOffer() {
                   />
                 </div>
                 {/* Check badge */}
-                <div className="w-8 h-8 bg-gold/10 rounded-lg flex items-center justify-center mb-4">
-                  <FiCheck className="w-4 h-4 text-gold" strokeWidth={3} />
+                <div className="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center mb-4">
+                  <FiCheck className="w-4 h-4 text-[#374151]" strokeWidth={3} />
                 </div>
                 <h3 className="font-heading text-xl font-semibold text-navy mb-2">{card.title}</h3>
                 <p className="font-body text-gray-500 text-sm leading-relaxed">{card.desc}</p>
@@ -193,7 +193,7 @@ export default function CashOffer() {
       <section className="bg-navy py-24 px-4">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-16">
-            <p className="font-body text-xs text-gold uppercase tracking-widest font-semibold mb-3">Simple Process</p>
+            <p className="font-body text-xs text-white uppercase tracking-widest font-semibold mb-3">Simple Process</p>
             <h2 className="font-heading text-4xl md:text-5xl font-semibold text-white">How Our Cash Offer Process Works</h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-14">
@@ -203,10 +203,10 @@ export default function CashOffer() {
                 transition={{ duration: 0.5, delay: i * 0.15 }}
                 className="relative text-center">
                 {i < steps.length - 1 && (
-                  <div className="hidden md:block absolute top-8 left-[calc(50%+2rem)] w-[calc(100%-4rem)] h-px bg-gold/20" />
+                  <div className="hidden md:block absolute top-8 left-[calc(50%+2rem)] w-[calc(100%-4rem)] h-px bg-white/20" />
                 )}
-                <div className="w-16 h-16 rounded-full bg-gold/10 border border-gold/30 flex items-center justify-center mx-auto mb-5">
-                  <span className="font-heading text-xl font-bold text-gold">{step.n}</span>
+                <div className="w-16 h-16 rounded-full bg-white/10 border border-white/20 flex items-center justify-center mx-auto mb-5">
+                  <span className="font-heading text-xl font-bold text-white">{step.n}</span>
                 </div>
                 <h3 className="font-heading text-lg font-semibold text-white mb-3">{step.title}</h3>
                 <p className="font-body text-white/55 text-sm leading-relaxed">{step.desc}</p>
@@ -231,14 +231,14 @@ export default function CashOffer() {
             <ul className="space-y-4 mb-10">
               {benefits.map((b) => (
                 <li key={b} className="flex items-start gap-3">
-                  <span className="w-6 h-6 bg-gold/15 rounded-full flex items-center justify-center shrink-0 mt-0.5">
-                    <FiCheck className="w-3.5 h-3.5 text-gold" strokeWidth={3} />
+                  <span className="w-6 h-6 bg-gray-100 rounded-full flex items-center justify-center shrink-0 mt-0.5">
+                    <FiCheck className="w-3.5 h-3.5 text-[#374151]" strokeWidth={3} />
                   </span>
                   <span className="font-body text-sm text-gray-700">{b}</span>
                 </li>
               ))}
             </ul>
-            <p className="font-body text-gray-500 text-sm leading-relaxed italic border-l-4 border-gold pl-4">
+            <p className="font-body text-gray-500 text-sm leading-relaxed italic border-l-4 border-gray-300 pl-4">
               As both a licensed Georgia brokerage and experienced local investor, Jack Davis Realty gives you more than a generic cash buyer. We understand property values, renovation costs, neighborhood trends, and the best exit strategy for your home.
             </p>
           </motion.div>
@@ -262,12 +262,12 @@ export default function CashOffer() {
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 mb-8">
             {situations.map((s) => (
               <div key={s} className="bg-white rounded-2xl px-5 py-4 shadow-sm border border-gray-100 flex items-center gap-3">
-                <span className="w-2 h-2 bg-gold rounded-full shrink-0" />
+                <span className="w-2 h-2 bg-[#AC1E32] rounded-full shrink-0" />
                 <span className="font-body text-sm text-gray-700">{s}</span>
               </div>
             ))}
           </div>
-          <p className="text-center font-body text-sm text-gold italic mt-4">
+          <p className="text-center font-body text-sm text-[#374151] italic mt-4">
             If your home needs work, that's okay — we buy as-is.
           </p>
         </div>
@@ -277,7 +277,7 @@ export default function CashOffer() {
       <section className="bg-[#1F0A0E] py-24 px-4">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-14">
-            <p className="font-body text-xs text-gold uppercase tracking-widest font-semibold mb-3">Coverage</p>
+            <p className="font-body text-xs text-white uppercase tracking-widest font-semibold mb-3">Coverage</p>
             <h2 className="font-heading text-4xl font-semibold text-white mb-4">Areas We Buy Homes</h2>
             <p className="font-body text-white/50 text-sm max-w-md mx-auto">
               We provide fast cash offers throughout Metro Atlanta, including:
@@ -285,21 +285,21 @@ export default function CashOffer() {
           </div>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 mb-8">
             <div>
-              <p className="font-body text-xs text-gold uppercase tracking-widest font-semibold mb-5">Counties</p>
+              <p className="font-body text-xs text-white uppercase tracking-widest font-semibold mb-5">Counties</p>
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                 {counties.map((c) => (
                   <div key={c} className="flex items-center gap-2 font-body text-sm text-white/70">
-                    <span className="w-1.5 h-1.5 bg-gold rounded-full shrink-0" />{c}
+                    <span className="w-1.5 h-1.5 bg-white rounded-full shrink-0" />{c}
                   </div>
                 ))}
               </div>
             </div>
             <div>
-              <p className="font-body text-xs text-gold uppercase tracking-widest font-semibold mb-5">Cities</p>
+              <p className="font-body text-xs text-white uppercase tracking-widest font-semibold mb-5">Cities</p>
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                 {cities.map((c) => (
                   <div key={c} className="flex items-center gap-2 font-body text-sm text-white/70">
-                    <span className="w-1.5 h-1.5 bg-gold rounded-full shrink-0" />{c}
+                    <span className="w-1.5 h-1.5 bg-white rounded-full shrink-0" />{c}
                   </div>
                 ))}
               </div>
@@ -333,7 +333,7 @@ export default function CashOffer() {
         style={{ backgroundImage: `url(${HERO_BG})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
         <div className="absolute inset-0 backdrop-blur-sm bg-black/55" />
         <div className="relative z-10 max-w-3xl mx-auto text-center">
-          <p className="font-body text-xs text-gold uppercase tracking-widest font-semibold mb-4">No Obligation</p>
+          <p className="font-body text-xs text-white uppercase tracking-widest font-semibold mb-4">No Obligation</p>
           <h2 className="font-heading text-4xl md:text-5xl font-semibold text-white mb-4">
             Get Your No-Obligation Cash Offer
           </h2>
@@ -346,7 +346,7 @@ export default function CashOffer() {
           <div className="flex flex-wrap justify-center gap-6 mb-10">
             {['No fees', 'No repairs', 'No pressure', 'No obligation'].map((tag) => (
               <div key={tag} className="flex items-center gap-2 font-body text-sm text-white/70">
-                <FiCheck className="w-4 h-4 text-gold" strokeWidth={2.5} />
+                <FiCheck className="w-4 h-4 text-white" strokeWidth={2.5} />
                 {tag}
               </div>
             ))}

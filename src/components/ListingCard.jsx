@@ -65,16 +65,16 @@ export default function ListingCard({ listing }) {
 
         <div className="flex items-center gap-4 font-body text-sm text-gray-500 mb-4">
           <span className="flex items-center gap-1.5">
-            <IoBedOutline className="w-4 h-4 text-gold" />
+            <IoBedOutline className="w-4 h-4 text-gray-400" />
             {listing.beds} Beds
           </span>
           <span className="flex items-center gap-1.5">
-            <IoWaterOutline className="w-4 h-4 text-gold" />
+            <IoWaterOutline className="w-4 h-4 text-gray-400" />
             {listing.baths} Baths
           </span>
           {listing.sqft != null && (
             <span className="flex items-center gap-1.5">
-              <FiMaximize2 className="w-4 h-4 text-gold" />
+              <FiMaximize2 className="w-4 h-4 text-gray-400" />
               {listing.sqft.toLocaleString()} sqft
             </span>
           )}

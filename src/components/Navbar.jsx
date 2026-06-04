@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link, NavLink } from 'react-router-dom'
-import { FiMenu, FiX, FiPhone } from 'react-icons/fi'
+import { FiMenu, FiX, FiPhone, FiSearch } from 'react-icons/fi'
 import { motion, AnimatePresence } from 'framer-motion'
 // logo_navbar.png has transparent bg — renders perfectly on the white navbar
 const LogoImg = ({ height = 44 }) => (
@@ -15,7 +15,7 @@ const navLinks = [
   { label: 'Home Valuation', path: '/valuation' },
   { label: 'Featured Properties', path: '/featured' },
   { label: 'About Us', path: '/about' },
-  { label: 'Contact', path: '/contact' },
+  { label: 'Contact Us', path: '/contact' },
 ]
 
 export default function Navbar() {
@@ -59,7 +59,7 @@ export default function Navbar() {
               to="/cash-offer"
               className="hidden sm:block bg-[#AC1E32] hover:bg-[#8B1828] text-white font-body font-bold text-sm px-5 py-2.5 rounded-full transition-all duration-200 shadow-sm whitespace-nowrap"
             >
-              Get cash offer
+              Get My Cash Offer
             </Link>
             <button
               onClick={() => setSidebarOpen(true)}
@@ -81,7 +81,7 @@ export default function Navbar() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.22 }}
-            className="fixed inset-0 z-[60] bg-black/50"
+            className="fixed inset-0 z-[60] bg-black/60"
             onClick={() => setSidebarOpen(false)}
           />
         )}
@@ -95,23 +95,21 @@ export default function Navbar() {
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
             transition={{ type: 'tween', duration: 0.3, ease: [0.32, 0, 0.18, 1] }}
-            className="fixed top-0 right-0 bottom-0 z-[70] w-80 max-w-[88vw] bg-white flex flex-col shadow-2xl"
+            className="fixed top-0 right-0 bottom-0 z-[70] w-80 max-w-[88vw] flex flex-col"
+            style={{ background: 'linear-gradient(160deg, rgba(160,160,160,0.92) 0%, rgba(110,110,110,0.97) 100%)', backdropFilter: 'blur(14px)' }}
           >
-            {/* Sidebar Header */}
-            <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100">
-              <Link to="/" onClick={() => setSidebarOpen(false)}>
-                <LogoImg height={36} />
-              </Link>
+            {/* X button — top right only, no logo */}
+            <div className="flex justify-end px-5 pt-5 pb-2">
               <button
                 onClick={() => setSidebarOpen(false)}
-                className="p-2 text-gray-400 hover:text-gray-800 hover:bg-gray-100 rounded-lg transition-colors"
+                className="p-2 text-white/80 hover:text-white transition-colors"
               >
-                <FiX className="w-5 h-5" />
+                <FiX className="w-6 h-6" />
               </button>
             </div>
 
-            {/* Nav Links */}
-            <nav className="flex-1 overflow-y-auto px-5 py-5 space-y-0.5">
+            {/* Nav Links — no dividers, generous spacing */}
+            <nav className="flex-1 overflow-y-auto px-7 py-2">
               {navLinks.map((link) => (
                 <NavLink
                   key={link.path}
@@ -119,41 +117,41 @@ export default function Navbar() {
                   end={link.path === '/'}
                   onClick={() => setSidebarOpen(false)}
                   className={({ isActive }) =>
-                    `block font-body text-[15px] py-3 px-4 rounded-xl transition-all duration-150 ${
-                      isActive
-                        ? 'bg-[#AC1E32]/8 text-[#AC1E32] font-semibold'
-                        : 'text-gray-700 hover:bg-gray-50 hover:text-[#AC1E32]'
+                    `block font-body text-xl font-semibold py-[14px] transition-colors duration-150 ${
+                      isActive ? 'text-[#C81230]' : 'text-white hover:text-[#C81230]'
                     }`
                   }
                 >
                   {link.label}
                 </NavLink>
               ))}
+
+              {/* Phone number below nav links — matches SS2 layout */}
+              <a
+                href="tel:6789222532"
+                className="block font-body text-xl font-semibold text-white hover:text-white/60 transition-colors pt-6 pb-2"
+              >
+                678-922-2532
+              </a>
             </nav>
 
             {/* Bottom CTAs */}
-            <div className="px-5 pt-4 pb-8 border-t border-gray-100 space-y-3">
+            <div className="px-6 pb-8 pt-4 space-y-3">
               <Link
                 to="/cash-offer"
                 onClick={() => setSidebarOpen(false)}
-                className="block w-full text-center bg-[#AC1E32] hover:bg-[#8B1828] text-white font-body font-bold py-3.5 rounded-full transition-all duration-200 shadow-md"
+                className="block w-full text-center bg-[#AC1E32] hover:bg-[#8B1828] text-white font-body font-bold py-4 rounded-full transition-all duration-200"
               >
-                Get My Fast Cash Offer
+                Get My Cash Offer
               </Link>
               <Link
-                to="/selling"
+                to="/search"
                 onClick={() => setSidebarOpen(false)}
-                className="block w-full text-center border-2 border-[#AC1E32] text-[#AC1E32] font-body font-semibold py-3 rounded-full hover:bg-[#AC1E32] hover:text-white transition-all duration-200"
+                className="flex items-center justify-center gap-2 w-full text-center border border-white/40 text-white font-body font-semibold py-3.5 rounded-full hover:border-white/70 hover:bg-white/10 transition-all duration-200"
               >
-                Explore Selling Options
+                <FiSearch className="w-4 h-4" />
+                Search Properties
               </Link>
-              <a
-                href="tel:6789222532"
-                className="flex items-center justify-center gap-2 font-body text-sm text-gray-400 hover:text-[#AC1E32] transition-colors pt-1"
-              >
-                <FiPhone className="w-3.5 h-3.5" />
-                678-922-2532
-              </a>
             </div>
           </motion.aside>
         )}

@@ -58,7 +58,7 @@ export default function About() {
                       <h3 className="font-heading text-xl font-semibold text-white leading-tight">
                         {member.name}
                       </h3>
-                      <p className="font-body text-xs text-gold mt-0.5">{member.title}</p>
+                      <p className="font-body text-xs text-[#AC1E32] mt-0.5">{member.title}</p>
                     </div>
                   </div>
                 </Link>
@@ -72,10 +72,10 @@ export default function About() {
                     href={`tel:${member.phone.replace(/\D/g, '')}`}
                     className="flex items-center gap-3 group/link"
                   >
-                    <span className="w-8 h-8 rounded-full bg-gold/10 flex items-center justify-center shrink-0 group-hover/link:bg-gold/20 transition-colors">
-                      <FaPhone className="text-gold text-xs" />
+                    <span className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center shrink-0 group-hover/link:bg-gray-200 transition-colors">
+                      <FaPhone className="text-[#AC1E32] text-xs" />
                     </span>
-                    <span className="font-body text-sm text-gray-600 group-hover/link:text-gold transition-colors">
+                    <span className="font-body text-sm text-gray-600 group-hover/link:text-[#AC1E32] transition-colors">
                       {member.phone}
                     </span>
                   </a>
@@ -83,16 +83,16 @@ export default function About() {
                     href={`mailto:${member.email}`}
                     className="flex items-center gap-3 group/link"
                   >
-                    <span className="w-8 h-8 rounded-full bg-gold/10 flex items-center justify-center shrink-0 group-hover/link:bg-gold/20 transition-colors">
-                      <FaEnvelope className="text-gold text-xs" />
+                    <span className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center shrink-0 group-hover/link:bg-gray-200 transition-colors">
+                      <FaEnvelope className="text-[#AC1E32] text-xs" />
                     </span>
-                    <span className="font-body text-sm text-gray-600 group-hover/link:text-gold transition-colors truncate">
+                    <span className="font-body text-sm text-gray-600 group-hover/link:text-[#AC1E32] transition-colors truncate">
                       {member.email}
                     </span>
                   </a>
                   <Link
                     to={`/agents/${member.slug}`}
-                    className="flex items-center justify-center gap-1.5 font-body text-xs text-gold hover:text-navy transition-colors pt-1"
+                    className="flex items-center justify-center gap-1.5 font-body text-xs text-[#AC1E32] hover:text-navy transition-colors pt-1"
                   >
                     View Profile <FaArrowRight className="text-[10px]" />
                   </Link>

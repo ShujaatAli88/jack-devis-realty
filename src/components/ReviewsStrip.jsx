@@ -29,7 +29,7 @@ export default function ReviewsStrip() {
             className="w-full h-full object-cover"
           />
           <div className="absolute bottom-6 left-6 bg-navy/90 backdrop-blur-sm text-white px-5 py-3 rounded-xl">
-            <p className="font-body text-xs text-gold uppercase tracking-widest mb-0.5">Client Satisfaction</p>
+            <p className="font-body text-xs text-white uppercase tracking-widest mb-0.5">Client Satisfaction</p>
             <p className="font-heading text-3xl font-semibold">100%</p>
           </div>
         </div>
@@ -44,12 +44,12 @@ export default function ReviewsStrip() {
               <img
                 src={review.avatar}
                 alt={review.name}
-                className="w-14 h-14 rounded-full object-cover shrink-0 border-2 border-gold/30"
+                className="w-14 h-14 rounded-full object-cover shrink-0 border-2 border-gray-200"
               />
               <div>
                 <div className="flex mb-2">
                   {Array.from({ length: 5 }).map((_, i) => (
-                    <FiStar key={i} className="w-4 h-4 text-gold" style={{ fill: '#C8A96E' }} />
+                    <FiStar key={i} className="w-4 h-4 text-[#374151]" style={{ fill: '#374151' }} />
                   ))}
                 </div>
                 <p className="font-body text-gray-600 text-sm leading-relaxed mb-2">

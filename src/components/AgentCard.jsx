@@ -17,7 +17,7 @@ export default function AgentCard() {
 
         {/* Info */}
         <div className="md:col-span-2 p-8 md:p-10 flex flex-col justify-center">
-          <p className="section-label text-gold mb-2">Your Agent</p>
+          <p className="section-label text-white mb-2">Your Agent</p>
           <h3 className="font-heading text-3xl font-semibold text-white mb-1">Tomond Jack</h3>
           <p className="font-body text-white/50 text-sm mb-6">
             Managing Broker &amp; Founder — Jack Davis Realty
@@ -26,20 +26,20 @@ export default function AgentCard() {
           <div className="space-y-3 mb-8">
             <a
               href="mailto:info@jackdavisrealty.com"
-              className="flex items-center gap-3 font-body text-sm text-white/80 hover:text-gold transition-colors"
+              className="flex items-center gap-3 font-body text-sm text-white/80 hover:text-white transition-colors"
             >
-              <FiMail className="w-4 h-4 text-gold shrink-0" />
+              <FiMail className="w-4 h-4 text-white shrink-0" />
               info@jackdavisrealty.com
             </a>
             <a
               href="tel:6789222532"
-              className="flex items-center gap-3 font-body text-sm text-white/80 hover:text-gold transition-colors"
+              className="flex items-center gap-3 font-body text-sm text-white/80 hover:text-white transition-colors"
             >
-              <FiPhone className="w-4 h-4 text-gold shrink-0" />
+              <FiPhone className="w-4 h-4 text-white shrink-0" />
               678-922-2532
             </a>
             <div className="flex items-center gap-3 font-body text-sm text-white/80">
-              <FiMapPin className="w-4 h-4 text-gold shrink-0" />
+              <FiMapPin className="w-4 h-4 text-white shrink-0" />
               2020 Howell Mill Rd NW, Suite D422, Atlanta, GA 30318
             </div>
           </div>
@@ -48,14 +48,14 @@ export default function AgentCard() {
             <a
               href="#"
               aria-label="Facebook"
-              className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-gold hover:text-navy text-white transition-all"
+              className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 text-white transition-all"
             >
               <FaFacebook className="w-4 h-4" />
             </a>
             <a
               href="#"
               aria-label="Instagram"
-              className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-gold hover:text-navy text-white transition-all"
+              className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 text-white transition-all"
             >
               <FaInstagram className="w-4 h-4" />
             </a>

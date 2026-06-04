@@ -10,25 +10,25 @@ import CashOfferModal from '../components/CashOfferModal'
 
 const sellingPoints = [
   {
-    icon: <FiCheckCircle className="w-7 h-7 text-gold" />,
+    icon: <FiCheckCircle className="w-7 h-7 text-[#AC1E32]" />,
     title: 'Professional Selling Tips',
     description:
       'Even small updates and repairs can help you sell your home for the highest price possible in the shortest time possible. Staging, minor improvements, or even a fresh coat of paint can make a huge difference. Request a free consultation on preparing your home for sale.',
   },
   {
-    icon: <FiDollarSign className="w-7 h-7 text-gold" />,
+    icon: <FiDollarSign className="w-7 h-7 text-[#AC1E32]" />,
     title: 'Accurate Pricing',
     description:
       "Pricing your home according to what it's really worth in today's market is a critical step in the selling process. Well-priced homes are likely to generate multiple offers and get you the most money at closing. That's why you'll want a professional assessment of your home's value that takes into account similar homes in your area currently for sale as well as recently sold homes in your area.",
   },
   {
-    icon: <FiClock className="w-7 h-7 text-gold" />,
+    icon: <FiClock className="w-7 h-7 text-[#AC1E32]" />,
     title: 'Ready When You Are',
     description:
       'Contact us today for a free home evaluation and to learn more about the home selling process.',
   },
   {
-    icon: <FiTrendingUp className="w-7 h-7 text-gold" />,
+    icon: <FiTrendingUp className="w-7 h-7 text-[#AC1E32]" />,
     title: 'Attention to Detail',
     description:
       "As your listing team it's our job to take care of the details associated with selling your home so you can focus on making the move to your new home. Our experienced team can take care of everything you need, from start to close and everything in between.",
@@ -81,24 +81,24 @@ export default function Selling() {
       </section>
 
       {/* Selling points */}
-      <section className="bg-white py-24 px-4">
+      <section className="bg-[#111111] py-24 px-4">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-14">
             <p className="section-label mb-3">Our Selling Strategy</p>
-            <h2 className="section-heading">How We Get Your Home Sold</h2>
+            <h2 className="font-heading text-4xl md:text-5xl font-semibold text-white leading-tight">How We Get Your Home Sold</h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {sellingPoints.map((point) => (
               <div
                 key={point.title}
-                className="bg-ivory rounded-3xl p-8 shadow-sm border border-gray-100"
+                className="bg-[#1E1E1E] rounded-3xl p-8 border border-white/5"
               >
-                <div className="w-14 h-14 bg-navy/5 rounded-2xl flex items-center justify-center mb-5">
+                <div className="w-14 h-14 bg-[#AC1E32]/15 rounded-2xl flex items-center justify-center mb-5">
                   {point.icon}
                 </div>
-                <h3 className="font-heading text-xl font-semibold text-navy mb-3">{point.title}</h3>
-                <p className="font-body text-gray-500 text-sm leading-relaxed">{point.description}</p>
+                <h3 className="font-heading text-xl font-semibold text-white mb-3">{point.title}</h3>
+                <p className="font-body text-white/50 text-sm leading-relaxed">{point.description}</p>
               </div>
             ))}
           </div>
@@ -122,8 +122,8 @@ export default function Selling() {
             transition={{ duration: 0.6 }}
             className="flex flex-col justify-center px-8 md:px-12 py-16"
           >
-            <span className="inline-flex items-center gap-2 bg-gold/15 border border-gold/30 text-gold font-body text-xs font-semibold uppercase tracking-widest px-4 py-1.5 rounded-full mb-6 self-start">
-              <span className="w-2 h-2 bg-gold rounded-full animate-pulse" />
+            <span className="inline-flex items-center gap-2 bg-[#AC1E32]/10 border border-[#AC1E32]/30 text-[#AC1E32] font-body text-xs font-semibold uppercase tracking-widest px-4 py-1.5 rounded-full mb-6 self-start">
+              <span className="w-2 h-2 bg-[#AC1E32] rounded-full animate-pulse" />
               Cash Buyers Ready Now
             </span>
 
@@ -163,7 +163,7 @@ export default function Selling() {
               onClick={() => setContactOpen(true)}
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
-              className="self-start inline-flex items-center gap-2 bg-gold hover:bg-gold-dark text-navy font-body font-bold text-sm px-7 py-3.5 rounded-full shadow-lg transition-colors"
+              className="self-start inline-flex items-center gap-2 bg-[#AC1E32] hover:bg-[#8B1828] text-white font-body font-bold text-sm px-7 py-3.5 rounded-full shadow-lg transition-colors"
             >
               Get Started <FiArrowRight className="w-4 h-4" />
             </motion.button>
@@ -178,11 +178,11 @@ export default function Selling() {
             className="relative flex items-center justify-center px-8 md:px-12 py-16"
           >
             {/* Glow ring */}
-            <div className="absolute inset-8 rounded-3xl bg-gold/5 blur-2xl" />
+            <div className="absolute inset-8 rounded-3xl bg-gray-50 blur-2xl" />
             <div className="relative w-full">
               {/* Corner accent */}
-              <div className="absolute -top-3 -left-3 w-16 h-16 border-t-2 border-l-2 border-gold/50 rounded-tl-2xl" />
-              <div className="absolute -bottom-3 -right-3 w-16 h-16 border-b-2 border-r-2 border-gold/50 rounded-br-2xl" />
+              <div className="absolute -top-3 -left-3 w-16 h-16 border-t-2 border-l-2 border-gray-200 rounded-tl-2xl" />
+              <div className="absolute -bottom-3 -right-3 w-16 h-16 border-b-2 border-r-2 border-gray-200 rounded-br-2xl" />
               <img
                 src="https://u.realgeeks.media/jackdavisrealty/177709534M.jpg"
                 alt="Home Sold"

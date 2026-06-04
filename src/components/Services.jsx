@@ -14,7 +14,7 @@ export default function Services() {
         <div className="relative z-10 py-24 px-4">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-16">
-              <p className="section-label text-gold mb-3">What We Offer</p>
+              <p className="section-label text-white mb-3">What We Offer</p>
               <h2 className="font-heading text-4xl md:text-5xl font-semibold text-white mb-4">Our Services</h2>
               <p className="font-body text-white/60 max-w-xl mx-auto">
                 Serving the Atlanta Metro area with 20+ years of combined experience helping clients buy, sell, and invest.
@@ -36,7 +36,7 @@ export default function Services() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-navy/90 via-navy/40 to-transparent transition-opacity duration-300 group-hover:opacity-90" />
                   <div className="absolute inset-0 flex flex-col justify-end p-6">
-                    <h3 className="font-heading text-2xl font-semibold text-white mb-2 group-hover:text-gold transition-colors">
+                    <h3 className="font-heading text-2xl font-semibold text-white mb-2 group-hover:text-white transition-colors">
                       {svc.title}
                     </h3>
                     <p className="font-body text-white/0 group-hover:text-white/80 text-sm leading-relaxed transition-all duration-300 max-h-0 group-hover:max-h-24 overflow-hidden">

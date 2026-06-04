@@ -11,7 +11,7 @@ const CONDITIONS = [
 ]
 const TIMELINES = ['As soon as possible', 'Within 30 days', '1-3 months', '3-6 months', '6+ months']
 
-const inp = 'w-full border border-gray-200 rounded-xl px-4 py-3 font-body text-sm text-gray-800 bg-white focus:outline-none focus:ring-2 focus:ring-gold/40 focus:border-gold transition-all'
+const inp = 'w-full border border-gray-200 rounded-xl px-4 py-3 font-body text-sm text-gray-800 bg-white focus:outline-none focus:ring-2 focus:ring-gray-300 focus:border-gray-400 transition-all'
 
 function FormBody({ onClose }) {
   const [submitted, setSubmitted] = useState(false)
@@ -25,22 +25,22 @@ function FormBody({ onClose }) {
 
   if (submitted) return (
     <div className="bg-ivory rounded-3xl p-10 text-center">
-      <div className="w-16 h-16 bg-gold/20 rounded-full flex items-center justify-center mx-auto mb-5">
-        <FiCheck className="w-8 h-8 text-gold" strokeWidth={2.5} />
+      <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-5">
+        <FiCheck className="w-8 h-8 text-[#AC1E32]" strokeWidth={2.5} />
       </div>
       <h3 className="font-heading text-3xl font-semibold text-navy mb-2">Thank You!</h3>
       <p className="font-body text-gray-500">We received your request and will be in touch with your cash offer shortly.</p>
-      <button onClick={onClose} className="mt-6 font-body text-sm text-gold hover:underline">Close</button>
+      <button onClick={onClose} className="mt-6 font-body text-sm text-[#374151] hover:underline">Close</button>
     </div>
   )
 
   return (
     <div className="bg-ivory rounded-3xl overflow-hidden shadow-2xl">
-      <div className="h-1.5 bg-gradient-to-r from-navy via-gold to-navy" />
+      <div className="h-1.5 bg-gradient-to-r from-navy via-[#AC1E32] to-navy" />
       <div className="p-8 md:p-10">
         <div className="flex items-start justify-between mb-6">
           <div>
-            <p className="font-body text-xs text-gold uppercase tracking-widest font-semibold mb-1">Fast Cash Offer</p>
+            <p className="font-body text-xs text-[#374151] uppercase tracking-widest font-semibold mb-1">Fast Cash Offer</p>
             <h2 className="font-heading text-3xl font-semibold text-navy">Request a Cash Offer</h2>
           </div>
           <button

@@ -13,7 +13,7 @@ import Footer from '../components/Footer'
 import ContactModal from '../components/ContactModal'
 
 const RED = '#AC1E32'
-const GOLD = '#C8A96E'
+const GOLD = '#AC1E32'
 
 /* ── Seller Situations ─────────────────────────── */
 const SITUATIONS = [
@@ -142,7 +142,7 @@ function ReviewsCarousel() {
           <motion.div key={active} initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -14 }} transition={{ duration: 0.5 }}>
             <div className="flex justify-center gap-1 mb-5">
               {[...Array(5)].map((_, i) => (
-                <FiStar key={i} className="w-4 h-4" style={{ fill: GOLD, color: GOLD }} />
+                <FiStar key={i} className="w-4 h-4" style={{ fill: '#ffffff', color: '#ffffff' }} />
               ))}
             </div>
             <div className="font-heading leading-none mb-1 select-none" style={{ fontSize: '5rem', color: RED, opacity: 0.45, lineHeight: 1 }}>&ldquo;</div>
@@ -213,22 +213,58 @@ export default function Home() {
       <Navbar />
       <Hero />
 
-      {/* ─── 1. Stats Trust Bar ─────────────────── */}
-      <div style={{ background: RED }} className="py-8 md:py-10 px-4">
-        <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-0 md:divide-x md:divide-white/20">
-          {[
-            ['#1', 'GA Seller Solutions Brokerage'],
-            ['14 Days', 'Fastest Close Available'],
-            ['6,000+', 'Successful Transactions'],
-            ['5★', 'Rated by Local Homeowners'],
-          ].map(([num, lbl]) => (
-            <div key={lbl} className="text-center px-4">
-              <p className="font-heading text-2xl md:text-3xl font-bold text-white leading-none mb-1">{num}</p>
-              <p className="font-body text-[11px] text-white/70 uppercase tracking-wider">{lbl}</p>
-            </div>
-          ))}
+      {/* ─── 1. Why Work With Jack Davis ────────── */}
+      <section className="bg-white py-14 md:py-20 px-4">
+        <div className="max-w-5xl mx-auto">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}
+            className="font-heading text-3xl md:text-4xl font-semibold text-gray-900 text-center mb-10 md:mb-14"
+          >
+            Why Work With{' '}
+            <span style={{ color: RED }}>Jack Davis?</span>
+          </motion.h2>
+
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+            {[
+              {
+                icon: 'https://www.markspain.com/_next/image?url=https%3A%2F%2Fmarkspain-strapi-media-production.s3.us-east-2.amazonaws.com%2Freal_estate_icon_58b5f20ae1.png&w=128&q=75',
+                stat: '#1',
+                label: 'GA Seller Solutions Brokerage',
+              },
+              {
+                icon: 'https://markspain-strapi-media-production.s3.us-east-2.amazonaws.com/lifetime_icon_f9b3546fe9.svg',
+                stat: '6,000+',
+                label: 'Successful Transactions',
+              },
+              {
+                icon: 'https://www.markspain.com/_next/image?url=https%3A%2F%2Fmarkspain-strapi-media-production.s3.us-east-2.amazonaws.com%2Fover_icon_628f2ea41e.png&w=96&q=75',
+                stat: '14 Days',
+                label: 'Fastest Close Available',
+              },
+              {
+                icon: 'https://www.markspain.com/_next/image?url=https%3A%2F%2Fmarkspain-strapi-media-production.s3.us-east-2.amazonaws.com%2Fhome_icon_4b2d2ba3e7.png&w=96&q=75',
+                stat: '5★',
+                label: 'Rated by Local Homeowners',
+              },
+            ].map((item, i) => (
+              <motion.div
+                key={item.stat}
+                initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.45, delay: i * 0.1 }}
+                className="flex flex-col items-center text-center p-6 md:p-8 rounded-2xl"
+                style={{ background: '#F5F5F5' }}
+              >
+                <img
+                  src={item.icon}
+                  alt={item.label}
+                  className="w-14 h-14 md:w-16 md:h-16 object-contain mb-4"
+                />
+                <p className="font-heading text-xl md:text-2xl font-bold mb-1" style={{ color: RED }}>{item.stat}</p>
+                <p className="font-body text-sm text-gray-500 leading-snug">{item.label}</p>
+              </motion.div>
+            ))}
+          </div>
         </div>
-      </div>
+      </section>
 
       {/* ─── 2. Seller Problem Section ──────────── */}
       <section className="bg-white py-16 md:py-24 px-4">
@@ -271,7 +307,7 @@ export default function Home() {
       </section>
 
       {/* ─── 3. Differentiator Section ──────────── */}
-      <section className="bg-[#FAF7F2] py-16 md:py-24 px-4">
+      <section className="bg-[#F2F2F2] py-16 md:py-24 px-4">
         <div className="max-w-6xl mx-auto">
           <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.55 }} className="text-center mb-12 md:mb-16">
             <p className="font-body text-xs font-semibold uppercase tracking-[0.25em] mb-4" style={{ color: GOLD }}>The Jack Davis Difference</p>
@@ -301,6 +337,15 @@ export default function Home() {
               </motion.div>
             ))}
           </div>
+
+          <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.45, delay: 0.2 }} className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4">
+            <Link to="/cash-offer" className="inline-flex items-center gap-2 bg-[#AC1E32] hover:bg-[#8B1828] text-white font-body font-bold px-10 py-4 rounded-full transition-all duration-200 shadow-md hover:shadow-lg hover:-translate-y-0.5">
+              Get My Fast Cash Offer <FiArrowRight className="w-4 h-4" />
+            </Link>
+            <Link to="/selling" className="inline-flex items-center gap-2 border-2 border-gray-300 text-gray-700 hover:border-[#AC1E32] hover:text-[#AC1E32] font-body font-semibold px-10 py-4 rounded-full transition-all duration-200">
+              Explore Selling Options
+            </Link>
+          </motion.div>
         </div>
       </section>
 
@@ -335,6 +380,13 @@ export default function Home() {
               </motion.div>
             ))}
           </div>
+
+          <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.45, delay: 0.3 }} className="mt-14 text-center">
+            <Link to="/cash-offer" className="inline-flex items-center gap-2 bg-[#AC1E32] hover:bg-[#8B1828] text-white font-body font-bold px-10 py-4 rounded-full transition-all duration-200 shadow-md hover:shadow-lg hover:-translate-y-0.5">
+              Get My Fast Cash Offer <FiArrowRight className="w-4 h-4" />
+            </Link>
+            <p className="font-body text-gray-400 text-sm mt-3">Free. No pressure. No obligation. Licensed Georgia Brokerage.</p>
+          </motion.div>
         </div>
       </section>
 
@@ -362,7 +414,7 @@ export default function Home() {
               value={address}
               onChange={e => setAddress(e.target.value)}
               placeholder="Enter your property address…"
-              className="flex-1 bg-white rounded-full px-6 py-4 font-body text-sm text-gray-800 placeholder:text-gray-400 outline-none border-2 border-transparent focus:border-[#C8A96E] transition-all"
+              className="flex-1 bg-white rounded-full px-6 py-4 font-body text-sm text-gray-800 placeholder:text-gray-400 outline-none border-2 border-transparent focus:border-[#AC1E32] transition-all"
             />
             <button
               type="submit"
@@ -431,7 +483,7 @@ export default function Home() {
       </section>
 
       {/* ─── 8. FAQ Section ─────────────────────── */}
-      <section className="bg-[#FAF7F2] py-16 md:py-20 px-4">
+      <section className="bg-[#F2F2F2] py-16 md:py-20 px-4">
         <div className="max-w-3xl mx-auto">
           <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.55 }} className="text-center mb-10">
             <p className="font-body text-xs font-semibold uppercase tracking-[0.25em] mb-4" style={{ color: GOLD }}>Have Questions?</p>
