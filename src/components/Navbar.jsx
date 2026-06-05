@@ -4,7 +4,7 @@ import { FiMenu, FiX, FiPhone, FiSearch } from 'react-icons/fi'
 import { motion, AnimatePresence } from 'framer-motion'
 // logo_navbar.png has transparent bg — renders perfectly on the white navbar
 const LogoImg = ({ height = 44 }) => (
-  <img src="/logo_navbar.png" alt="Jack Davis Realty" style={{ height }} className="w-auto object-contain" />
+  <img src="/nav_logo.png" alt="Jack Davis Realty" style={{ height }} className="w-auto object-contain" />
 )
 
 const navLinks = [
