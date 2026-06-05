@@ -41,7 +41,7 @@ export default function Navbar() {
 
           {/* Logo — always on white, always visible */}
           <Link to="/" className="shrink-0">
-            <LogoImg height={42} />
+            <LogoImg height={54} />
           </Link>
 
           {/* Phone */}
