@@ -133,7 +133,7 @@ export default function Selling() {
             </h2>
 
             <p className="font-body text-white/60 text-base leading-relaxed mb-8 max-w-sm">
-              Sell your home in as little as 14 days. We work with cash buyers who are ready to purchase your home today — any condition, any situation.
+              Sell your home in as little as 14 days. We connect you with qualified cash buyers ready to close quickly — any condition, any situation.
             </p>
 
             {/* Stats row */}

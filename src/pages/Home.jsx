@@ -83,7 +83,7 @@ const REVIEWS = [
 /* ── FAQ Items ─────────────────────────────────── */
 const FAQ_ITEMS = [
   {
-    q: 'What types of properties do you buy?',
+    q: 'What types of properties can you help me sell?',
     a: 'We work with single-family homes, condos, townhomes, multi-family properties, and vacant land anywhere in the Metro Atlanta area — regardless of condition.',
   },
   {
@@ -92,7 +92,7 @@ const FAQ_ITEMS = [
   },
   {
     q: 'Do I have to make repairs before selling?',
-    a: 'Absolutely not. We buy homes as-is. No cleaning, repairs, staging, or showings required. We handle everything after closing.',
+    a: 'Absolutely not. Our cash buyer network purchases homes as-is. No cleaning, repairs, staging, or showings required.',
   },
   {
     q: 'Is your cash offer competitive with the open market?',

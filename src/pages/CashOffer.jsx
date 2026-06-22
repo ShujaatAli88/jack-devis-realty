@@ -44,7 +44,7 @@ const cities = ['Atlanta','Decatur','Lawrenceville','Snellville','Lilburn','Ston
 
 const faqs = [
   { q: 'How fast can I sell my house for cash?', a: 'Most closings happen in 14 days or less, but we can move faster or slower depending on your needs.' },
-  { q: 'Do I need to make repairs first?', a: 'No. We buy homes as-is, including homes that need cosmetic updates, major renovations, or cleanup.' },
+  { q: 'Do I need to make repairs first?', a: 'No. Our cash buyer network purchases homes as-is, including homes that need cosmetic updates, major renovations, or cleanup.' },
   { q: 'How do you determine the offer price?', a: 'We look at neighborhood sales, current condition, renovation costs, and your timeline to create a fair, competitive cash offer.' },
   { q: "What if I'm not ready to sell yet?", a: 'That\'s perfectly fine. Our offer process is 100% no obligation.' },
 ]
@@ -155,7 +155,7 @@ export default function CashOffer() {
             <p className="section-label mb-3">Why Homeowners Choose Us</p>
             <h2 className="section-heading mb-4">Why Homeowners Choose Our Cash Offer Program</h2>
             <p className="font-body text-gray-500 max-w-xl mx-auto text-sm leading-relaxed">
-              We work with cash buyers who are ready to purchase your home today.
+              We connect sellers with qualified cash buyers who are ready to purchase your home quickly — in any condition.
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -268,7 +268,7 @@ export default function CashOffer() {
             ))}
           </div>
           <p className="text-center font-body text-sm text-[#374151] italic mt-4">
-            If your home needs work, that's okay — we buy as-is.
+            If your home needs work, that's okay — homes sell as-is through our cash buyer network.
           </p>
         </div>
       </section>
@@ -278,7 +278,7 @@ export default function CashOffer() {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-14">
             <p className="font-body text-xs text-white uppercase tracking-widest font-semibold mb-3">Coverage</p>
-            <h2 className="font-heading text-4xl font-semibold text-white mb-4">Areas We Buy Homes</h2>
+            <h2 className="font-heading text-4xl font-semibold text-white mb-4">Areas We Serve</h2>
             <p className="font-body text-white/50 text-sm max-w-md mx-auto">
               We provide fast cash offers throughout Metro Atlanta, including:
             </p>
