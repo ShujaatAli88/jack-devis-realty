@@ -1,156 +1,206 @@
 import { useState, useEffect } from 'react'
 import { Link, NavLink } from 'react-router-dom'
-import { FiMenu, FiX, FiPhone, FiSearch } from 'react-icons/fi'
+import { FiMenu, FiX, FiPhone, FiChevronDown } from 'react-icons/fi'
 import { motion, AnimatePresence } from 'framer-motion'
-// logo_navbar.png has transparent bg — renders perfectly on the white navbar
-const LogoImg = ({ height = 44 }) => (
-  <img src="/nav_logo.png" alt="Jack Davis Realty" style={{ height }} className="w-auto object-contain" />
-)
 
-const navLinks = [
-  { label: 'Home', path: '/' },
+const MAROON  = '#C42535'
+const GOLD    = '#C1912E'
+const CHARCOAL = '#262626'
+
+const NAV_ITEMS = [
+  { label: 'Home',            path: '/',            dropdown: false },
+  { label: 'Sell Your Home',  path: '/selling',     dropdown: true  },
+  { label: 'Buy & Invest',    path: '/search',      dropdown: true  },
+  { label: 'Solutions',       path: '/cash-offer',  dropdown: true  },
+  { label: 'About Us',        path: '/about',       dropdown: false },
+  { label: 'Resources',       path: '/blog',        dropdown: true  },
+  { label: 'Contact',         path: '/contact',     dropdown: false },
+]
+
+const MOBILE_LINKS = [
+  { label: 'Home',                path: '/'           },
+  { label: 'Sell Your Home',      path: '/selling'    },
   { label: 'Get Fast Cash Offer', path: '/cash-offer' },
-  { label: 'Sell Your Home', path: '/selling' },
-  { label: 'Buyers', path: '/search' },
-  { label: 'Home Valuation', path: '/valuation' },
-  { label: 'Featured Properties', path: '/featured' },
-  { label: 'About Us', path: '/about' },
-  { label: 'Contact Us', path: '/contact' },
+  { label: 'Buy & Invest',        path: '/search'     },
+  { label: 'About Us',            path: '/about'      },
+  { label: 'Contact',             path: '/contact'    },
 ]
 
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false)
-  const [sidebarOpen, setSidebarOpen] = useState(false)
+  const [scrolled,    setScrolled]    = useState(false)
+  const [mobileOpen,  setMobileOpen]  = useState(false)
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20)
-    window.addEventListener('scroll', onScroll)
+    window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
   useEffect(() => {
-    document.body.style.overflow = sidebarOpen ? 'hidden' : ''
+    document.body.style.overflow = mobileOpen ? 'hidden' : ''
     return () => { document.body.style.overflow = '' }
-  }, [sidebarOpen])
+  }, [mobileOpen])
 
   return (
     <>
-      {/* Top Bar — always white */}
-      <nav className={`fixed top-0 left-0 right-0 z-50 bg-white transition-shadow duration-300 ${scrolled ? 'shadow-md' : 'shadow-sm border-b border-gray-100'}`}>
-        <div className="max-w-7xl mx-auto px-5 sm:px-8 py-3.5 flex items-center justify-between gap-4">
+      {/* ── Top bar ── */}
+      <nav
+        className={`fixed top-0 left-0 right-0 z-50 bg-white transition-shadow duration-300 ${
+          scrolled ? 'shadow-lg' : 'shadow-sm border-b border-gray-100'
+        }`}
+      >
+        <div className="max-w-7xl mx-auto px-5 sm:px-8">
+          <div className="flex items-center justify-between h-[72px]">
 
-          {/* Logo — always on white, always visible */}
-          <Link to="/" className="shrink-0">
-            <LogoImg height={54} />
-          </Link>
-
-          {/* Phone */}
-          <a
-            href="tel:6789222532"
-            className="hidden md:flex items-center gap-2 font-body font-semibold text-sm text-gray-600 hover:text-[#AC1E32] transition-colors"
-          >
-            <FiPhone className="w-4 h-4" />
-            678-922-2532
-          </a>
-
-          {/* Right: CTA + Hamburger */}
-          <div className="flex items-center gap-2.5">
-            <Link
-              to="/cash-offer"
-              className="hidden sm:block bg-[#AC1E32] hover:bg-[#8B1828] text-white font-body font-bold text-sm px-5 py-2.5 rounded-full transition-all duration-200 shadow-sm whitespace-nowrap"
-            >
-              Get My Cash Offer
+            {/* Logo */}
+            <Link to="/" className="flex items-center gap-3 shrink-0">
+              <span className="font-heading text-2xl font-bold" style={{ color: GOLD }}>JD</span>
+              <div className="w-px h-7 bg-gray-200" />
+              <div
+                className="font-body text-[11px] font-extrabold tracking-[0.15em] leading-tight hidden sm:block"
+                style={{ color: CHARCOAL }}
+              >
+                <span className="block">JACK DAVIS</span>
+                <span className="block" style={{ color: GOLD }}>REALTY</span>
+              </div>
             </Link>
-            <button
-              onClick={() => setSidebarOpen(true)}
-              aria-label="Open menu"
-              className="p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors"
-            >
-              <FiMenu className="w-6 h-6" />
-            </button>
-          </div>
 
+            {/* Center nav — desktop (lg+) */}
+            <nav className="hidden lg:flex items-center gap-0.5">
+              {NAV_ITEMS.map((item) => (
+                <NavLink
+                  key={item.path}
+                  to={item.path}
+                  end={item.path === '/'}
+                  className={({ isActive }) =>
+                    `flex items-center gap-0.5 font-body text-[13px] font-medium px-3 py-2 rounded-md border-b-2 transition-colors duration-150 ${
+                      isActive
+                        ? 'text-[#C42535] border-[#C42535]'
+                        : 'text-gray-600 hover:text-gray-900 border-transparent'
+                    }`
+                  }
+                >
+                  {item.label}
+                  {item.dropdown && <FiChevronDown className="w-3.5 h-3.5 opacity-40 ml-0.5" />}
+                </NavLink>
+              ))}
+            </nav>
+
+            {/* Right: CTA stack + hamburger */}
+            <div className="flex items-center gap-3">
+              <div className="hidden sm:flex flex-col items-end gap-0.5">
+                <Link
+                  to="/cash-offer"
+                  className="font-body font-bold text-xs text-white px-5 py-2.5 rounded-lg hover:opacity-90 transition-opacity whitespace-nowrap"
+                  style={{ background: MAROON }}
+                >
+                  Get My Fast Cash Offer
+                </Link>
+                <a
+                  href="tel:6789628754"
+                  className="flex items-center gap-1.5 font-body text-[11px] text-gray-400 hover:text-gray-700 transition-colors"
+                >
+                  <FiPhone className="w-3 h-3" />
+                  (678) 962-8754
+                </a>
+              </div>
+
+              {/* Hamburger */}
+              <button
+                onClick={() => setMobileOpen(true)}
+                aria-label="Open menu"
+                className="lg:hidden p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors"
+              >
+                <FiMenu className="w-6 h-6" />
+              </button>
+            </div>
+
+          </div>
         </div>
       </nav>
 
-      {/* Backdrop */}
+      {/* ── Backdrop ── */}
       <AnimatePresence>
-        {sidebarOpen && (
+        {mobileOpen && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.22 }}
+            transition={{ duration: 0.2 }}
             className="fixed inset-0 z-[60] bg-black/60"
-            onClick={() => setSidebarOpen(false)}
+            onClick={() => setMobileOpen(false)}
           />
         )}
       </AnimatePresence>
 
-      {/* Sidebar Panel */}
+      {/* ── Mobile drawer ── */}
       <AnimatePresence>
-        {sidebarOpen && (
+        {mobileOpen && (
           <motion.aside
             initial={{ x: '100%' }}
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
             transition={{ type: 'tween', duration: 0.3, ease: [0.32, 0, 0.18, 1] }}
-            className="fixed top-0 right-0 bottom-0 z-[70] w-80 max-w-[88vw] flex flex-col"
-            style={{ background: 'linear-gradient(160deg, rgba(160,160,160,0.92) 0%, rgba(110,110,110,0.97) 100%)', backdropFilter: 'blur(14px)' }}
+            className="fixed top-0 right-0 bottom-0 z-[70] w-80 max-w-[90vw] bg-white flex flex-col shadow-2xl"
           >
-            {/* X button — top right only, no logo */}
-            <div className="flex justify-end px-5 pt-5 pb-2">
+            {/* Header */}
+            <div className="flex items-center justify-between px-6 py-5 border-b border-gray-100">
+              <div className="flex items-center gap-2.5">
+                <span className="font-heading text-xl font-bold" style={{ color: GOLD }}>JD</span>
+                <div className="w-px h-5 bg-gray-200" />
+                <span
+                  className="font-body text-[10px] font-extrabold tracking-[0.15em]"
+                  style={{ color: CHARCOAL }}
+                >
+                  JACK DAVIS REALTY
+                </span>
+              </div>
               <button
-                onClick={() => setSidebarOpen(false)}
-                className="p-2 text-white/80 hover:text-white transition-colors"
+                onClick={() => setMobileOpen(false)}
+                aria-label="Close menu"
+                className="p-2 text-gray-400 hover:text-gray-700 rounded-md transition-colors"
               >
-                <FiX className="w-6 h-6" />
+                <FiX className="w-5 h-5" />
               </button>
             </div>
 
-            {/* Nav Links — no dividers, generous spacing */}
-            <nav className="flex-1 overflow-y-auto px-7 py-2">
-              {navLinks.map((link) => (
+            {/* Links */}
+            <nav className="flex-1 overflow-y-auto px-6 py-2">
+              {MOBILE_LINKS.map((link) => (
                 <NavLink
                   key={link.path}
                   to={link.path}
                   end={link.path === '/'}
-                  onClick={() => setSidebarOpen(false)}
+                  onClick={() => setMobileOpen(false)}
                   className={({ isActive }) =>
-                    `block font-body text-xl font-semibold py-[14px] transition-colors duration-150 ${
-                      isActive ? 'text-[#C81230]' : 'text-white hover:text-[#C81230]'
+                    `block font-body text-lg font-semibold py-4 border-b border-gray-50 transition-colors ${
+                      isActive ? '' : 'text-gray-700 hover:text-gray-900'
                     }`
                   }
+                  style={({ isActive }) => (isActive ? { color: MAROON } : {})}
                 >
                   {link.label}
                 </NavLink>
               ))}
-
-              {/* Phone number below nav links — matches SS2 layout */}
               <a
-                href="tel:6789222532"
-                className="block font-body text-xl font-semibold text-white hover:text-white/60 transition-colors pt-6 pb-2"
+                href="tel:6789628754"
+                className="flex items-center gap-2 font-body text-base font-semibold py-4 text-gray-600 border-b border-gray-50"
+                onClick={() => setMobileOpen(false)}
               >
-                678-922-2532
+                <FiPhone className="w-4 h-4" />
+                (678) 962-8754
               </a>
             </nav>
 
-            {/* Bottom CTAs */}
-            <div className="px-6 pb-8 pt-4 space-y-3">
+            {/* Bottom CTA */}
+            <div className="px-6 pb-10 pt-4">
               <Link
                 to="/cash-offer"
-                onClick={() => setSidebarOpen(false)}
-                className="block w-full text-center bg-[#AC1E32] hover:bg-[#8B1828] text-white font-body font-bold py-4 rounded-full transition-all duration-200"
+                onClick={() => setMobileOpen(false)}
+                className="block w-full text-center text-white font-body font-bold py-4 rounded-lg hover:opacity-90 transition-opacity"
+                style={{ background: MAROON }}
               >
-                Get My Cash Offer
-              </Link>
-              <Link
-                to="/search"
-                onClick={() => setSidebarOpen(false)}
-                className="flex items-center justify-center gap-2 w-full text-center border border-white/40 text-white font-body font-semibold py-3.5 rounded-full hover:border-white/70 hover:bg-white/10 transition-all duration-200"
-              >
-                <FiSearch className="w-4 h-4" />
-                Search Properties
+                Get My Fast Cash Offer
               </Link>
             </div>
           </motion.aside>

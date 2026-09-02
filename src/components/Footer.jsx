@@ -1,178 +1,202 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { FaFacebook, FaInstagram } from 'react-icons/fa'
-import { FiMail } from 'react-icons/fi'
+import { FaFacebook, FaInstagram, FaLinkedin, FaYoutube } from 'react-icons/fa'
+import { FiPhone, FiMail, FiMapPin, FiArrowRight } from 'react-icons/fi'
 
-const BG = '#141414'
+const NAVY   = '#17293C'
+const GOLD   = '#C1912E'
 
-const COLS = [
-  {
-    heading: 'Sell Your Home',
-    links: [
-      { label: 'Sell Your Home',        path: '/selling' },
-      { label: 'Get a Fast Cash Offer',  path: '/cash-offer' },
-      { label: 'Free Home Valuation',    path: '/valuation' },
-      { label: 'Sell As-Is',             path: '/cash-offer' },
-    ],
-  },
-  {
-    heading: 'Find Your Home',
-    links: [
-      { label: 'Search Listings',        path: '/search' },
-      { label: 'Featured Properties',    path: '/featured' },
-      { label: 'Communities',            path: '/communities' },
-      { label: 'Buyers Guide',           path: '/buying' },
-    ],
-  },
-  {
-    heading: 'Company',
-    links: [
-      { label: 'About Us',               path: '/about' },
-      { label: 'Our Team',               path: '/about' },
-      { label: 'Blog & Insights',        path: '/blog' },
-      { label: 'Contact Us',             path: '/contact' },
-    ],
-  },
-  {
-    heading: 'Help Center',
-    links: [
-      { label: 'Contact Us',             path: '/contact' },
-      { label: 'FAQ',                    path: '/#faq' },
-      { label: 'Metro Atlanta Areas',    path: '/search' },
-      { label: 'Cash Offer Form',        path: '/cash-offer-form' },
-    ],
-  },
+const QUICK_LINKS = [
+  { label: 'Sell Your Home', path: '/selling'    },
+  { label: 'Buy & Invest',   path: '/search'     },
+  { label: 'Solutions',      path: '/cash-offer' },
+  { label: 'Resources',      path: '/blog'       },
+  { label: 'About Us',       path: '/about'      },
+  { label: 'Contact',        path: '/contact'    },
+]
+
+const RESOURCES = [
+  { label: 'Homeowner Guide',  path: '/#faq'    },
+  { label: 'Seller Checklist', path: '/selling' },
+  { label: 'Market Reports',   path: '/blog'    },
+  { label: 'FAQ',              path: '/#faq'    },
 ]
 
 const SOCIALS = [
-  {
-    label: 'Facebook',
-    href: 'https://www.facebook.com/jackdavisrealty#',
-    icon: <FaFacebook size={18} />,
-  },
-  {
-    label: 'Instagram',
-    href: 'https://www.instagram.com/jackdavisrealty/',
-    icon: <FaInstagram size={18} />,
-  },
-  {
-    label: 'Email',
-    href: 'mailto:info@jackdavisrealty.com',
-    icon: <FiMail size={18} />,
-  },
+  { label: 'Facebook',  href: 'https://www.facebook.com/jackdavisrealty#',  Icon: FaFacebook  },
+  { label: 'Instagram', href: 'https://www.instagram.com/jackdavisrealty/', Icon: FaInstagram },
+  { label: 'LinkedIn',  href: '#',                                           Icon: FaLinkedin  },
+  { label: 'YouTube',   href: '#',                                           Icon: FaYoutube   },
 ]
 
 export default function Footer() {
+  const [email, setEmail] = useState('')
+
+  const handleSubscribe = (e) => {
+    e.preventDefault()
+    setEmail('')
+  }
+
   return (
-    <footer style={{ background: BG }}>
+    <footer style={{ background: NAVY }}>
 
-      {/* ── 4-Column Links ── */}
-      <div className="max-w-6xl mx-auto px-6 sm:px-10 pt-16 pb-12">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-10">
-          {COLS.map(col => (
-            <div key={col.heading}>
-              <h3 className="font-body text-base font-bold text-white mb-2 pb-3 border-b border-white/20">
-                {col.heading}
-              </h3>
-              <ul className="mt-4 space-y-3">
-                {col.links.map(l => (
-                  <li key={l.label}>
-                    <Link
-                      to={l.path}
-                      className="font-body text-sm text-white/60 hover:text-white transition-colors duration-150"
-                    >
-                      {l.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
+      {/* ── Main grid ── */}
+      <div className="max-w-7xl mx-auto px-6 sm:px-10 pt-16 pb-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+
+          {/* Col 1 — Brand */}
+          <div>
+            <div className="flex items-center gap-3 mb-3">
+              <span className="font-heading text-2xl font-bold" style={{ color: GOLD }}>JD</span>
+              <div className="w-px h-7 bg-white/20" />
+              <div className="font-body text-[11px] font-extrabold tracking-[0.15em] text-white leading-tight">
+                <span className="block">JACK DAVIS</span>
+                <span className="block" style={{ color: GOLD }}>REALTY</span>
+              </div>
             </div>
-          ))}
+            <p className="font-body text-[10px] uppercase tracking-[0.22em] text-white/35 mb-7">
+              Real Solutions. Real Life.
+            </p>
+            <div className="flex items-center gap-2.5">
+              {SOCIALS.map(({ label, href, Icon }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center text-white/60 hover:bg-white/20 hover:text-white transition-all duration-200"
+                >
+                  <Icon size={15} />
+                </a>
+              ))}
+            </div>
+          </div>
+
+          {/* Col 2 — Quick Links */}
+          <div>
+            <h4 className="font-body text-[10px] font-bold uppercase tracking-[0.2em] text-white/35 mb-5">
+              Quick Links
+            </h4>
+            <ul className="space-y-3">
+              {QUICK_LINKS.map(l => (
+                <li key={l.label}>
+                  <Link
+                    to={l.path}
+                    className="font-body text-sm text-white/60 hover:text-white transition-colors duration-150"
+                  >
+                    {l.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Col 3 — Resources + Contact */}
+          <div>
+            <h4 className="font-body text-[10px] font-bold uppercase tracking-[0.2em] text-white/35 mb-5">
+              Helpful Resources
+            </h4>
+            <ul className="space-y-3 mb-8">
+              {RESOURCES.map(l => (
+                <li key={l.label}>
+                  <Link
+                    to={l.path}
+                    className="font-body text-sm text-white/60 hover:text-white transition-colors duration-150"
+                  >
+                    {l.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+
+            <h4 className="font-body text-[10px] font-bold uppercase tracking-[0.2em] text-white/35 mb-5">
+              Contact
+            </h4>
+            <ul className="space-y-3">
+              <li>
+                <a
+                  href="tel:6789628754"
+                  className="flex items-center gap-2 font-body text-sm text-white/60 hover:text-white transition-colors"
+                >
+                  <FiPhone className="w-3.5 h-3.5 shrink-0" />
+                  (678) 962-8754
+                </a>
+              </li>
+              <li>
+                <a
+                  href="mailto:hello@jackdavisrealty.com"
+                  className="flex items-center gap-2 font-body text-sm text-white/60 hover:text-white transition-colors"
+                >
+                  <FiMail className="w-3.5 h-3.5 shrink-0" />
+                  hello@jackdavisrealty.com
+                </a>
+              </li>
+              <li className="flex items-start gap-2 font-body text-sm text-white/60">
+                <FiMapPin className="w-3.5 h-3.5 shrink-0 mt-0.5" />
+                <span>321 Sandy Way, Suite 100<br />Marietta, GA 30060</span>
+              </li>
+            </ul>
+          </div>
+
+          {/* Col 4 — Stay Connected */}
+          <div>
+            <h4 className="font-body text-[10px] font-bold uppercase tracking-[0.2em] text-white/35 mb-5">
+              Stay Connected
+            </h4>
+            <p className="font-body text-sm text-white/60 mb-5 leading-relaxed">
+              Follow us for market updates, tips, and helpful resources.
+            </p>
+            <form onSubmit={handleSubscribe} className="flex items-center gap-2 mb-6">
+              <input
+                type="email"
+                value={email}
+                onChange={e => setEmail(e.target.value)}
+                placeholder="Your email"
+                className="flex-1 bg-white/10 border border-white/15 rounded-lg px-4 py-2.5 font-body text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-white/35 min-w-0 transition-colors"
+              />
+              <button
+                type="submit"
+                aria-label="Subscribe"
+                className="w-10 h-10 rounded-lg flex items-center justify-center shrink-0 hover:opacity-85 transition-opacity"
+                style={{ background: GOLD }}
+              >
+                <FiArrowRight className="w-4 h-4 text-white" />
+              </button>
+            </form>
+            <div className="flex items-center gap-2">
+              {SOCIALS.map(({ label, href, Icon }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-white/50 hover:bg-white/20 hover:text-white transition-all duration-200"
+                >
+                  <Icon size={13} />
+                </a>
+              ))}
+            </div>
+          </div>
+
         </div>
       </div>
 
-      {/* ── Divider ── */}
-      <div className="border-t border-white/10" />
-
-      {/* ── Centered Bottom Block ── */}
-      <div className="pt-12 pb-28 md:pb-14 px-4 flex flex-col items-center text-center gap-5">
-
-        {/* Logo */}
-        <Link to="/">
-          <img
-            src="/logo_navbar.png"
-            alt="Jack Davis Realty"
-            className="h-44 w-auto object-contain rounded-2xl"
-          />
-        </Link>
-
-        {/* Phone */}
-        <a
-          href="tel:6789222532"
-          className="font-heading text-2xl sm:text-3xl md:text-4xl font-semibold text-white hover:text-white/80 transition-colors tracking-wide"
-        >
-          678-922-2532
-        </a>
-
-        {/* Primary CTA — required by brand document in footer */}
-        <div className="flex flex-col sm:flex-row items-center gap-3">
-          <Link
-            to="/cash-offer"
-            className="font-body font-bold text-sm text-white px-8 py-3.5 rounded-full transition-all duration-200 hover:opacity-90"
-            style={{ background: '#AC1E32' }}
-          >
-            Get My Fast Cash Offer
-          </Link>
-          <Link
-            to="/selling"
-            className="font-body font-semibold text-sm text-white/70 hover:text-white border border-white/25 px-8 py-3.5 rounded-full transition-all duration-200 hover:border-white/50"
-          >
-            Explore Selling Options
-          </Link>
+      {/* ── Bottom bar ── */}
+      <div className="border-t border-white/10">
+        <div className="max-w-7xl mx-auto px-6 sm:px-10 py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
+          <p className="font-body text-xs text-white/30">
+            © 2024 Jack Davis Realty. All Rights Reserved.
+          </p>
+          <div className="flex items-center gap-4 font-body text-xs text-white/30">
+            <span className="hover:text-white/55 cursor-pointer transition-colors">Privacy Policy</span>
+            <span className="text-white/15">|</span>
+            <span className="hover:text-white/55 cursor-pointer transition-colors">Terms of Use</span>
+          </div>
         </div>
-
-        {/* Address */}
-        <p className="font-body text-sm text-white/40 leading-relaxed">
-          2020 Howell Mill Rd NW, D422 · Atlanta, GA 30318
-        </p>
-
-        {/* Copyright + Legal */}
-        <p className="font-body text-sm text-white/40">
-          © 2024 Jack Davis Realty. All rights reserved.
-        </p>
-        <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 font-body text-sm text-white/40">
-          <span className="hover:text-white cursor-pointer transition-colors">Terms of Use</span>
-          <span className="text-white/20">·</span>
-          <span className="hover:text-white cursor-pointer transition-colors">Privacy Policy</span>
-          <span className="text-white/20">·</span>
-          <p className="font-body text-sm text-white/40">Licensed Georgia Real Estate Brokerage</p>
-        </div>
-
-        {/* Social Icons — white circles */}
-        <div className="flex items-center gap-3 mt-1">
-          {SOCIALS.map(s => (
-            <a
-              key={s.label}
-              href={s.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={s.label}
-              className="w-11 h-11 rounded-full bg-white flex items-center justify-center text-gray-900 hover:bg-white/80 transition-colors duration-200 shadow-sm"
-            >
-              {s.icon}
-            </a>
-          ))}
-        </div>
-
-        {/* Equal Housing */}
-        <div className="bg-white rounded-lg px-4 py-2 mt-1">
-          <img
-            src="https://u.realgeeks.media/jackdavisrealty/R-EH.png"
-            alt="Equal Housing Opportunity"
-            className="h-10 w-auto object-contain"
-          />
-        </div>
-
       </div>
+
     </footer>
   )
 }

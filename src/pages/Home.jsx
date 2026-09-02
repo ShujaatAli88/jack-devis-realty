@@ -1,556 +1,588 @@
-import { useState, useEffect, useCallback } from 'react'
-import { Helmet } from 'react-helmet-async'
-import { motion, AnimatePresence } from 'framer-motion'
 import { Link } from 'react-router-dom'
+import { Helmet } from 'react-helmet-async'
+import { motion } from 'framer-motion'
 import {
-  FiAward, FiStar, FiCheckCircle, FiHome, FiMapPin, FiPhone,
-  FiChevronDown, FiChevronUp, FiArrowRight, FiTool, FiUsers,
-  FiDollarSign, FiZap, FiAlertCircle, FiTrendingUp,
-} from 'react-icons/fi'
+  MdHome, MdBuild, MdWarning, MdGavel, MdPeople,
+  MdFlightTakeoff, MdLocationOn, MdApartment,
+  MdVerifiedUser, MdCheckCircle, MdEvent,
+  MdTrendingUp, MdAttachMoney, MdArrowForward,
+  MdPhone, MdLock, MdSell, MdHomeWork,
+} from 'react-icons/md'
 import Navbar from '../components/Navbar'
-import Hero from '../components/Hero'
 import Footer from '../components/Footer'
-import ContactModal from '../components/ContactModal'
 
-const RED = '#AC1E32'
-const GOLD = '#AC1E32'
+const RED   = '#C42535'
+const NAVY  = '#17293C'
+const GOLD  = '#C1912E'
+const CREAM = '#F7F3EE'
+const GRAY1 = '#EFEDEA'
+const DARK  = '#1A1A1A'
 
-/* ── Seller Situations ─────────────────────────── */
+const HERO_IMG    = '/hero_bg.jpg'
+const AGENT_IMG   = '/jack_devis.jpg'
+const SKYLINE_IMG = 'https://images.unsplash.com/photo-1575517111839-3a3843ee7f5d?w=1600&auto=format&fit=crop&q=80'
+
 const SITUATIONS = [
-  { icon: FiHome,        label: 'Inherited Home' },
-  { icon: FiMapPin,      label: 'Vacant Property' },
-  { icon: FiTool,        label: 'Needs Repairs' },
-  { icon: FiCheckCircle, label: 'Tired Landlord' },
-  { icon: FiZap,         label: 'Relocation' },
-  { icon: FiAward,       label: 'Divorce' },
-  { icon: FiAlertCircle, label: 'Pre-Foreclosure' },
-  { icon: FiTrendingUp,  label: 'Downsizing' },
-  { icon: FiUsers,       label: 'Tenant Issues' },
-  { icon: FiAlertCircle, label: 'Code Violations' },
+  { Icon: MdHome,          label: 'Inherited Property'      },
+  { Icon: MdBuild,         label: 'Repairs Needed'          },
+  { Icon: MdWarning,       label: 'Behind on Payments'      },
+  { Icon: MdGavel,         label: 'Probate or Estate'       },
+  { Icon: MdPeople,        label: 'Divorce or Separation'   },
+  { Icon: MdLocationOn,    label: 'Downsizing or Retirement'},
+  { Icon: MdFlightTakeoff, label: 'Relocation'              },
+  { Icon: MdApartment,     label: 'Landlords & Investors'   },
 ]
 
-/* ── Differentiators ───────────────────────────── */
-const DIFF_ITEMS = [
-  {
-    icon: FiDollarSign,
-    title: 'Fast Cash Offer',
-    body: 'Receive a competitive cash offer within 24 hours. No agent commissions, no repairs, close in as little as 14 days.',
-  },
-  {
-    icon: FiAward,
-    title: 'Traditional Listing',
-    body: 'Want top dollar? Our licensed agents will list your home and market it to thousands of active buyers in the Atlanta area.',
-  },
-  {
-    icon: FiTool,
-    title: 'Renovate Before Selling',
-    body: 'Our in-house renovation expertise means we can help you maximize value before listing — with no out-of-pocket costs.',
-  },
-  {
-    icon: FiUsers,
-    title: 'Investor Buyer Strategy',
-    body: 'Access our network of vetted investors ready to buy off-market, as-is, on your timeline with no contingencies.',
-  },
+const TRUST_ITEMS = [
+  { Icon: MdBuild,       label: 'Investor & Renovation Experience', sub: '100+ homes renovated'  },
+  { Icon: MdVerifiedUser,label: 'Licensed Georgia Broker',          sub: 'Years of experience'    },
+  { Icon: MdHomeWork,    label: 'Multiple Selling Options',         sub: 'Cash or traditional'    },
+  { Icon: MdCheckCircle, label: 'No Repairs Required',              sub: 'Sell as-is'             },
+  { Icon: MdEvent,       label: 'Flexible Closing Dates',           sub: 'On your timeline'       },
 ]
 
-/* ── Process Steps ─────────────────────────────── */
-const PROCESS_STEPS = [
-  { num: '01', title: 'Tell Us About the Property', body: 'Answer a few quick questions about your home — condition, timeline, goals. Takes less than 2 minutes.' },
-  { num: '02', title: 'Receive Your Offer or Recommendations', body: 'We present you with a fast cash offer and/or a personalized selling strategy based on your unique situation.' },
-  { num: '03', title: 'Choose the Best Selling Option', body: 'You decide — cash offer, traditional listing, or renovation-first. No pressure, no obligation, ever.' },
-  { num: '04', title: 'Close on Your Timeline', body: 'Whether it\'s 14 days or 6 months, we close when you\'re ready. You stay in control the entire way.' },
-]
-
-/* ── Reviews ───────────────────────────────────── */
-const REVIEWS = [
+const TESTIMONIALS = [
   {
-    name: "The Murray's",
-    role: 'Home Seller',
-    quote: "From our first conversation, I felt Mr. Tomond Jack was very knowledgeable, understanding to my desire to sell my home. Mr. Jack has been outstanding in helping me and I just cannot thank him enough. He was more than a Realtor — he assisted me in other areas of the sale of my property. I will gladly use Mr. Jack again.",
+    quote: "I needed to sell my parents' house fast after they passed. Jack Davis Realty made the process so easy. No repairs, no hassle. They really do everything they say.",
+    name: 'Angela H.',
+    city: 'Decatur, GA',
   },
   {
-    name: 'C. Coleman',
-    role: 'Home Seller',
-    quote: "Tomond Jack went above and beyond helping me through the selling process of my late father's home. His communication through each step was clear and helpful. I never felt rushed or like a random customer — he took time to explain details for my understanding. I would recommend Tomond as an agent to anyone.",
+    quote: "We had tenants who stopped paying rent. Jack helped us get a fair cash offer, and we closed in 2 weeks! Highly recommended.",
+    name: 'Marcus T.',
+    city: 'Atlanta, GA',
   },
   {
-    name: 'J. Robertson',
-    role: 'Home Seller',
-    quote: "Tomond was very efficient and thorough through this experience. He went to extensive measures to make sure that every concern I had was properly handled. He went over and above what was expected to make sure I got the result I wanted. Timely, available, and knowledgeable.",
+    quote: "They gave us clear options and explained everything. It felt good to have a team we could trust.",
+    name: 'Stephanie L.',
+    city: 'Smyrna, GA',
   },
 ]
 
-/* ── FAQ Items ─────────────────────────────────── */
-const FAQ_ITEMS = [
-  {
-    q: 'What types of properties can you help me sell?',
-    a: 'We work with single-family homes, condos, townhomes, multi-family properties, and vacant land anywhere in the Metro Atlanta area — regardless of condition.',
-  },
-  {
-    q: 'How quickly can you close?',
-    a: 'We can close in as little as 14 days on a cash offer, or work with your timeline if you need more time. You set the closing date.',
-  },
-  {
-    q: 'Do I have to make repairs before selling?',
-    a: 'Absolutely not. Our cash buyer network purchases homes as-is. No cleaning, repairs, staging, or showings required.',
-  },
-  {
-    q: 'Is your cash offer competitive with the open market?',
-    a: 'Our cash offers are competitive and factor in your home\'s current condition. We\'ll also show you what a traditional listing could net so you can compare and choose confidently.',
-  },
-  {
-    q: 'What makes Jack Davis Realty different from a wholesaler?',
-    a: 'We are a licensed Georgia brokerage, not a wholesaler. We combine investor experience with brokerage expertise, giving you more options and more transparency than a typical cash buyer.',
-  },
-  {
-    q: 'Is there any obligation after I request an offer?',
-    a: 'None whatsoever. Getting an offer is completely free with zero pressure to accept. We want you to make the best decision for your situation.',
-  },
-]
-
-/* ── Metro Areas ───────────────────────────────── */
-const COUNTIES = ['DeKalb', 'Fulton', 'Cobb', 'Gwinnett', 'Clayton', 'Douglas', 'Rockdale', 'Henry', 'Newton']
-const CITIES = [
-  'Atlanta', 'Decatur', 'Stone Mountain', 'Tucker', 'Conyers',
-  'Lilburn', 'Snellville', 'Mableton', 'Smyrna', 'Marietta',
-  'Chamblee', 'Doraville', 'College Park', 'East Point',
-]
-
-/* ── Reviews Carousel ──────────────────────────── */
-function ReviewsCarousel() {
-  const [active, setActive] = useState(0)
-  const next = useCallback(() => setActive(i => (i + 1) % REVIEWS.length), [])
-
-  useEffect(() => {
-    const t = setTimeout(next, 5000)
-    return () => clearTimeout(t)
-  }, [active, next])
-
-  const r = REVIEWS[active]
-
-  return (
-    <section className="relative overflow-hidden py-20 px-4">
-      <div className="absolute inset-0">
-        <img src="/pexels-ibidsy-5524164.jpg" alt="" aria-hidden="true" className="w-full h-full object-cover" style={{ filter: 'blur(6px)', transform: 'scale(1.06)' }} />
-        <div className="absolute inset-0" style={{ background: 'rgba(12,4,6,0.82)' }} />
-      </div>
-
-      <div className="relative max-w-3xl mx-auto text-center">
-        <p className="font-body text-[11px] uppercase tracking-[0.35em] text-white/50 mb-8">What Our Clients Say</p>
-
-        <AnimatePresence mode="wait">
-          <motion.div key={active} initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -14 }} transition={{ duration: 0.5 }}>
-            <div className="flex justify-center gap-1 mb-5">
-              {[...Array(5)].map((_, i) => (
-                <FiStar key={i} className="w-4 h-4" style={{ fill: '#ffffff', color: '#ffffff' }} />
-              ))}
-            </div>
-            <div className="font-heading leading-none mb-1 select-none" style={{ fontSize: '5rem', color: RED, opacity: 0.45, lineHeight: 1 }}>&ldquo;</div>
-            <p className="font-heading text-xl md:text-2xl text-white/90 leading-relaxed italic mb-8">{r.quote}</p>
-            <div className="flex items-center justify-center gap-3">
-              <div className="h-px w-10 bg-white/30 shrink-0" />
-              <div>
-                <p className="font-body text-sm font-semibold text-white tracking-wide">{r.name}</p>
-                <p className="font-body text-xs text-white/40 mt-0.5">{r.role}</p>
-              </div>
-              <div className="h-px w-10 bg-white/30 shrink-0" />
-            </div>
-          </motion.div>
-        </AnimatePresence>
-
-        <div className="flex justify-center gap-2 mt-10">
-          {REVIEWS.map((_, i) => (
-            <button key={i} onClick={() => setActive(i)} className="rounded-full transition-all duration-300"
-              style={{ width: i === active ? '24px' : '6px', height: '6px', background: i === active ? 'white' : 'rgba(255,255,255,0.2)' }} />
-          ))}
-        </div>
-      </div>
-    </section>
-  )
+const fadeUp = {
+  hidden:  { opacity: 0, y: 28 },
+  visible: (i) => ({
+    opacity: 1, y: 0,
+    transition: { duration: 0.55, delay: (i || 0) * 0.09, ease: 'easeOut' },
+  }),
 }
 
-/* ── FAQ Item ──────────────────────────────────── */
-function FaqItem({ q, a, open, onToggle }) {
-  return (
-    <div className="border-b border-gray-100">
-      <button
-        onClick={onToggle}
-        className="w-full flex items-center justify-between py-5 text-left gap-4 group"
-      >
-        <span className="font-heading text-lg text-gray-800 group-hover:text-[#AC1E32] transition-colors">{q}</span>
-        {open ? <FiChevronUp className="w-5 h-5 text-[#AC1E32] shrink-0" /> : <FiChevronDown className="w-5 h-5 text-gray-400 shrink-0 group-hover:text-[#AC1E32] transition-colors" />}
-      </button>
-      <AnimatePresence>
-        {open && (
-          <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.22 }} className="overflow-hidden">
-            <p className="font-body text-gray-500 text-sm leading-relaxed pb-5">{a}</p>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </div>
-  )
-}
+const CashBtn = ({ className = '', children }) => (
+  <Link
+    to="/cash-offer"
+    className={`inline-flex items-center justify-center gap-2 text-white font-body font-bold text-sm px-7 py-4 rounded-xl shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 whitespace-nowrap ${className}`}
+    style={{ background: RED }}
+  >
+    {children || 'Get My Fast Cash Offer'}
+    <MdArrowForward className="w-5 h-5" />
+  </Link>
+)
 
-/* ── Main Component ────────────────────────────── */
 export default function Home() {
-  const [contactOpen, setContactOpen] = useState(false)
-  const [openFaq, setOpenFaq] = useState(null)
-  const [address, setAddress] = useState('')
-
-  const handleOfferSubmit = (e) => {
-    e.preventDefault()
-    window.location.href = `/cash-offer${address ? `?address=${encodeURIComponent(address)}` : ''}`
-  }
-
   return (
-    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.4 }}>
+    <>
       <Helmet>
-        <title>Sell Your House Fast in Metro Atlanta | Jack Davis Realty</title>
-        <meta name="description" content="Sell your home fast in Metro Atlanta. Get a competitive cash offer or explore the best strategy to maximize your home's value. No repairs. No pressure. No obligation." />
-        <meta name="keywords" content="sell my house fast Atlanta, cash offer homes Atlanta, sell house as-is Metro Atlanta, cash home buyers DeKalb County" />
+        <title>Sell Your Home Your Way | Jack Davis Realty – Metro Atlanta</title>
+        <meta name="description" content="Fast Cash Offers. Traditional Listings. Real Solutions for Real Life. Jack Davis Realty helps Metro Atlanta homeowners sell on their terms." />
       </Helmet>
 
       <Navbar />
-      <Hero />
 
-      {/* ─── 1. Why Work With Jack Davis ────────── */}
-      <section className="bg-white py-14 md:py-20 px-4">
-        <div className="max-w-5xl mx-auto">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}
-            className="font-heading text-3xl md:text-4xl font-semibold text-gray-900 text-center mb-10 md:mb-14"
-          >
-            Why Work With{' '}
-            <span style={{ color: RED }}>Jack Davis?</span>
-          </motion.h2>
+      {/* ══════════════════════════════════════════
+          1. HERO
+      ══════════════════════════════════════════ */}
+      <section className="relative min-h-screen flex items-center overflow-hidden">
+        <img
+          src={HERO_IMG}
+          alt="Atlanta home"
+          className="absolute inset-0 w-full h-full object-cover"
+          style={{ objectPosition: 'center 40%' }}
+          loading="eager"
+        />
+        <div
+          className="absolute inset-0"
+          style={{
+            background: 'linear-gradient(110deg, rgba(10,4,6,0.92) 0%, rgba(10,4,6,0.72) 48%, rgba(10,4,6,0.20) 100%)',
+          }}
+        />
 
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
-            {[
-              {
-                icon: 'https://www.markspain.com/_next/image?url=https%3A%2F%2Fmarkspain-strapi-media-production.s3.us-east-2.amazonaws.com%2Freal_estate_icon_58b5f20ae1.png&w=128&q=75',
-                stat: '#1',
-                label: 'GA Seller Solutions Brokerage',
-              },
-              {
-                icon: 'https://markspain-strapi-media-production.s3.us-east-2.amazonaws.com/lifetime_icon_f9b3546fe9.svg',
-                stat: '6,000+',
-                label: 'Successful Transactions',
-              },
-              {
-                icon: 'https://www.markspain.com/_next/image?url=https%3A%2F%2Fmarkspain-strapi-media-production.s3.us-east-2.amazonaws.com%2Fover_icon_628f2ea41e.png&w=96&q=75',
-                stat: '14 Days',
-                label: 'Fastest Close Available',
-              },
-              {
-                icon: 'https://www.markspain.com/_next/image?url=https%3A%2F%2Fmarkspain-strapi-media-production.s3.us-east-2.amazonaws.com%2Fhome_icon_4b2d2ba3e7.png&w=96&q=75',
-                stat: '5★',
-                label: 'Rated by Local Homeowners',
-              },
-            ].map((item, i) => (
-              <motion.div
-                key={item.stat}
-                initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.45, delay: i * 0.1 }}
-                className="flex flex-col items-center text-center p-6 md:p-8 rounded-2xl"
-                style={{ background: '#F5F5F5' }}
-              >
-                <img
-                  src={item.icon}
-                  alt={item.label}
-                  className="w-14 h-14 md:w-16 md:h-16 object-contain mb-4"
-                />
-                <p className="font-heading text-xl md:text-2xl font-bold mb-1" style={{ color: RED }}>{item.stat}</p>
-                <p className="font-body text-sm text-gray-500 leading-snug">{item.label}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+        <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-36 w-full">
+          <motion.div initial="hidden" animate="visible" className="max-w-xl">
 
-      {/* ─── 2. Seller Problem Section ──────────── */}
-      <section className="bg-white py-16 md:py-24 px-4">
-        <div className="max-w-5xl mx-auto text-center">
-          <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.55 }}>
-            <p className="font-body text-xs font-semibold uppercase tracking-[0.25em] mb-4" style={{ color: GOLD }}>We Understand Your Situation</p>
-            <h2 className="font-heading text-3xl md:text-5xl font-semibold text-gray-900 leading-tight mb-5">
-              We Help Homeowners Sell<br />in Difficult Situations
-            </h2>
-            <p className="font-body text-gray-500 text-base md:text-lg max-w-2xl mx-auto mb-12">
-              Life happens. Whether you're dealing with an inherited property, a challenging tenant, or just need to move fast — Jack Davis Realty has a solution for you.
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
-            {SITUATIONS.map((s, i) => (
-              <motion.div
-                key={s.label}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: i * 0.06 }}
-                className="flex flex-col items-center gap-3 p-5 rounded-2xl border border-gray-100 hover:border-[#AC1E32]/25 hover:shadow-md transition-all duration-200 group bg-gray-50/60"
-              >
-                <div className="w-11 h-11 rounded-xl flex items-center justify-center transition-all duration-200" style={{ background: '#AC1E32' }}>
-                  <s.icon className="w-5 h-5 text-white" />
-                </div>
-                <p className="font-body text-xs font-semibold text-gray-700 text-center leading-snug">{s.label}</p>
-              </motion.div>
-            ))}
-          </div>
-
-          <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.45, delay: 0.3 }} className="mt-12">
-            <Link to="/cash-offer" className="inline-flex items-center gap-2 bg-[#AC1E32] hover:bg-[#8B1828] text-white font-body font-bold px-10 py-4 rounded-full transition-all duration-200 shadow-md hover:shadow-lg hover:-translate-y-0.5">
-              Get My Fast Cash Offer
-              <FiArrowRight className="w-4 h-4" />
-            </Link>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ─── 3. Differentiator Section ──────────── */}
-      <section className="bg-[#F2F2F2] py-16 md:py-24 px-4">
-        <div className="max-w-6xl mx-auto">
-          <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.55 }} className="text-center mb-12 md:mb-16">
-            <p className="font-body text-xs font-semibold uppercase tracking-[0.25em] mb-4" style={{ color: GOLD }}>The Jack Davis Difference</p>
-            <h2 className="font-heading text-3xl md:text-5xl font-semibold text-gray-900 leading-tight mb-5">
-              More Than a Typical Cash Buyer
-            </h2>
-            <p className="font-body text-gray-500 text-base md:text-lg max-w-2xl mx-auto">
-              Unlike national cash buyers or wholesalers, Jack Davis Realty combines local brokerage expertise, investor experience, and renovation knowledge — so you always get the best option for your situation.
-            </p>
-          </motion.div>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {DIFF_ITEMS.map((item, i) => (
-              <motion.div
-                key={item.title}
-                initial={{ opacity: 0, y: 28 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.45, delay: i * 0.1 }}
-                className="bg-white rounded-2xl p-7 shadow-sm border border-gray-100 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col"
-              >
-                <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-5 shrink-0" style={{ background: '#AC1E32' }}>
-                  <item.icon className="w-6 h-6 text-white" />
-                </div>
-                <h3 className="font-heading text-xl font-semibold text-gray-900 mb-3">{item.title}</h3>
-                <p className="font-body text-sm text-gray-500 leading-relaxed flex-1">{item.body}</p>
-              </motion.div>
-            ))}
-          </div>
-
-          <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.45, delay: 0.2 }} className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link to="/cash-offer" className="inline-flex items-center gap-2 bg-[#AC1E32] hover:bg-[#8B1828] text-white font-body font-bold px-10 py-4 rounded-full transition-all duration-200 shadow-md hover:shadow-lg hover:-translate-y-0.5">
-              Get My Fast Cash Offer <FiArrowRight className="w-4 h-4" />
-            </Link>
-            <Link to="/selling" className="inline-flex items-center gap-2 border-2 border-gray-300 text-gray-700 hover:border-[#AC1E32] hover:text-[#AC1E32] font-body font-semibold px-10 py-4 rounded-full transition-all duration-200">
-              Explore Selling Options
-            </Link>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ─── 4. How It Works ────────────────────── */}
-      <section className="bg-white py-16 md:py-24 px-4">
-        <div className="max-w-5xl mx-auto">
-          <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.55 }} className="text-center mb-12 md:mb-16">
-            <p className="font-body text-xs font-semibold uppercase tracking-[0.25em] mb-4" style={{ color: GOLD }}>Our Process</p>
-            <h2 className="font-heading text-3xl md:text-5xl font-semibold text-gray-900 leading-tight">
-              Simple. Fast. Flexible.
-            </h2>
-          </motion.div>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {PROCESS_STEPS.map((step, i) => (
-              <motion.div
-                key={step.num}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.45, delay: i * 0.1 }}
-                className="relative flex flex-col items-center text-center group"
-              >
-                {i < PROCESS_STEPS.length - 1 && (
-                  <div className="hidden lg:block absolute top-10 left-[calc(50%+44px)] right-[-50%] h-px bg-gray-200" />
-                )}
-                <div className="relative w-20 h-20 rounded-2xl flex items-center justify-center mb-5 shadow-md group-hover:scale-105 transition-transform duration-200" style={{ background: RED }}>
-                  <span className="font-heading text-2xl font-bold text-white">{step.num}</span>
-                </div>
-                <h3 className="font-heading text-lg font-semibold text-gray-900 mb-3 leading-snug">{step.title}</h3>
-                <p className="font-body text-sm text-gray-500 leading-relaxed">{step.body}</p>
-              </motion.div>
-            ))}
-          </div>
-
-          <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.45, delay: 0.3 }} className="mt-14 text-center">
-            <Link to="/cash-offer" className="inline-flex items-center gap-2 bg-[#AC1E32] hover:bg-[#8B1828] text-white font-body font-bold px-10 py-4 rounded-full transition-all duration-200 shadow-md hover:shadow-lg hover:-translate-y-0.5">
-              Get My Fast Cash Offer <FiArrowRight className="w-4 h-4" />
-            </Link>
-            <p className="font-body text-gray-400 text-sm mt-3">Free. No pressure. No obligation. Licensed Georgia Brokerage.</p>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ─── 5. Lead Capture CTA ────────────────── */}
-      <section className="relative overflow-hidden py-16 md:py-20 px-4" style={{ background: RED }}>
-        <div className="absolute inset-0 opacity-10">
-          <img src="/pexels-cara-denison-886614634-37419422.jpg" alt="" aria-hidden="true" className="w-full h-full object-cover" />
-        </div>
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.55 }}
-          className="relative max-w-2xl mx-auto text-center"
-        >
-          <h2 className="font-heading text-3xl md:text-4xl font-semibold text-white mb-4 leading-tight">
-            Get Your Fast Cash Offer Today
-          </h2>
-          <p className="font-body text-white/80 text-base mb-8">
-            No obligations, just offers. Enter your property address to get started.
-          </p>
-          <form onSubmit={handleOfferSubmit} className="flex flex-col sm:flex-row gap-3 max-w-xl mx-auto">
-            <input
-              type="text"
-              value={address}
-              onChange={e => setAddress(e.target.value)}
-              placeholder="Enter your property address…"
-              className="flex-1 bg-white rounded-full px-6 py-4 font-body text-sm text-gray-800 placeholder:text-gray-400 outline-none border-2 border-transparent focus:border-[#AC1E32] transition-all"
-            />
-            <button
-              type="submit"
-              className="bg-[#1F0A0E] hover:bg-black text-white font-body font-bold text-sm px-8 py-4 rounded-full transition-all duration-200 whitespace-nowrap shadow-lg"
+            <motion.p
+              variants={fadeUp} custom={0}
+              className="font-body font-bold text-sm uppercase tracking-[0.28em] mb-5"
+              style={{ color: GOLD }}
             >
-              Get My Offer
-            </button>
-          </form>
-          <p className="font-body text-white/50 text-xs mt-4">Free. No pressure. No obligation. Licensed Georgia Brokerage.</p>
-        </motion.div>
+              Real Solutions. Real Life.
+            </motion.p>
+
+            <motion.h1
+              variants={fadeUp} custom={1}
+              className="font-heading font-bold leading-[1.04] mb-6"
+              style={{ fontSize: 'clamp(2.8rem, 5.5vw, 4.8rem)' }}
+            >
+              <span className="text-white block">Sell Your Home</span>
+              <span style={{ color: GOLD }}>Your Way</span>
+            </motion.h1>
+
+            <motion.p
+              variants={fadeUp} custom={2}
+              className="font-body text-white/80 text-lg leading-relaxed mb-8"
+            >
+              Fast Cash Offers. Traditional Listings. Real Solutions for Real Life.
+            </motion.p>
+
+            <motion.div
+              variants={fadeUp} custom={3}
+              className="flex flex-col sm:flex-row gap-3 mb-7"
+            >
+              <CashBtn />
+              <Link
+                to="/selling"
+                className="inline-flex items-center justify-center gap-2 border border-white/45 text-white font-body font-semibold text-sm px-7 py-4 rounded-xl hover:bg-white/10 hover:border-white/70 transition-all duration-200 whitespace-nowrap"
+              >
+                Explore All My Selling Options
+              </Link>
+            </motion.div>
+
+            <motion.div
+              variants={fadeUp} custom={4}
+              className="flex items-center gap-2 text-white/45 font-body text-xs"
+            >
+              <MdLock className="w-4 h-4 shrink-0" style={{ color: GOLD }} />
+              <span>100% Confidential &nbsp;·&nbsp; No Obligation</span>
+            </motion.div>
+
+          </motion.div>
+        </div>
+
+        {/* Scroll indicator */}
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 opacity-30">
+          <div className="w-px h-10 bg-white animate-pulse" />
+        </div>
       </section>
 
-      {/* ─── 6. Testimonials ────────────────────── */}
-      <ReviewsCarousel />
+      {/* ══════════════════════════════════════════
+          2. SITUATIONS
+      ══════════════════════════════════════════ */}
+      <section className="py-20 px-4" style={{ background: GRAY1 }}>
+        <div className="max-w-6xl mx-auto text-center">
 
-      {/* ─── 7. Metro Atlanta Service Areas ─────── */}
-      <section className="bg-white py-16 md:py-20 px-4">
-        <div className="max-w-5xl mx-auto text-center">
-          <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.55 }}>
-            <p className="font-body text-xs font-semibold uppercase tracking-[0.25em] mb-4" style={{ color: GOLD }}>Our Coverage</p>
-            <h2 className="font-heading text-3xl md:text-4xl font-semibold text-gray-900 mb-4">
-              We Serve Metro Atlanta &amp; Surrounding Counties
+          <motion.div
+            initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }} transition={{ duration: 0.5 }}
+          >
+            <p className="font-body font-bold text-xs uppercase tracking-[0.28em] mb-3" style={{ color: RED }}>
+              We Can Help
+            </p>
+            <h2 className="font-heading font-semibold text-3xl md:text-4xl mb-5 leading-tight" style={{ color: DARK }}>
+              We Help Homeowners in Difficult Situations
             </h2>
-            <p className="font-body text-gray-500 text-base mb-10 max-w-xl mx-auto">
-              If your property is in any of these counties or cities, we can help you sell fast.
+            <p className="font-body text-gray-500 text-base max-w-2xl mx-auto mb-12 leading-relaxed">
+              Life happens. Whether you're dealing with an inherited property, repairs, foreclosure, divorce,
+              or simply want a hassle-free sale, we'll help you explore the best option for your situation.
             </p>
           </motion.div>
 
-          <div className="mb-8">
-            <p className="font-body text-xs uppercase tracking-[0.2em] text-gray-400 font-semibold mb-4">Counties</p>
-            <div className="flex flex-wrap justify-center gap-2">
-              {COUNTIES.map(c => (
-                <Link
-                  key={c}
-                  to={`/search?location=${encodeURIComponent(c + ' County GA')}`}
-                  className="font-body text-sm font-medium px-4 py-2 rounded-full border border-gray-200 text-gray-600 hover:border-[#AC1E32] hover:text-[#AC1E32] transition-all duration-150"
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-10">
+            {SITUATIONS.map(({ Icon, label }, i) => (
+              <motion.div
+                key={label}
+                custom={i}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                variants={fadeUp}
+                className="bg-white rounded-2xl px-4 py-6 flex flex-col items-center gap-4 border border-gray-100 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-250 cursor-default group"
+              >
+                <div
+                  className="w-14 h-14 rounded-xl flex items-center justify-center shadow-sm group-hover:scale-105 transition-transform duration-200"
+                  style={{ background: RED }}
                 >
-                  {c} County
-                </Link>
-              ))}
-            </div>
-          </div>
-
-          <div>
-            <p className="font-body text-xs uppercase tracking-[0.2em] text-gray-400 font-semibold mb-4">Cities</p>
-            <div className="flex flex-wrap justify-center gap-2">
-              {CITIES.map(c => (
-                <Link
-                  key={c}
-                  to={`/search?location=${encodeURIComponent(c + ' GA')}`}
-                  className="font-body text-sm font-medium px-4 py-2 rounded-full border border-gray-200 text-gray-600 hover:border-[#AC1E32] hover:text-[#AC1E32] transition-all duration-150"
-                >
-                  {c}
-                </Link>
-              ))}
-            </div>
-          </div>
-
-          <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.45, delay: 0.2 }} className="mt-12">
-            <Link to="/cash-offer" className="inline-flex items-center gap-2 bg-[#AC1E32] hover:bg-[#8B1828] text-white font-body font-bold px-10 py-4 rounded-full transition-all duration-200 shadow-md hover:shadow-lg">
-              Get My Cash Offer
-              <FiArrowRight className="w-4 h-4" />
-            </Link>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ─── 8. FAQ Section ─────────────────────── */}
-      <section className="bg-[#F2F2F2] py-16 md:py-20 px-4">
-        <div className="max-w-3xl mx-auto">
-          <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.55 }} className="text-center mb-10">
-            <p className="font-body text-xs font-semibold uppercase tracking-[0.25em] mb-4" style={{ color: GOLD }}>Have Questions?</p>
-            <h2 className="font-heading text-3xl md:text-4xl font-semibold text-gray-900">Frequently Asked Questions</h2>
-          </motion.div>
-
-          <div className="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-gray-100">
-            {FAQ_ITEMS.map((item, i) => (
-              <FaqItem
-                key={i}
-                q={item.q}
-                a={item.a}
-                open={openFaq === i}
-                onToggle={() => setOpenFaq(openFaq === i ? null : i)}
-              />
+                  <Icon className="w-7 h-7 text-white" />
+                </div>
+                <p className="font-body text-sm font-semibold text-center leading-snug" style={{ color: DARK }}>
+                  {label}
+                </p>
+              </motion.div>
             ))}
           </div>
 
-          <p className="font-body text-center text-gray-400 text-sm mt-8">
-            Still have questions?{' '}
-            <button onClick={() => setContactOpen(true)} className="text-[#AC1E32] font-semibold hover:underline">
-              Contact us directly
-            </button>
-            .
-          </p>
+          <motion.div
+            initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }} transition={{ duration: 0.4, delay: 0.25 }}
+          >
+            <CashBtn />
+          </motion.div>
         </div>
       </section>
 
-      {/* ─── 9. Final CTA Banner ────────────────── */}
-      <section className="relative overflow-hidden py-16 md:py-24 px-4">
-        <div className="absolute inset-0">
-          <img src="/pexels-cara-denison-886614634-37419422.jpg" alt="" aria-hidden="true" className="w-full h-full object-cover" style={{ filter: 'blur(4px)' }} />
-          <div className="absolute inset-0" style={{ background: 'rgba(20,6,9,0.88)' }} />
-        </div>
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.55 }}
-          className="relative max-w-3xl mx-auto text-center"
-        >
-          <p className="font-body text-[11px] uppercase tracking-[0.3em] text-white/50 mb-4">Sell Fast. Sell As-Is. Sell With Confidence.</p>
-          <h2 className="font-heading text-3xl md:text-5xl font-semibold text-white mb-5 leading-tight">
-            Ready to Explore<br />
-            <span className="italic">Your Selling Options?</span>
-          </h2>
-          <p className="font-body text-white/65 text-sm md:text-base mb-10 max-w-md mx-auto">
-            We help Metro Atlanta homeowners sell quickly and easily — whether that's a cash offer, a traditional listing, or something in between.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link to="/cash-offer" className="bg-white text-[#AC1E32] font-body font-bold px-10 py-4 rounded-full hover:bg-gray-100 transition-all duration-200 shadow-lg">
-              Get My Fast Cash Offer
-            </Link>
-            <Link to="/selling" className="border-2 border-white/40 text-white font-body font-semibold px-10 py-4 rounded-full hover:border-white hover:bg-white/10 transition-all duration-200">
-              Explore Selling Options
-            </Link>
+      {/* ══════════════════════════════════════════
+          3. SELLING OPTIONS
+      ══════════════════════════════════════════ */}
+      <section className="py-20 px-4" style={{ background: CREAM }}>
+        <div className="max-w-6xl mx-auto">
+
+          <div className="text-center mb-14">
+            <p className="font-body font-bold text-xs uppercase tracking-[0.28em] mb-3" style={{ color: RED }}>
+              One Home. Multiple Selling Options.
+            </p>
+            <h2 className="font-heading font-semibold text-3xl md:text-4xl mb-4" style={{ color: DARK }}>
+              Every homeowner's situation is different.
+            </h2>
+            <p className="font-body text-gray-500 text-base max-w-xl mx-auto">
+              Whether you need speed, top dollar, or something in between, we'll help you find the right path.
+            </p>
           </div>
-          <a href="tel:6789222532" className="flex items-center justify-center gap-2 mt-8 font-body text-sm text-white/40 hover:text-white/70 transition-colors">
-            <FiPhone className="w-3.5 h-3.5" />
-            678-922-2532
-          </a>
-        </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
+
+            {/* ── Card 1: Highlighted maroon ── */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }} transition={{ duration: 0.5 }}
+              className="relative rounded-2xl p-8 flex flex-col shadow-xl mt-6"
+              style={{ background: RED }}
+            >
+              {/* Most Popular badge */}
+              <div
+                className="absolute -top-5 left-1/2 -translate-x-1/2 px-6 py-1.5 rounded-full font-body text-[11px] font-bold uppercase tracking-widest whitespace-nowrap shadow-md"
+                style={{ background: GOLD, color: '#fff' }}
+              >
+                Most Popular
+              </div>
+
+              <div
+                className="w-14 h-14 rounded-xl flex items-center justify-center mb-6 mt-2"
+                style={{ background: 'rgba(255,255,255,0.18)' }}
+              >
+                <MdSell className="w-8 h-8 text-white" />
+              </div>
+              <h3 className="font-heading text-2xl font-bold text-white mb-3">Sell As-Is for Cash</h3>
+              <p className="font-body text-white/75 text-sm leading-relaxed mb-6">
+                Skip repairs, showings, and uncertainty. Receive a competitive cash offer and close on your timeline.
+              </p>
+              <div className="border-t border-white/20 pt-5 mb-6">
+                <p className="font-body text-[11px] font-bold uppercase tracking-widest text-white/55 mb-3">Best For:</p>
+                <ul className="space-y-2.5">
+                  {['Inherited homes', 'Repairs needed', 'Landlords', 'Fast Closings'].map(item => (
+                    <li key={item} className="flex items-center gap-2.5 font-body text-sm text-white/90">
+                      <MdCheckCircle className="w-5 h-5 text-white shrink-0" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="mt-auto">
+                <Link
+                  to="/cash-offer"
+                  className="block w-full text-center font-body font-bold text-sm py-3.5 rounded-xl hover:bg-gray-50 transition-colors shadow-sm"
+                  style={{ background: '#fff', color: RED }}
+                >
+                  Get My Fast Cash Offer
+                </Link>
+              </div>
+            </motion.div>
+
+            {/* ── Card 2: Maximize price ── */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.1 }}
+              className="bg-white rounded-2xl p-8 flex flex-col border border-gray-100 shadow-sm hover:shadow-lg transition-shadow duration-300"
+            >
+              <div
+                className="w-14 h-14 rounded-xl flex items-center justify-center mb-6"
+                style={{ background: NAVY }}
+              >
+                <MdTrendingUp className="w-8 h-8 text-white" />
+              </div>
+              <h3 className="font-heading text-2xl font-bold mb-3" style={{ color: DARK }}>
+                Maximize Your Sale Price
+              </h3>
+              <p className="font-body text-gray-500 text-sm leading-relaxed mb-6">
+                Want the highest possible price? We'll market your home to thousands of qualified buyers across Metro Atlanta.
+              </p>
+              <div className="border-t border-gray-100 pt-5 mb-6">
+                <p className="font-body text-[11px] font-bold uppercase tracking-widest text-gray-400 mb-3">Best For:</p>
+                <ul className="space-y-2.5">
+                  {['Updated homes', 'No rush to sell', 'Highest return'].map(item => (
+                    <li key={item} className="flex items-center gap-2.5 font-body text-sm text-gray-700">
+                      <MdCheckCircle className="w-5 h-5 shrink-0" style={{ color: RED }} />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="mt-auto">
+                <Link
+                  to="/cash-offer"
+                  className="block w-full text-center text-white font-body font-bold text-sm py-3.5 rounded-xl hover:opacity-90 transition-opacity"
+                  style={{ background: RED }}
+                >
+                  Get My Fast Cash Offer
+                </Link>
+              </div>
+            </motion.div>
+
+            {/* ── Card 3: Increase value ── */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.2 }}
+              className="bg-white rounded-2xl p-8 flex flex-col border border-gray-100 shadow-sm hover:shadow-lg transition-shadow duration-300"
+            >
+              <div
+                className="w-14 h-14 rounded-xl flex items-center justify-center mb-6"
+                style={{ background: `${GOLD}22` }}
+              >
+                <MdHomeWork className="w-8 h-8" style={{ color: GOLD }} />
+              </div>
+              <h3 className="font-heading text-2xl font-bold mb-3" style={{ color: GOLD }}>
+                Increase Your Home's Value
+              </h3>
+              <p className="font-body text-gray-500 text-sm leading-relaxed mb-6">
+                Minor improvements can sometimes lead to significantly higher offers. We'll help you determine
+                if renovations are worth the investment—and in some cases, help you complete them with little
+                or no upfront cost.
+              </p>
+              <div className="border-t border-gray-100 pt-5 mb-6">
+                <p className="font-body text-[11px] font-bold uppercase tracking-widest text-gray-400 mb-3">Best For:</p>
+                <ul className="space-y-2.5">
+                  {['Curb appeal', 'Cosmetic repairs', 'More equity'].map(item => (
+                    <li key={item} className="flex items-center gap-2.5 font-body text-sm text-gray-700">
+                      <MdCheckCircle className="w-5 h-5 shrink-0" style={{ color: GOLD }} />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="mt-auto">
+                <Link
+                  to="/cash-offer"
+                  className="block w-full text-center text-white font-body font-bold text-sm py-3.5 rounded-xl hover:opacity-90 transition-opacity"
+                  style={{ background: RED }}
+                >
+                  Get My Fast Cash Offer
+                </Link>
+              </div>
+            </motion.div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════
+          4. TRUST STRIP
+      ══════════════════════════════════════════ */}
+      <section className="py-8 px-4 border-y border-gray-200 bg-white">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5">
+            {TRUST_ITEMS.map(({ Icon, label, sub }, i) => (
+              <div
+                key={label}
+                className={`flex flex-col items-center text-center px-4 py-6 gap-2 ${
+                  i > 0 ? 'lg:border-l lg:border-gray-100' : ''
+                }`}
+              >
+                <div
+                  className="w-12 h-12 rounded-xl flex items-center justify-center mb-1"
+                  style={{ background: `${NAVY}12` }}
+                >
+                  <Icon className="w-6 h-6" style={{ color: NAVY }} />
+                </div>
+                <p className="font-body font-bold text-xs leading-snug" style={{ color: DARK }}>{label}</p>
+                <p className="font-body text-[11px] text-gray-400">{sub}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════
+          5. AGENT BIO
+      ══════════════════════════════════════════ */}
+      <section className="py-20 px-4" style={{ background: CREAM }}>
+        <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+
+          {/* Photo */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }} transition={{ duration: 0.6 }}
+            className="relative order-2 lg:order-1"
+          >
+            <div
+              className="absolute -top-4 -left-4 w-full h-full rounded-2xl hidden lg:block"
+              style={{ background: `${RED}15` }}
+            />
+            <div className="relative rounded-2xl overflow-hidden shadow-2xl">
+              <img
+                src={AGENT_IMG}
+                alt="Jack Davis — Tomond Jack"
+                className="w-full object-cover object-top"
+                style={{ aspectRatio: '4/5' }}
+                loading="lazy"
+              />
+            </div>
+            {/* Gold corner accent */}
+            <div
+              className="absolute -bottom-3 -right-3 w-20 h-20 rounded-2xl hidden lg:block"
+              style={{ background: GOLD, opacity: 0.18 }}
+            />
+          </motion.div>
+
+          {/* Text */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.15 }}
+            className="order-1 lg:order-2"
+          >
+            <p className="font-body font-bold text-xs uppercase tracking-[0.28em] mb-4" style={{ color: RED }}>
+              Meet Tomond Jack
+            </p>
+            <h2
+              className="font-heading text-3xl md:text-4xl font-semibold mb-6 leading-tight"
+              style={{ color: DARK }}
+            >
+              Your Trusted Real Estate Advisor
+            </h2>
+            <p className="font-body text-gray-500 text-base leading-relaxed mb-8">
+              Investor. Broker. Developer. I've renovated over 100 homes and helped homeowners navigate
+              some of life's toughest transitions. Whether you need a fast cash offer or want to maximize
+              your sale price, my goal is simple: help you make the best decision—not the fastest one.
+            </p>
+
+            {/* Quick stats */}
+            <div className="grid grid-cols-3 gap-4 mb-8">
+              {[['100+', 'Homes Renovated'], ['14 Days', 'Fastest Close'], ['5★', 'Client Rating']].map(([val, lbl]) => (
+                <div key={lbl} className="text-center bg-white rounded-xl py-4 shadow-sm border border-gray-100">
+                  <p className="font-heading text-xl font-bold mb-0.5" style={{ color: RED }}>{val}</p>
+                  <p className="font-body text-[11px] text-gray-400 leading-tight">{lbl}</p>
+                </div>
+              ))}
+            </div>
+
+            <Link
+              to="/about"
+              className="inline-flex items-center gap-2 text-white font-body font-bold text-sm px-7 py-4 rounded-xl shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200"
+              style={{ background: RED }}
+            >
+              Learn More About Tomond <MdArrowForward className="w-5 h-5" />
+            </Link>
+          </motion.div>
+
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════
+          6. TESTIMONIALS
+      ══════════════════════════════════════════ */}
+      <section className="py-20 px-4 bg-white">
+        <div className="max-w-6xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }} transition={{ duration: 0.5 }}
+            className="text-center mb-14"
+          >
+            <p className="font-body font-bold text-xs uppercase tracking-[0.28em] mb-3" style={{ color: RED }}>
+              Client Stories
+            </p>
+            <h2 className="font-heading text-3xl md:text-4xl font-semibold" style={{ color: DARK }}>
+              What Homeowners Are Saying
+            </h2>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {TESTIMONIALS.map((t, i) => (
+              <motion.div
+                key={t.name}
+                custom={i}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                variants={fadeUp}
+                className="rounded-2xl p-8 flex flex-col border border-gray-100 shadow-sm hover:shadow-md transition-shadow duration-300"
+                style={{ background: CREAM }}
+              >
+                {/* Stars */}
+                <div className="flex items-center gap-1 mb-4">
+                  {[...Array(5)].map((_, s) => (
+                    <svg key={s} className="w-4 h-4" style={{ fill: GOLD, color: GOLD }} viewBox="0 0 20 20">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
+                  ))}
+                </div>
+
+                <p className="font-heading text-base italic text-gray-600 leading-relaxed flex-1 mb-6">
+                  "{t.quote}"
+                </p>
+
+                <div className="flex items-center gap-3 border-t border-gray-200 pt-4">
+                  <div
+                    className="w-10 h-10 rounded-full flex items-center justify-center font-body font-bold text-white text-sm shrink-0"
+                    style={{ background: RED }}
+                  >
+                    {t.name[0]}
+                  </div>
+                  <div>
+                    <p className="font-body font-bold text-sm" style={{ color: DARK }}>{t.name}</p>
+                    <p className="font-body text-xs text-gray-400">{t.city}</p>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════
+          7. CTA BAND
+      ══════════════════════════════════════════ */}
+      <section className="relative py-20 px-4 overflow-hidden" style={{ background: NAVY }}>
+        <img
+          src={SKYLINE_IMG}
+          alt=""
+          aria-hidden="true"
+          className="absolute inset-0 w-full h-full object-cover opacity-[0.10]"
+        />
+        {/* Left red accent strip */}
+        <div className="absolute left-0 top-0 bottom-0 w-1" style={{ background: RED }} />
+
+        <div className="relative z-10 max-w-6xl mx-auto grid lg:grid-cols-2 gap-10 items-center">
+
+          <motion.div
+            initial={{ opacity: 0, x: -24 }} whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }} transition={{ duration: 0.55 }}
+          >
+            <p className="font-body font-bold text-xs uppercase tracking-[0.28em] mb-3" style={{ color: GOLD }}>
+              No Obligation
+            </p>
+            <h2 className="font-heading text-3xl md:text-4xl font-semibold text-white mb-4 leading-tight">
+              Ready to Explore Your Options?
+            </h2>
+            <p className="font-body text-white/55 text-base">
+              Let's find the best solution for your home and your life.
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, x: 24 }} whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }} transition={{ duration: 0.55, delay: 0.15 }}
+            className="flex flex-col sm:flex-row gap-4 lg:justify-end"
+          >
+            <CashBtn />
+            <a
+              href="tel:6789628754"
+              className="inline-flex items-center justify-center gap-2 border border-white/35 text-white font-body font-semibold text-sm px-7 py-4 rounded-xl hover:bg-white/10 hover:border-white/60 transition-all duration-200 whitespace-nowrap"
+            >
+              <MdPhone className="w-5 h-5" />
+              (678) 962-8754
+            </a>
+          </motion.div>
+
+        </div>
       </section>
 
       <Footer />
-
-      {contactOpen && <ContactModal onClose={() => setContactOpen(false)} />}
-    </motion.div>
+    </>
   )
 }
