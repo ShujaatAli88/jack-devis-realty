@@ -13,7 +13,7 @@ export default function CTABanner({ onContact }) {
           />
           <div className="absolute inset-0 bg-navy/50" />
           <div className="absolute bottom-8 left-8">
-            <span className="bg-[#AC1E32] text-white font-body text-xs font-semibold uppercase tracking-widest px-4 py-2 rounded-full">
+            <span className="bg-[#8D2222] text-white font-body text-xs font-semibold uppercase tracking-widest px-4 py-2 rounded-full">
               Exclusive Service, Best Results
             </span>
           </div>

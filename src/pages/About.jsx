@@ -58,7 +58,7 @@ export default function About() {
                       <h3 className="font-heading text-xl font-semibold text-white leading-tight">
                         {member.name}
                       </h3>
-                      <p className="font-body text-xs text-[#AC1E32] mt-0.5">{member.title}</p>
+                      <p className="font-body text-xs text-[#8D2222] mt-0.5">{member.title}</p>
                     </div>
                   </div>
                 </Link>
@@ -73,9 +73,9 @@ export default function About() {
                     className="flex items-center gap-3 group/link"
                   >
                     <span className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center shrink-0 group-hover/link:bg-gray-200 transition-colors">
-                      <FaPhone className="text-[#AC1E32] text-xs" />
+                      <FaPhone className="text-[#8D2222] text-xs" />
                     </span>
-                    <span className="font-body text-sm text-gray-600 group-hover/link:text-[#AC1E32] transition-colors">
+                    <span className="font-body text-sm text-gray-600 group-hover/link:text-[#8D2222] transition-colors">
                       {member.phone}
                     </span>
                   </a>
@@ -84,15 +84,15 @@ export default function About() {
                     className="flex items-center gap-3 group/link"
                   >
                     <span className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center shrink-0 group-hover/link:bg-gray-200 transition-colors">
-                      <FaEnvelope className="text-[#AC1E32] text-xs" />
+                      <FaEnvelope className="text-[#8D2222] text-xs" />
                     </span>
-                    <span className="font-body text-sm text-gray-600 group-hover/link:text-[#AC1E32] transition-colors truncate">
+                    <span className="font-body text-sm text-gray-600 group-hover/link:text-[#8D2222] transition-colors truncate">
                       {member.email}
                     </span>
                   </a>
                   <Link
                     to={`/agents/${member.slug}`}
-                    className="flex items-center justify-center gap-1.5 font-body text-xs text-[#AC1E32] hover:text-navy transition-colors pt-1"
+                    className="flex items-center justify-center gap-1.5 font-body text-xs text-[#8D2222] hover:text-navy transition-colors pt-1"
                   >
                     View Profile <FaArrowRight className="text-[10px]" />
                   </Link>

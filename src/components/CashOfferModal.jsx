@@ -26,21 +26,21 @@ function FormBody({ onClose }) {
   if (submitted) return (
     <div className="bg-ivory rounded-3xl p-10 text-center">
       <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-5">
-        <FiCheck className="w-8 h-8 text-[#AC1E32]" strokeWidth={2.5} />
+        <FiCheck className="w-8 h-8 text-[#8D2222]" strokeWidth={2.5} />
       </div>
       <h3 className="font-heading text-3xl font-semibold text-navy mb-2">Thank You!</h3>
       <p className="font-body text-gray-500">We received your request and will be in touch with your cash offer shortly.</p>
-      <button onClick={onClose} className="mt-6 font-body text-sm text-[#374151] hover:underline">Close</button>
+      <button onClick={onClose} className="mt-6 font-body text-sm text-[#796063] hover:underline">Close</button>
     </div>
   )
 
   return (
     <div className="bg-ivory rounded-3xl overflow-hidden shadow-2xl">
-      <div className="h-1.5 bg-gradient-to-r from-navy via-[#AC1E32] to-navy" />
+      <div className="h-1.5 bg-gradient-to-r from-navy via-[#8D2222] to-navy" />
       <div className="p-8 md:p-10">
         <div className="flex items-start justify-between mb-6">
           <div>
-            <p className="font-body text-xs text-[#374151] uppercase tracking-widest font-semibold mb-1">Fast Cash Offer</p>
+            <p className="font-body text-xs text-[#796063] uppercase tracking-widest font-semibold mb-1">Fast Cash Offer</p>
             <h2 className="font-heading text-3xl font-semibold text-navy">Request a Cash Offer</h2>
           </div>
           <button
@@ -85,7 +85,7 @@ function FormBody({ onClose }) {
                   <label key={t} className={`flex items-center gap-2 cursor-pointer rounded-xl border px-4 py-2.5 transition-all font-body text-sm ${
                     form.propertyType === t ? 'border-navy bg-navy/5 text-navy font-medium' : 'border-gray-200 text-gray-600 hover:border-gray-300'
                   }`}>
-                    <input type="radio" name="pt" value={t} checked={form.propertyType === t} onChange={field('propertyType')} required className="accent-[#AC1E32] w-3.5 h-3.5" />
+                    <input type="radio" name="pt" value={t} checked={form.propertyType === t} onChange={field('propertyType')} required className="accent-[#8D2222] w-3.5 h-3.5" />
                     {t}
                   </label>
                 ))}
@@ -108,7 +108,7 @@ function FormBody({ onClose }) {
               <div className="space-y-2">
                 {CONDITIONS.map((c) => (
                   <label key={c} className="flex items-center gap-3 cursor-pointer font-body text-sm text-gray-700">
-                    <input type="radio" name="cond" value={c} checked={form.condition === c} onChange={field('condition')} required className="accent-[#AC1E32] w-4 h-4" />
+                    <input type="radio" name="cond" value={c} checked={form.condition === c} onChange={field('condition')} required className="accent-[#8D2222] w-4 h-4" />
                     {c}
                   </label>
                 ))}
@@ -120,7 +120,7 @@ function FormBody({ onClose }) {
               <div className="space-y-2">
                 {TIMELINES.map((t) => (
                   <label key={t} className="flex items-center gap-3 cursor-pointer font-body text-sm text-gray-700">
-                    <input type="radio" name="tl" value={t} checked={form.timeline === t} onChange={field('timeline')} required className="accent-[#AC1E32] w-4 h-4" />
+                    <input type="radio" name="tl" value={t} checked={form.timeline === t} onChange={field('timeline')} required className="accent-[#8D2222] w-4 h-4" />
                     {t}
                   </label>
                 ))}

@@ -46,7 +46,7 @@ function ListingRow({ listing }) {
           <div className="p-4">
             {/* Address + Price */}
             <div className="flex items-start justify-between gap-3 mb-2">
-              <p className="font-body font-semibold text-sm leading-snug flex-1" style={{ color: '#AC1E32' }}>
+              <p className="font-body font-semibold text-sm leading-snug flex-1" style={{ color: '#8D2222' }}>
                 {listing.address}, {listing.city}
               </p>
               <p className="font-body font-bold text-sm text-gray-900 whitespace-nowrap shrink-0">

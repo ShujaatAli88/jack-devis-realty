@@ -7,7 +7,7 @@ export default function AboutPreview() {
         <div className="order-2 lg:order-1">
           <p className="section-label mb-3">Managing Broker — 20+ Years Experience</p>
           <h2 className="section-heading mb-1">Tomond Jack</h2>
-          <p className="font-body text-[#374151] font-medium mb-5">Jack Davis Realty</p>
+          <p className="font-body text-[#796063] font-medium mb-5">Jack Davis Realty</p>
           <p className="font-body text-gray-600 leading-relaxed mb-8">
             With over 6,000 real estate deals and 20+ years of experience, I prioritize
             understanding your needs and using my expertise to find the best solution.

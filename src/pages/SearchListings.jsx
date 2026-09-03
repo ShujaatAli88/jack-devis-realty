@@ -57,8 +57,8 @@ const YEAR_OPTS     = ['No Pref','2020+','2010+','2000+','1990+','1980+','Before
 function SectionTitle({ icon: Icon, children }) {
   return (
     <div className="flex items-center gap-2 mb-4">
-      <div className="w-7 h-7 rounded-lg bg-[#AC1E32]/10 flex items-center justify-center">
-        <Icon className="text-[#AC1E32]" size={15} />
+      <div className="w-7 h-7 rounded-lg bg-[#8D2222]/10 flex items-center justify-center">
+        <Icon className="text-[#8D2222]" size={15} />
       </div>
       <span className="font-body text-xs font-bold text-gray-500 uppercase tracking-widest">{children}</span>
     </div>
@@ -70,8 +70,8 @@ function PropCard({ icon: Icon, label, active, onClick }) {
     <motion.button whileTap={{ scale: 0.93 }} onClick={onClick}
       className={`flex flex-col items-center justify-center gap-2.5 p-4 rounded-2xl border-2 cursor-pointer transition-all duration-200 ${
         active
-          ? 'bg-[#AC1E32] border-[#AC1E32] text-white shadow-lg shadow-[#AC1E32]/25'
-          : 'bg-white border-gray-100 text-gray-400 hover:border-[#AC1E32]/30 hover:text-[#AC1E32] hover:bg-[#AC1E32]/5'
+          ? 'bg-[#8D2222] border-[#8D2222] text-white shadow-lg shadow-[#8D2222]/25'
+          : 'bg-white border-gray-100 text-gray-400 hover:border-[#8D2222]/30 hover:text-[#8D2222] hover:bg-[#8D2222]/5'
       }`}
     >
       <Icon size={28} />
@@ -85,8 +85,8 @@ function StepBtn({ value, active, onClick }) {
     <motion.button whileTap={{ scale: 0.88 }} onClick={onClick}
       className={`h-10 px-4 rounded-xl font-body font-bold text-sm transition-all duration-150 ${
         active
-          ? 'bg-[#AC1E32] text-white shadow-md shadow-[#AC1E32]/30'
-          : 'bg-white border-2 border-gray-100 text-gray-500 hover:border-[#AC1E32]/40 hover:text-[#AC1E32]'
+          ? 'bg-[#8D2222] text-white shadow-md shadow-[#8D2222]/30'
+          : 'bg-white border-2 border-gray-100 text-gray-500 hover:border-[#8D2222]/40 hover:text-[#8D2222]'
       }`}
     >
       {value}
@@ -100,7 +100,7 @@ function PriceSelect({ label, value, onChange }) {
       <p className="font-body text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1.5">{label}</p>
       <div className="relative">
         <select value={value} onChange={e => onChange(e.target.value)}
-          className="w-full border-2 border-gray-100 hover:border-[#AC1E32]/40 focus:border-[#AC1E32] rounded-xl px-3 py-2.5 font-body text-sm font-semibold text-gray-700 bg-white outline-none transition-all appearance-none cursor-pointer pr-8">
+          className="w-full border-2 border-gray-100 hover:border-[#8D2222]/40 focus:border-[#8D2222] rounded-xl px-3 py-2.5 font-body text-sm font-semibold text-gray-700 bg-white outline-none transition-all appearance-none cursor-pointer pr-8">
           {PRICE_OPTS.map(o => <option key={o}>{o}</option>)}
         </select>
         <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 text-xs">▾</span>
@@ -115,7 +115,7 @@ function SmallSelect({ label, value, onChange, options }) {
       <p className="font-body text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1.5">{label}</p>
       <div className="relative">
         <select value={value} onChange={e => onChange(e.target.value)}
-          className="w-full border-2 border-gray-100 hover:border-[#AC1E32]/40 focus:border-[#AC1E32] rounded-xl px-3 py-2 font-body text-sm font-semibold text-gray-700 bg-white outline-none transition-all appearance-none cursor-pointer pr-7">
+          className="w-full border-2 border-gray-100 hover:border-[#8D2222]/40 focus:border-[#8D2222] rounded-xl px-3 py-2 font-body text-sm font-semibold text-gray-700 bg-white outline-none transition-all appearance-none cursor-pointer pr-7">
           {options.map(o => <option key={o}>{o}</option>)}
         </select>
         <span className="pointer-events-none absolute right-2.5 top-1/2 -translate-y-1/2 text-gray-400 text-xs">▾</span>
@@ -128,20 +128,20 @@ function ScrollBox({ label, value, onChange, options }) {
   return (
     <div className="flex flex-col">
       <p className="font-body text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1.5">{label}</p>
-      <div className="border-2 border-gray-100 rounded-xl overflow-hidden focus-within:border-[#AC1E32] transition-all">
+      <div className="border-2 border-gray-100 rounded-xl overflow-hidden focus-within:border-[#8D2222] transition-all">
         <select multiple size={10} value={[value]} onChange={e => onChange(e.target.value)}
           className="w-full font-body text-sm text-gray-700 bg-white outline-none cursor-pointer"
-          style={{ scrollbarWidth: 'thin', scrollbarColor: '#AC1E32 #f5f5f5' }}>
+          style={{ scrollbarWidth: 'thin', scrollbarColor: '#8D2222 #f5f5f5' }}>
           {options.map(o => (
             <option key={o} value={o}
-              style={value === o ? { background: '#AC1E32', color: '#fff', fontWeight: 600 } : {}}
+              style={value === o ? { background: '#8D2222', color: '#fff', fontWeight: 600 } : {}}
             >{o}</option>
           ))}
         </select>
       </div>
       {value !== 'All' && (
         <button onClick={() => onChange('All')}
-          className="self-start mt-1 font-body text-[10px] text-[#AC1E32] hover:underline flex items-center gap-0.5">
+          className="self-start mt-1 font-body text-[10px] text-[#8D2222] hover:underline flex items-center gap-0.5">
           <MdClose size={10} /> Clear
         </button>
       )}
@@ -154,7 +154,7 @@ function TextInput({ label, value, onChange, placeholder }) {
     <div>
       <p className="font-body text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1.5">{label}</p>
       <input type="text" value={value} onChange={e => onChange(e.target.value)} placeholder={placeholder}
-        className="w-full border-2 border-gray-100 hover:border-[#AC1E32]/40 focus:border-[#AC1E32] rounded-xl px-4 py-3 font-body text-sm font-medium text-gray-700 outline-none transition-all bg-white placeholder:text-gray-300" />
+        className="w-full border-2 border-gray-100 hover:border-[#8D2222]/40 focus:border-[#8D2222] rounded-xl px-4 py-3 font-body text-sm font-medium text-gray-700 outline-none transition-all bg-white placeholder:text-gray-300" />
     </div>
   )
 }
@@ -162,9 +162,9 @@ function TextInput({ label, value, onChange, placeholder }) {
 /* ─── Active filter chips ────────────────────────── */
 function FilterChip({ label, onRemove }) {
   return (
-    <span className="inline-flex items-center gap-1.5 bg-[#AC1E32]/10 text-[#AC1E32] border border-[#AC1E32]/20 font-body text-xs font-semibold rounded-full px-3 py-1">
+    <span className="inline-flex items-center gap-1.5 bg-[#8D2222]/10 text-[#8D2222] border border-[#8D2222]/20 font-body text-xs font-semibold rounded-full px-3 py-1">
       {label}
-      <button onClick={onRemove} className="hover:text-[#7a1020]"><MdClose size={12} /></button>
+      <button onClick={onRemove} className="hover:text-[#6E1A1A]"><MdClose size={12} /></button>
     </span>
   )
 }
@@ -260,7 +260,7 @@ export default function SearchListings() {
       {/* Hero */}
       <div className="relative bg-navy overflow-hidden pt-28 pb-12 px-4 text-center">
         <div className="absolute inset-0 opacity-10 pointer-events-none"
-          style={{ backgroundImage: 'radial-gradient(ellipse at 15% 60%, #AC1E32 0%, transparent 55%), radial-gradient(ellipse at 85% 40%, #AC1E32 0%, transparent 55%)' }} />
+          style={{ backgroundImage: 'radial-gradient(ellipse at 15% 60%, #8D2222 0%, transparent 55%), radial-gradient(ellipse at 85% 40%, #8D2222 0%, transparent 55%)' }} />
         <motion.p initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
           className="font-body text-[11px] text-white/70 uppercase tracking-[0.3em] mb-2">Jack Davis Realty</motion.p>
         <motion.h1 initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.18 }}
@@ -277,7 +277,7 @@ export default function SearchListings() {
             <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }}
               className="flex flex-wrap gap-2 mb-4">
               {chips.map((c, i) => <FilterChip key={i} label={c.label} onRemove={c.remove} />)}
-              <button onClick={resetAll} className="font-body text-xs text-gray-400 hover:text-[#AC1E32] transition-colors ml-1 underline-offset-2 hover:underline">
+              <button onClick={resetAll} className="font-body text-xs text-gray-400 hover:text-[#8D2222] transition-colors ml-1 underline-offset-2 hover:underline">
                 Clear all
               </button>
             </motion.div>
@@ -295,7 +295,7 @@ export default function SearchListings() {
               return (
                 <button key={tab.id} onClick={() => setActiveTab(tab.id)}
                   className={`flex items-center gap-1.5 px-5 py-4 font-body text-[11px] font-bold uppercase tracking-wider whitespace-nowrap border-b-2 transition-all duration-200 shrink-0 ${
-                    on ? 'border-[#AC1E32] text-[#AC1E32] bg-white' : 'border-transparent text-gray-400 hover:text-[#AC1E32] hover:bg-white/80'
+                    on ? 'border-[#8D2222] text-[#8D2222] bg-white' : 'border-transparent text-gray-400 hover:text-[#8D2222] hover:bg-white/80'
                   }`}>
                   <Icon size={13} />
                   {tab.label}
@@ -416,7 +416,7 @@ export default function SearchListings() {
               <div className="flex items-center gap-3 px-6 py-5 border-t border-gray-100 bg-gray-50/40">
                 <motion.button whileTap={{ scale: 0.97 }} onClick={handleSearch}
                   className="flex items-center gap-2 px-10 py-3.5 rounded-full font-body font-bold text-sm text-white shadow-lg hover:shadow-xl transition-shadow"
-                  style={{ background: 'linear-gradient(135deg, #AC1E32 0%, #7a1020 100%)' }}>
+                  style={{ background: 'linear-gradient(135deg, #8D2222 0%, #6E1A1A 100%)' }}>
                   <MdSearch size={18} />
                   Search
                   {chips.length > 0 && (
@@ -434,7 +434,7 @@ export default function SearchListings() {
 
                 {chips.length > 0 && (
                   <button onClick={resetAll}
-                    className="ml-auto font-body text-xs text-gray-400 hover:text-[#AC1E32] transition-colors flex items-center gap-1">
+                    className="ml-auto font-body text-xs text-gray-400 hover:text-[#8D2222] transition-colors flex items-center gap-1">
                     <MdClose size={13} /> Reset filters
                   </button>
                 )}

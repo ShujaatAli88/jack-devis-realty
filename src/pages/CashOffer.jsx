@@ -58,7 +58,7 @@ function FAQItem({ q, a }) {
         className="w-full flex items-center justify-between py-5 text-left gap-4"
       >
         <span className="font-heading text-base font-semibold text-navy">{q}</span>
-        <FiChevronDown className={`w-5 h-5 text-[#374151] shrink-0 transition-transform duration-300 ${open ? 'rotate-180' : ''}`} />
+        <FiChevronDown className={`w-5 h-5 text-[#796063] shrink-0 transition-transform duration-300 ${open ? 'rotate-180' : ''}`} />
       </button>
       <AnimatePresence>
         {open && (
@@ -83,7 +83,7 @@ function CTAButton({ onClick, className = '', children }) {
       onClick={onClick}
       whileHover={{ scale: 1.03 }}
       whileTap={{ scale: 0.97 }}
-      className={`inline-flex items-center gap-2 bg-[#AC1E32] hover:bg-[#8B1828] text-white font-body font-bold text-sm px-8 py-4 rounded-full shadow-lg transition-colors ${className}`}
+      className={`inline-flex items-center gap-2 bg-[#8D2222] hover:bg-[#6E1A1A] text-white font-body font-bold text-sm px-8 py-4 rounded-full shadow-lg transition-colors ${className}`}
     >
       {children}
       <FiArrowRight className="w-4 h-4" />
@@ -179,7 +179,7 @@ export default function CashOffer() {
                 </div>
                 {/* Check badge */}
                 <div className="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center mb-4">
-                  <FiCheck className="w-4 h-4 text-[#374151]" strokeWidth={3} />
+                  <FiCheck className="w-4 h-4 text-[#796063]" strokeWidth={3} />
                 </div>
                 <h3 className="font-heading text-xl font-semibold text-navy mb-2">{card.title}</h3>
                 <p className="font-body text-gray-500 text-sm leading-relaxed">{card.desc}</p>
@@ -232,7 +232,7 @@ export default function CashOffer() {
               {benefits.map((b) => (
                 <li key={b} className="flex items-start gap-3">
                   <span className="w-6 h-6 bg-gray-100 rounded-full flex items-center justify-center shrink-0 mt-0.5">
-                    <FiCheck className="w-3.5 h-3.5 text-[#374151]" strokeWidth={3} />
+                    <FiCheck className="w-3.5 h-3.5 text-[#796063]" strokeWidth={3} />
                   </span>
                   <span className="font-body text-sm text-gray-700">{b}</span>
                 </li>
@@ -262,12 +262,12 @@ export default function CashOffer() {
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 mb-8">
             {situations.map((s) => (
               <div key={s} className="bg-white rounded-2xl px-5 py-4 shadow-sm border border-gray-100 flex items-center gap-3">
-                <span className="w-2 h-2 bg-[#AC1E32] rounded-full shrink-0" />
+                <span className="w-2 h-2 bg-[#8D2222] rounded-full shrink-0" />
                 <span className="font-body text-sm text-gray-700">{s}</span>
               </div>
             ))}
           </div>
-          <p className="text-center font-body text-sm text-[#374151] italic mt-4">
+          <p className="text-center font-body text-sm text-[#796063] italic mt-4">
             If your home needs work, that's okay — homes sell as-is through our cash buyer network.
           </p>
         </div>

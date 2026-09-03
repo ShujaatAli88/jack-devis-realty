@@ -12,7 +12,11 @@ export default function Testimonials() {
       <div className="max-w-5xl mx-auto">
         <div className="text-center mb-14">
           <div className="flex justify-center mb-6">
-            <span className="font-heading text-3xl font-semibold text-white italic">JD</span>
+            <img
+              src="/logo_navbar.png"
+              alt="Jack Davis Realty"
+              className="h-16 w-auto object-contain bg-white rounded-lg p-2"
+            />
           </div>
           <p className="section-label text-white mb-3">Client Stories</p>
           <h2 className="font-heading text-4xl md:text-5xl font-semibold text-white mb-4">Success Stories</h2>

@@ -9,19 +9,19 @@ import Footer from '../components/Footer'
 
 const features = [
   {
-    icon: <FiBell className="w-7 h-7 text-[#AC1E32]" />,
+    icon: <FiBell className="w-7 h-7 text-[#8D2222]" />,
     title: 'New Listing Alerts',
     description:
       'Sign up to receive instant notifications when new homes matching your criteria hit the Atlanta Metro market — so you never miss an opportunity.',
   },
   {
-    icon: <FiBarChart2 className="w-7 h-7 text-[#AC1E32]" />,
+    icon: <FiBarChart2 className="w-7 h-7 text-[#8D2222]" />,
     title: 'Custom Market Reports',
     description:
       'Curious about what\'s happening in your target neighborhood? A custom market report shows the latest active, under contract, and sold homes near you.',
   },
   {
-    icon: <FiHome className="w-7 h-7 text-[#AC1E32]" />,
+    icon: <FiHome className="w-7 h-7 text-[#8D2222]" />,
     title: 'Free Home Valuation',
     description:
       'Considering selling or refinancing? Get an instant property valuation now. Knowledge is power in any real estate decision.',

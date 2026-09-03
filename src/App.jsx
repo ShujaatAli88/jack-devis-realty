@@ -14,6 +14,7 @@ import Valuation from './pages/Valuation'
 import FeaturedProperties from './pages/FeaturedProperties'
 import AgentProfile from './pages/AgentProfile'
 import Contact from './pages/Contact'
+import SituationPage from './pages/SituationPage'
 import ScrollToTop from './components/ScrollToTop'
 
 function StickyMobileCTA() {
@@ -30,7 +31,7 @@ function StickyMobileCTA() {
       <Link
         to="/cash-offer"
         className="block w-full text-center font-body font-bold text-base py-4 rounded-full shadow-xl transition-all duration-200"
-        style={{ background: '#AC1E32', color: 'white' }}
+        style={{ background: '#8D2222', color: 'white' }}
       >
         Get My Fast Cash Offer
       </Link>
@@ -58,6 +59,7 @@ export default function App() {
             <Route path="/featured" element={<FeaturedProperties />} />
             <Route path="/agents/:slug" element={<AgentProfile />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/sell/:slug" element={<SituationPage />} />
           </Routes>
         </AnimatePresence>
         <StickyMobileCTA />

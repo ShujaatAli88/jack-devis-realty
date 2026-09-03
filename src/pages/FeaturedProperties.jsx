@@ -139,15 +139,15 @@ export default function FeaturedProperties() {
                   <p className="font-body text-xs text-gray-500 mb-4">{listing.city}</p>
                   <div className="flex items-center gap-5 font-body text-sm text-gray-500 border-t border-gray-100 pt-4">
                     <span className="flex items-center gap-1.5">
-                      <FaBed className="w-4 h-4 text-[#374151]" />
+                      <FaBed className="w-4 h-4 text-[#796063]" />
                       {listing.beds} Beds
                     </span>
                     <span className="flex items-center gap-1.5">
-                      <FaBath className="w-4 h-4 text-[#374151]" />
+                      <FaBath className="w-4 h-4 text-[#796063]" />
                       {listing.baths} Baths
                     </span>
                     <span className="flex items-center gap-1.5">
-                      <FiMaximize2 className="w-4 h-4 text-[#374151]" />
+                      <FiMaximize2 className="w-4 h-4 text-[#796063]" />
                       {listing.sqft} sqft
                     </span>
                   </div>

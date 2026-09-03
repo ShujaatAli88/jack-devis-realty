@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom'
 import { FaFacebook, FaInstagram, FaLinkedin, FaYoutube } from 'react-icons/fa'
 import { FiPhone, FiMail, FiMapPin, FiArrowRight } from 'react-icons/fi'
 
-const NAVY   = '#17293C'
-const GOLD   = '#C1912E'
+const NAVY   = '#1A1A1A'
+const GOLD   = '#796063'
 
 const QUICK_LINKS = [
   { label: 'Sell Your Home', path: '/selling'    },
@@ -45,19 +45,16 @@ export default function Footer() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
 
           {/* Col 1 — Brand */}
-          <div>
-            <div className="flex items-center gap-3 mb-3">
-              <span className="font-heading text-2xl font-bold" style={{ color: GOLD }}>JD</span>
-              <div className="w-px h-7 bg-white/20" />
-              <div className="font-body text-[11px] font-extrabold tracking-[0.15em] text-white leading-tight">
-                <span className="block">JACK DAVIS</span>
-                <span className="block" style={{ color: GOLD }}>REALTY</span>
-              </div>
-            </div>
+          <div className="flex flex-col items-center text-center">
+            <img
+              src="/logo.png"
+              alt="Jack Davis Realty"
+              className="h-24 w-auto object-contain mb-3 bg-white rounded-lg p-2 mx-auto"
+            />
             <p className="font-body text-[10px] uppercase tracking-[0.22em] text-white/35 mb-7">
               Real Solutions. Real Life.
             </p>
-            <div className="flex items-center gap-2.5">
+            <div className="flex items-center justify-center gap-2.5">
               {SOCIALS.map(({ label, href, Icon }) => (
                 <a
                   key={label}

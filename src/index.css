@@ -45,7 +45,7 @@
   }
 
   .section-label {
-    @apply text-[#AC1E32] font-body font-semibold text-xs tracking-[0.2em] uppercase;
+    @apply text-[#8D2222] font-body font-semibold text-xs tracking-[0.2em] uppercase;
   }
 
   .section-heading {
@@ -60,11 +60,11 @@
 /* Swiper overrides */
 .swiper-button-next,
 .swiper-button-prev {
-  color: #AC1E32 !important;
+  color: #8D2222 !important;
 }
 
 .swiper-pagination-bullet-active {
-  background: #AC1E32 !important;
+  background: #8D2222 !important;
 }
 
 /* Smooth scroll offset for sticky nav */

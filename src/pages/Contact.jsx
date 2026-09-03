@@ -70,7 +70,7 @@ function ContactForm() {
         className="text-center py-16"
       >
         <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-5">
-          <FiSend className="w-7 h-7 text-[#AC1E32]" />
+          <FiSend className="w-7 h-7 text-[#8D2222]" />
         </div>
         <h3 className="font-heading text-3xl font-semibold text-navy mb-2">Message Received!</h3>
         <p className="font-body text-gray-500 text-base">

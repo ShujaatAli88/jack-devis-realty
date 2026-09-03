@@ -13,7 +13,7 @@ function CommunityCard({ community }) {
         <img src={community.image} alt={community.name} loading="lazy" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
         <div className="absolute inset-0 bg-gradient-to-t from-navy/70 to-transparent" />
         <div className="absolute bottom-4 left-4">
-          <span className="font-body text-xs font-semibold text-white bg-[#AC1E32] px-3 py-1 rounded-full">Avg. {community.avgPrice}</span>
+          <span className="font-body text-xs font-semibold text-white bg-[#8D2222] px-3 py-1 rounded-full">Avg. {community.avgPrice}</span>
         </div>
       </div>
       <div className="p-6">
@@ -24,7 +24,7 @@ function CommunityCard({ community }) {
             <span key={h} className="font-body text-xs text-navy bg-ivory border border-gray-200 px-3 py-1 rounded-full">{h}</span>
           ))}
         </div>
-        <Link to="/search" className="font-body text-sm font-semibold text-[#AC1E32] hover:text-[#8B1828] transition-colors">
+        <Link to="/search" className="font-body text-sm font-semibold text-[#8D2222] hover:text-[#6E1A1A] transition-colors">
           View Homes in {community.name} →
         </Link>
       </div>

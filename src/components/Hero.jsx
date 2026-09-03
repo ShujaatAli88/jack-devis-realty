@@ -33,14 +33,19 @@ export default function Hero() {
           className="relative overflow-hidden rounded-[80px]"
           style={{ minHeight: CARD_H }}
         >
-          {/* Background image */}
-          <img
-            src="/hero_bg.jpg"
-            alt="Metro Atlanta Home"
+          {/* Background video */}
+          <video
             className="absolute inset-0 w-full h-full object-cover"
             style={{ objectPosition: 'center 55%' }}
-            loading="eager"
-          />
+            poster="/hero_bg_poster.png"
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="auto"
+          >
+            <source src="/hero_bg.mp4" type="video/mp4" />
+          </video>
 
           {/* Gradient overlay */}
           <div
@@ -113,7 +118,7 @@ export default function Hero() {
                 <button
                   type="submit"
                   className="font-body font-bold text-sm text-white px-5 sm:px-7 py-3.5 rounded-full m-1 whitespace-nowrap transition-all duration-200 hover:opacity-90 active:scale-95 shrink-0"
-                  style={{ background: '#AC1E32' }}
+                  style={{ background: '#8D2222' }}
                 >
                   Get My Cash Offer
                 </button>
@@ -139,7 +144,7 @@ export default function Hero() {
         >
           {TRUST_BADGES.map(badge => (
             <div key={badge} className="flex items-center gap-2">
-              <FiCheckCircle className="w-4 h-4 shrink-0" style={{ color: '#AC1E32' }} />
+              <FiCheckCircle className="w-4 h-4 shrink-0" style={{ color: '#8D2222' }} />
               <span className="font-body text-gray-600 text-xs sm:text-sm font-medium">{badge}</span>
             </div>
           ))}

@@ -27,7 +27,7 @@ export default function ServicesSplit() {
                 <p className="font-body text-gray-600 leading-relaxed mb-4">{item.description}</p>
                 <Link
                   to="/about"
-                  className="font-body text-sm font-semibold text-[#AC1E32] hover:text-[#8B1828] flex items-center gap-2 transition-colors group"
+                  className="font-body text-sm font-semibold text-[#8D2222] hover:text-[#6E1A1A] flex items-center gap-2 transition-colors group"
                 >
                   Learn More
                   <FiArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />

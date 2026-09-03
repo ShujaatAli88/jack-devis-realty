@@ -105,7 +105,7 @@ export default function Valuation() {
             {/* Submit */}
             <button
               type="submit"
-              className="bg-[#AC1E32] hover:bg-[#8B1828] transition-colors text-white font-body font-semibold text-sm px-8 py-4 shrink-0"
+              className="bg-[#8D2222] hover:bg-[#6E1A1A] transition-colors text-white font-body font-semibold text-sm px-8 py-4 shrink-0"
             >
               Submit
             </button>

@@ -39,7 +39,7 @@ function RadioGroup({ name, options, value, onChange, required }) {
             checked={value === opt}
             onChange={onChange}
             required={required}
-            className="w-4 h-4 accent-[#AC1E32]"
+            className="w-4 h-4 accent-[#8D2222]"
           />
           <span className="font-body text-sm text-gray-700">{opt}</span>
         </label>
@@ -135,7 +135,7 @@ export default function CashOfferForm() {
               className="text-center py-20"
             >
               <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                <svg className="w-8 h-8 text-[#374151]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <svg className="w-8 h-8 text-[#796063]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                 </svg>
               </div>
@@ -171,11 +171,11 @@ export default function CashOfferForm() {
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
                           <TextInput value={form.firstName} onChange={field('firstName')} required />
-                          <p className="font-body text-xs text-[#374151] mt-1">First Name</p>
+                          <p className="font-body text-xs text-[#796063] mt-1">First Name</p>
                         </div>
                         <div>
                           <TextInput value={form.lastName} onChange={field('lastName')} required />
-                          <p className="font-body text-xs text-[#374151] mt-1">Last Name</p>
+                          <p className="font-body text-xs text-[#796063] mt-1">Last Name</p>
                         </div>
                       </div>
                     </div>
@@ -190,7 +190,7 @@ export default function CashOfferForm() {
                         required
                         className="max-w-sm"
                       />
-                      <p className="font-body text-xs text-[#374151] mt-1">example@example.com</p>
+                      <p className="font-body text-xs text-[#796063] mt-1">example@example.com</p>
                     </div>
 
                     {/* Phone */}
@@ -204,7 +204,7 @@ export default function CashOfferForm() {
                         placeholder="(000) 000-0000"
                         className="max-w-xs"
                       />
-                      <p className="font-body text-xs text-[#374151] mt-1">Please enter a valid phone number.</p>
+                      <p className="font-body text-xs text-[#796063] mt-1">Please enter a valid phone number.</p>
                     </div>
 
                     {/* Property Address */}
@@ -213,24 +213,24 @@ export default function CashOfferForm() {
                       <div className="space-y-3">
                         <div>
                           <TextInput value={form.street} onChange={field('street')} required />
-                          <p className="font-body text-xs text-[#374151] mt-1">Street Address</p>
+                          <p className="font-body text-xs text-[#796063] mt-1">Street Address</p>
                         </div>
                         <div>
                           <TextInput value={form.street2} onChange={field('street2')} />
-                          <p className="font-body text-xs text-[#374151] mt-1">Street Address Line 2</p>
+                          <p className="font-body text-xs text-[#796063] mt-1">Street Address Line 2</p>
                         </div>
                         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                           <div>
                             <TextInput value={form.city} onChange={field('city')} required />
-                            <p className="font-body text-xs text-[#374151] mt-1">City</p>
+                            <p className="font-body text-xs text-[#796063] mt-1">City</p>
                           </div>
                           <div>
                             <TextInput value={form.state} onChange={field('state')} required />
-                            <p className="font-body text-xs text-[#374151] mt-1">State / Province</p>
+                            <p className="font-body text-xs text-[#796063] mt-1">State / Province</p>
                           </div>
                           <div>
                             <TextInput value={form.zip} onChange={field('zip')} required />
-                            <p className="font-body text-xs text-[#374151] mt-1">Postal / Zip Code</p>
+                            <p className="font-body text-xs text-[#796063] mt-1">Postal / Zip Code</p>
                           </div>
                         </div>
                       </div>

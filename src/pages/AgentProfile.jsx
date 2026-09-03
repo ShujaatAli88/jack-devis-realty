@@ -146,7 +146,7 @@ export default function AgentProfile() {
             {/* Bio */}
             {agent.bio.length > 0 && (
               <div className="mb-14">
-                <p className="font-body text-xs uppercase tracking-[0.25em] text-[#374151] mb-3">
+                <p className="font-body text-xs uppercase tracking-[0.25em] text-[#796063] mb-3">
                   About {agent.name.split(' ')[0]}
                 </p>
                 <h2 className="font-heading text-3xl font-semibold text-navy mb-6">
@@ -165,7 +165,7 @@ export default function AgentProfile() {
             {/* Reviews */}
             {agent.reviews.length > 0 && (
               <div>
-                <p className="font-body text-xs uppercase tracking-[0.25em] text-[#374151] mb-3">
+                <p className="font-body text-xs uppercase tracking-[0.25em] text-[#796063] mb-3">
                   Client Reviews
                 </p>
                 <h2 className="font-heading text-3xl font-semibold text-navy mb-8">
