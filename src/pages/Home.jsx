@@ -383,11 +383,11 @@ export default function Home() {
               viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.1 }}
               whileHover={{ y: -6 }}
               className="group rounded-3xl p-8 flex flex-col border border-gray-100 shadow-sm hover:shadow-2xl hover:border-transparent transition-all duration-300"
-              style={{ background: `linear-gradient(160deg, #FFFFFF 0%, #F0F1F3 100%)` }}
+              style={{ background: `linear-gradient(160deg, #FFFFFF 0%, ${GOLD}14 100%)` }}
             >
               <div
                 className="w-14 h-14 rounded-2xl flex items-center justify-center mb-6 shadow-md group-hover:scale-110 transition-transform duration-300"
-                style={{ background: `linear-gradient(135deg, #3A3A3A, ${NAVY})` }}
+                style={{ background: `linear-gradient(135deg, #9C8A8C, ${GOLD})` }}
               >
                 <MdTrendingUp className="w-8 h-8 text-white" />
               </div>
@@ -484,9 +484,9 @@ export default function Home() {
               >
                 <div
                   className="w-12 h-12 rounded-2xl flex items-center justify-center mb-1 shadow-sm group-hover:shadow-md group-hover:scale-110 transition-all duration-300"
-                  style={{ background: `linear-gradient(135deg, ${NAVY}10, ${RED}18)` }}
+                  style={{ background: `linear-gradient(135deg, ${NAVY}08, ${GOLD}22)` }}
                 >
-                  <Icon className="w-6 h-6" style={{ color: RED }} />
+                  <Icon className="w-6 h-6" style={{ color: GOLD }} />
                 </div>
                 <p className="font-body font-bold text-xs leading-snug" style={{ color: DARK }}>{label}</p>
                 <p className="font-body text-[11px] text-gray-400">{sub}</p>
